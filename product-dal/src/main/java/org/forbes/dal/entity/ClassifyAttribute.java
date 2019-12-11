@@ -7,46 +7,7 @@ import lombok.Data;
  * Table: f_classify_attribute
  */
 @Data
-public class ClassifyAttribute {
-    /**
-     * 主键
-     * Table:     f_classify_attribute
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
-
-    /**
-     * Table:     f_classify_attribute
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_classify_attribute
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 更新人
-     * Table:     f_classify_attribute
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     * Table:     f_classify_attribute
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
+public class ClassifyAttribute extends BaseEntity{
     /**
      * 名称
      * Table:     f_classify_attribute

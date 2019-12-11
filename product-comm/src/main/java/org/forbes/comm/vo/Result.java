@@ -24,6 +24,14 @@ public class Result<T> implements Serializable {
 	 */
 	private String message = "操作成功！";
 
+	/******查询商品相关信息****/
+	public static final  String SELECT_PRODUCT = "查询商品信息成功";
+	public static final  String SELECT_ERROR_PRODUCT = "查询商品信息失败";
+
+	/******添加商品相关信息****/
+	public static final  String ADD_PRODUCT = "添加商品信息成功";
+	public static final  String ADD_ERROR_PRODUCT = "添加商品信息失败";
+
 	/******查询分类相关信息****/
 	public static final  String SELECT_CLASSIFY = "查询分类成功";
 	public static final  String SELECT_ERROR_CLASSIFY = "查询分类失败";
