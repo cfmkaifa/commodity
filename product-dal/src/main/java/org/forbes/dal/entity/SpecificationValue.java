@@ -8,7 +8,7 @@ import lombok.Data;
  * Table: f_specification_value
  */
 @Data
-public class SpecificationValue extends BaseEntity {
+public class SpecificationValue {
     /**
      * 主键
      * Table:     f_specification_value

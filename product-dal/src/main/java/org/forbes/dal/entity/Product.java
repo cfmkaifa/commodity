@@ -8,7 +8,7 @@ import lombok.Data;
  * Table: f_product
  */
 @Data
-public class Product extends BaseEntity {
+public class Product{
     /**
      * 主键
      * Table:     f_product
@@ -342,14 +342,6 @@ public class Product extends BaseEntity {
      * Nullable:  true
      */
     private Integer spotListing;
-
-    /**
-     * 新资源
-     * Table:     f_product
-     * Column:    new
-     * Nullable:  true
-     */
-    private Integer new;
 
     /**
      * 供应链

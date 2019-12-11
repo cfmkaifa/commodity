@@ -7,7 +7,7 @@ import lombok.Data;
  * Table: f_product_classify
  */
 @Data
-public class ProductClassify extends BaseEntity {
+public class ProductClassify {
     /**
      * 主键
      * Table:     f_product_classify
