@@ -32,6 +32,10 @@ public class Result<T> implements Serializable {
 	public static final  String ADD_CLASSIFY = "添加分类成功";
 	public static final  String ADD_ERROR_CLASSIFY = "添加分类失败";
 
+	/******删除分类相关信息****/
+	public static final  String DEL_CLASSIFY = "删除分类成功";
+	public static final  String DEL_ERROR_CLASSIFY = "删除分类失败";
+
 	/**
 	 * 返回代码
 	 */

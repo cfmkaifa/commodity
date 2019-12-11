@@ -2,6 +2,8 @@ package org.forbes.dal.entity;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class ProductClassify {
      * Column:    id
      * Nullable:  false
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
