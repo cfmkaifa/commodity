@@ -32,6 +32,10 @@ public class Result<T> implements Serializable {
 	public static final  String ADD_PRODUCT = "添加商品信息成功";
 	public static final  String ADD_ERROR_PRODUCT = "添加商品信息失败";
 
+	/******修改商品相关信息****/
+	public static final  String UPDATE_PRODUCT = "添加商品信息成功";
+	public static final  String UPDATE_ERROR_PRODUCT = "添加商品信息失败";
+
 	/******查询分类相关信息****/
 	public static final  String SELECT_CLASSIFY = "查询分类成功";
 	public static final  String SELECT_ERROR_CLASSIFY = "查询分类失败";
