@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.forbes.dal.mapper.ext.ProductClassifyExtMapper" >
+
+    <sql id="Base_Column_List" >
+        <include refid="org.forbes.dal.mapper.ProductClassifyMapper.Base_Column_List" />
+    </sql>
+<!--商品分类-->
+    <resultMap id="BaseResultMap" type="org.forbes.dal.entity.ProductClassify" >
+        <!-- 主键 -->
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <!-- 创建时间 -->
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <!-- 更新人 -->
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <!-- 更新时间 -->
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <!-- 分类编码 -->
+        <result column="classify_sn" property="classifySn" jdbcType="VARCHAR" />
+        <!-- 分类名称 -->
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <!-- 等级 -->
+        <result column="level" property="level" jdbcType="BIGINT" />
+        <!-- 状态:0未启用1-启用 -->
+        <result column="state" property="state" jdbcType="BIGINT" />
+    </resultMap>
+</mapper>

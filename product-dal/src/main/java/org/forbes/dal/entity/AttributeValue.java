@@ -7,7 +7,7 @@ import lombok.Data;
  * Table: f_attribute_value
  */
 @Data
-public class AttributeValue extends BaseEntity {
+public class AttributeValue{
     /**
      * 主键
      * Table:     f_attribute_value

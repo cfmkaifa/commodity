@@ -1,13 +1,20 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_product_classify
  */
 @Data
-public class ProductClassify extends BaseEntity {
+@ApiModel(description="商品分类信息")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_product_classify")
+public class ProductClassify {
     /**
      * 主键
      * Table:     f_product_classify

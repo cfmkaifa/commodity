@@ -4,10 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.forbes.comm.constant.CommonConstant;
-import org.forbes.comm.constant.UserContext;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.utils.JwtUtil;
-import org.forbes.comm.vo.SysUserVo;
 import org.forbes.config.cache.UserCache;
 import org.springframework.web.servlet.HandlerInterceptor;
 

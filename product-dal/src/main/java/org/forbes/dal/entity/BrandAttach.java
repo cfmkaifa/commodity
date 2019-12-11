@@ -7,7 +7,7 @@ import lombok.Data;
  * Table: f_brand_attach
  */
 @Data
-public class BrandAttach extends BaseEntity {
+public class BrandAttach{
     /**
      * 主键
      * Table:     f_brand_attach

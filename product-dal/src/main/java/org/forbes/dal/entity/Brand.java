@@ -7,7 +7,7 @@ import lombok.Data;
  * Table: brand
  */
 @Data
-public class Brand extends BaseEntity {
+public class Brand{
     /**
      * 主键
      * Table:     brand

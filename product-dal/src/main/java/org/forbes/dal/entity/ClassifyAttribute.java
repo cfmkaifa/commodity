@@ -7,7 +7,7 @@ import lombok.Data;
  * Table: f_classify_attribute
  */
 @Data
-public class ClassifyAttribute extends BaseEntity {
+public class ClassifyAttribute {
     /**
      * 主键
      * Table:     f_classify_attribute
