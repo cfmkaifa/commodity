@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.forbes.dal.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="org.forbes.dal.entity.Product" >
+    <!-- 主键 -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <!-- 创建时间 -->
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <!-- 更新人 -->
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <!-- 更新时间 -->
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <!-- 分类id -->
+    <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
+    <!-- 品牌ID -->
+    <result column="brand_id" property="brandId" jdbcType="BIGINT" />
+    <!-- 店铺ID -->
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <!-- 商品编码 -->
+    <result column="pro_sn" property="proSn" jdbcType="VARCHAR" />
+    <!-- 商品名称 -->
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <!-- 品种 -->
+    <result column="variety" property="variety" jdbcType="VARCHAR" />
+    <!-- 厚度单位为mm -->
+    <result column="thickness" property="thickness" jdbcType="DECIMAL" />
+    <!-- 细度单位dtex -->
+    <result column="fineness" property="fineness" jdbcType="DECIMAL" />
+    <!-- 颜色 -->
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <!-- 功能 -->
+    <result column="function" property="function" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <!-- 单价 -->
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <!-- 单位 -->
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <!-- 数量 -->
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <!-- 集装箱重--改为件重 -->
+    <result column="whole_weight" property="wholeWeight" jdbcType="VARCHAR" />
+    <!-- 产地 -->
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <!-- 存放地 -->
+    <result column="deposit" property="deposit" jdbcType="VARCHAR" />
+    <!-- 仓库 -->
+    <result column="warehouse" property="warehouse" jdbcType="VARCHAR" />
+    <!-- 销售地址 -->
+    <result column="sales_address" property="salesAddress" jdbcType="VARCHAR" />
+    <!-- 说明 -->
+    <result column="explaindesc" property="explaindesc" jdbcType="VARCHAR" />
+    <!-- 实物验证 -->
+    <result column="good_verify" property="goodVerify" jdbcType="INTEGER" />
+    <!-- 质量验证 -->
+    <result column="quality_verify" property="qualityVerify" jdbcType="INTEGER" />
+    <!-- 质保书1无2有 -->
+    <result column="quality_warranty" property="qualityWarranty" jdbcType="INTEGER" />
+    <!-- 议价1有2无 -->
+    <result column="bargaining" property="bargaining" jdbcType="INTEGER" />
+    <!-- 延期保证金 -->
+    <result column="extension_margin" property="extensionMargin" jdbcType="INTEGER" />
+    <!-- 融资保证金 -->
+    <result column="financing_margin" property="financingMargin" jdbcType="INTEGER" />
+    <!-- 供方代运 -->
+    <result column="supplier_delivery" property="supplierDelivery" jdbcType="INTEGER" />
+    <!-- 先行赔付 -->
+    <result column="compensation" property="compensation" jdbcType="INTEGER" />
+    <!-- 视频验货 -->
+    <result column="video_inspection" property="videoInspection" jdbcType="INTEGER" />
+    <!-- 仓费快结 -->
+    <result column="warehouse_charge" property="warehouseCharge" jdbcType="INTEGER" />
+    <!-- 代运补贴 -->
+    <result column="subsidy" property="subsidy" jdbcType="INTEGER" />
+    <!-- 闪电开票 -->
+    <result column="lightning_invoice" property="lightningInvoice" jdbcType="INTEGER" />
+    <!-- 诚信店铺 -->
+    <result column="honest_shop" property="honestShop" jdbcType="INTEGER" />
+    <!-- 在途 -->
+    <result column="on_the_way" property="onTheWay" jdbcType="INTEGER" />
+    <!-- 定向 -->
+    <result column="directional" property="directional" jdbcType="INTEGER" />
+    <!-- 竞价 -->
+    <result column="bidding_price" property="biddingPrice" jdbcType="INTEGER" />
+    <!-- 现货挂牌 -->
+    <result column="spot_listing" property="spotListing" jdbcType="INTEGER" />
+    <!-- 新资源 -->
+    <result column="new" property="new" jdbcType="INTEGER" />
+    <!-- 供应链 -->
+    <result column="supply_chain" property="supplyChain" jdbcType="INTEGER" />
+    <!-- 担保交易 -->
+    <result column="guarantee_pay" property="guaranteePay" jdbcType="INTEGER" />
+    <!-- 纤维纤度 -->
+    <result column="size" property="size" jdbcType="DECIMAL" />
+    <!-- 长度 -->
+    <result column="length" property="length" jdbcType="DECIMAL" />
+    <!-- 断裂长度 -->
+    <result column="break_length" property="breakLength" jdbcType="DECIMAL" />
+    <!-- 延伸率 -->
+    <result column="break_elongation" property="breakElongation" jdbcType="DECIMAL" />
+    <!-- 回潮率 -->
+    <result column="regain" property="regain" jdbcType="DECIMAL" />
+    <!-- 卷曲度 -->
+    <result column="crimp_degree" property="crimpDegree" jdbcType="INTEGER" />
+    <!-- 倍长纤维 -->
+    <result column="double_length" property="doubleLength" jdbcType="DECIMAL" />
+    <!-- 白度 -->
+    <result column="whiteness" property="whiteness" jdbcType="DECIMAL" />
+    <!-- 疵点 -->
+    <result column="defect" property="defect" jdbcType="DECIMAL" />
+    <!-- 油污 -->
+    <result column="oil" property="oil" jdbcType="DECIMAL" />
+    <!-- 残硫物 -->
+    <result column="sulfur" property="sulfur" jdbcType="DECIMAL" />
+    <!-- 灼烧残留物 -->
+    <result column="burn" property="burn" jdbcType="DECIMAL" />
+    <result column="add_time" property="addTime" jdbcType="VARCHAR" />
+    <!-- 1上架2未上架3待审核4审核失败 -->
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <!-- 库存 -->
+    <result column="stock" property="stock" jdbcType="VARCHAR" />
+    <!-- 销售类别1现货直销2预售3竞价 -->
+    <result column="sale_type" property="saleType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_by, create_time, update_by, update_time, classify_id, brand_id, shop_id, 
+    pro_sn, name, variety, thickness, fineness, color, function, unit_price, price, company, 
+    number, whole_weight, origin, deposit, warehouse, sales_address, explaindesc, good_verify, 
+    quality_verify, quality_warranty, bargaining, extension_margin, financing_margin, 
+    supplier_delivery, compensation, video_inspection, warehouse_charge, subsidy, lightning_invoice, 
+    honest_shop, on_the_way, directional, bidding_price, spot_listing, new, supply_chain, 
+    guarantee_pay, size, length, break_length, break_elongation, regain, crimp_degree, 
+    double_length, whiteness, defect, oil, sulfur, burn, add_time, state, stock, sale_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from f_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" >
+    insert into f_product (id, create_by, create_time, 
+      update_by, update_time, classify_id, 
+      brand_id, shop_id, pro_sn, 
+      name, variety, thickness, 
+      fineness, color, function, 
+      unit_price, price, company, 
+      number, whole_weight, origin, 
+      deposit, warehouse, sales_address, 
+      explaindesc, good_verify, quality_verify, 
+      quality_warranty, bargaining, extension_margin, 
+      financing_margin, supplier_delivery, compensation, 
+      video_inspection, warehouse_charge, subsidy, 
+      lightning_invoice, honest_shop, on_the_way, 
+      directional, bidding_price, spot_listing, 
+      new, supply_chain, guarantee_pay, 
+      size, length, break_length, 
+      break_elongation, regain, crimp_degree, 
+      double_length, whiteness, defect, 
+      oil, sulfur, burn, 
+      add_time, state, stock, 
+      sale_type)
+    values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{classifyId,jdbcType=BIGINT}, 
+      #{brandId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{proSn,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{variety,jdbcType=VARCHAR}, #{thickness,jdbcType=DECIMAL}, 
+      #{fineness,jdbcType=DECIMAL}, #{color,jdbcType=VARCHAR}, #{function,jdbcType=VARCHAR}, 
+      #{unitPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{company,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{wholeWeight,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{deposit,jdbcType=VARCHAR}, #{warehouse,jdbcType=VARCHAR}, #{salesAddress,jdbcType=VARCHAR}, 
+      #{explaindesc,jdbcType=VARCHAR}, #{goodVerify,jdbcType=INTEGER}, #{qualityVerify,jdbcType=INTEGER}, 
+      #{qualityWarranty,jdbcType=INTEGER}, #{bargaining,jdbcType=INTEGER}, #{extensionMargin,jdbcType=INTEGER}, 
+      #{financingMargin,jdbcType=INTEGER}, #{supplierDelivery,jdbcType=INTEGER}, #{compensation,jdbcType=INTEGER}, 
+      #{videoInspection,jdbcType=INTEGER}, #{warehouseCharge,jdbcType=INTEGER}, #{subsidy,jdbcType=INTEGER}, 
+      #{lightningInvoice,jdbcType=INTEGER}, #{honestShop,jdbcType=INTEGER}, #{onTheWay,jdbcType=INTEGER}, 
+      #{directional,jdbcType=INTEGER}, #{biddingPrice,jdbcType=INTEGER}, #{spotListing,jdbcType=INTEGER}, 
+      #{new,jdbcType=INTEGER}, #{supplyChain,jdbcType=INTEGER}, #{guaranteePay,jdbcType=INTEGER}, 
+      #{size,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL}, #{breakLength,jdbcType=DECIMAL}, 
+      #{breakElongation,jdbcType=DECIMAL}, #{regain,jdbcType=DECIMAL}, #{crimpDegree,jdbcType=INTEGER}, 
+      #{doubleLength,jdbcType=DECIMAL}, #{whiteness,jdbcType=DECIMAL}, #{defect,jdbcType=DECIMAL}, 
+      #{oil,jdbcType=DECIMAL}, #{sulfur,jdbcType=DECIMAL}, #{burn,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{stock,jdbcType=VARCHAR}, 
+      #{saleType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" >
+    insert into f_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="proSn != null" >
+        pro_sn,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="variety != null" >
+        variety,
+      </if>
+      <if test="thickness != null" >
+        thickness,
+      </if>
+      <if test="fineness != null" >
+        fineness,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="function != null" >
+        function,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="wholeWeight != null" >
+        whole_weight,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="warehouse != null" >
+        warehouse,
+      </if>
+      <if test="salesAddress != null" >
+        sales_address,
+      </if>
+      <if test="explaindesc != null" >
+        explaindesc,
+      </if>
+      <if test="goodVerify != null" >
+        good_verify,
+      </if>
+      <if test="qualityVerify != null" >
+        quality_verify,
+      </if>
+      <if test="qualityWarranty != null" >
+        quality_warranty,
+      </if>
+      <if test="bargaining != null" >
+        bargaining,
+      </if>
+      <if test="extensionMargin != null" >
+        extension_margin,
+      </if>
+      <if test="financingMargin != null" >
+        financing_margin,
+      </if>
+      <if test="supplierDelivery != null" >
+        supplier_delivery,
+      </if>
+      <if test="compensation != null" >
+        compensation,
+      </if>
+      <if test="videoInspection != null" >
+        video_inspection,
+      </if>
+      <if test="warehouseCharge != null" >
+        warehouse_charge,
+      </if>
+      <if test="subsidy != null" >
+        subsidy,
+      </if>
+      <if test="lightningInvoice != null" >
+        lightning_invoice,
+      </if>
+      <if test="honestShop != null" >
+        honest_shop,
+      </if>
+      <if test="onTheWay != null" >
+        on_the_way,
+      </if>
+      <if test="directional != null" >
+        directional,
+      </if>
+      <if test="biddingPrice != null" >
+        bidding_price,
+      </if>
+      <if test="spotListing != null" >
+        spot_listing,
+      </if>
+      <if test="new != null" >
+        new,
+      </if>
+      <if test="supplyChain != null" >
+        supply_chain,
+      </if>
+      <if test="guaranteePay != null" >
+        guarantee_pay,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="breakLength != null" >
+        break_length,
+      </if>
+      <if test="breakElongation != null" >
+        break_elongation,
+      </if>
+      <if test="regain != null" >
+        regain,
+      </if>
+      <if test="crimpDegree != null" >
+        crimp_degree,
+      </if>
+      <if test="doubleLength != null" >
+        double_length,
+      </if>
+      <if test="whiteness != null" >
+        whiteness,
+      </if>
+      <if test="defect != null" >
+        defect,
+      </if>
+      <if test="oil != null" >
+        oil,
+      </if>
+      <if test="sulfur != null" >
+        sulfur,
+      </if>
+      <if test="burn != null" >
+        burn,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="saleType != null" >
+        sale_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="proSn != null" >
+        #{proSn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="variety != null" >
+        #{variety,jdbcType=VARCHAR},
+      </if>
+      <if test="thickness != null" >
+        #{thickness,jdbcType=DECIMAL},
+      </if>
+      <if test="fineness != null" >
+        #{fineness,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="function != null" >
+        #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="wholeWeight != null" >
+        #{wholeWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null" >
+        #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAddress != null" >
+        #{salesAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="explaindesc != null" >
+        #{explaindesc,jdbcType=VARCHAR},
+      </if>
+      <if test="goodVerify != null" >
+        #{goodVerify,jdbcType=INTEGER},
+      </if>
+      <if test="qualityVerify != null" >
+        #{qualityVerify,jdbcType=INTEGER},
+      </if>
+      <if test="qualityWarranty != null" >
+        #{qualityWarranty,jdbcType=INTEGER},
+      </if>
+      <if test="bargaining != null" >
+        #{bargaining,jdbcType=INTEGER},
+      </if>
+      <if test="extensionMargin != null" >
+        #{extensionMargin,jdbcType=INTEGER},
+      </if>
+      <if test="financingMargin != null" >
+        #{financingMargin,jdbcType=INTEGER},
+      </if>
+      <if test="supplierDelivery != null" >
+        #{supplierDelivery,jdbcType=INTEGER},
+      </if>
+      <if test="compensation != null" >
+        #{compensation,jdbcType=INTEGER},
+      </if>
+      <if test="videoInspection != null" >
+        #{videoInspection,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCharge != null" >
+        #{warehouseCharge,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null" >
+        #{subsidy,jdbcType=INTEGER},
+      </if>
+      <if test="lightningInvoice != null" >
+        #{lightningInvoice,jdbcType=INTEGER},
+      </if>
+      <if test="honestShop != null" >
+        #{honestShop,jdbcType=INTEGER},
+      </if>
+      <if test="onTheWay != null" >
+        #{onTheWay,jdbcType=INTEGER},
+      </if>
+      <if test="directional != null" >
+        #{directional,jdbcType=INTEGER},
+      </if>
+      <if test="biddingPrice != null" >
+        #{biddingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="spotListing != null" >
+        #{spotListing,jdbcType=INTEGER},
+      </if>
+      <if test="new != null" >
+        #{new,jdbcType=INTEGER},
+      </if>
+      <if test="supplyChain != null" >
+        #{supplyChain,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteePay != null" >
+        #{guaranteePay,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=DECIMAL},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=DECIMAL},
+      </if>
+      <if test="breakLength != null" >
+        #{breakLength,jdbcType=DECIMAL},
+      </if>
+      <if test="breakElongation != null" >
+        #{breakElongation,jdbcType=DECIMAL},
+      </if>
+      <if test="regain != null" >
+        #{regain,jdbcType=DECIMAL},
+      </if>
+      <if test="crimpDegree != null" >
+        #{crimpDegree,jdbcType=INTEGER},
+      </if>
+      <if test="doubleLength != null" >
+        #{doubleLength,jdbcType=DECIMAL},
+      </if>
+      <if test="whiteness != null" >
+        #{whiteness,jdbcType=DECIMAL},
+      </if>
+      <if test="defect != null" >
+        #{defect,jdbcType=DECIMAL},
+      </if>
+      <if test="oil != null" >
+        #{oil,jdbcType=DECIMAL},
+      </if>
+      <if test="sulfur != null" >
+        #{sulfur,jdbcType=DECIMAL},
+      </if>
+      <if test="burn != null" >
+        #{burn,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null" >
+        #{saleType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" >
+    update f_product
+    <set >
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="proSn != null" >
+        pro_sn = #{proSn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="variety != null" >
+        variety = #{variety,jdbcType=VARCHAR},
+      </if>
+      <if test="thickness != null" >
+        thickness = #{thickness,jdbcType=DECIMAL},
+      </if>
+      <if test="fineness != null" >
+        fineness = #{fineness,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="function != null" >
+        function = #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="wholeWeight != null" >
+        whole_weight = #{wholeWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null" >
+        warehouse = #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAddress != null" >
+        sales_address = #{salesAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="explaindesc != null" >
+        explaindesc = #{explaindesc,jdbcType=VARCHAR},
+      </if>
+      <if test="goodVerify != null" >
+        good_verify = #{goodVerify,jdbcType=INTEGER},
+      </if>
+      <if test="qualityVerify != null" >
+        quality_verify = #{qualityVerify,jdbcType=INTEGER},
+      </if>
+      <if test="qualityWarranty != null" >
+        quality_warranty = #{qualityWarranty,jdbcType=INTEGER},
+      </if>
+      <if test="bargaining != null" >
+        bargaining = #{bargaining,jdbcType=INTEGER},
+      </if>
+      <if test="extensionMargin != null" >
+        extension_margin = #{extensionMargin,jdbcType=INTEGER},
+      </if>
+      <if test="financingMargin != null" >
+        financing_margin = #{financingMargin,jdbcType=INTEGER},
+      </if>
+      <if test="supplierDelivery != null" >
+        supplier_delivery = #{supplierDelivery,jdbcType=INTEGER},
+      </if>
+      <if test="compensation != null" >
+        compensation = #{compensation,jdbcType=INTEGER},
+      </if>
+      <if test="videoInspection != null" >
+        video_inspection = #{videoInspection,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCharge != null" >
+        warehouse_charge = #{warehouseCharge,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null" >
+        subsidy = #{subsidy,jdbcType=INTEGER},
+      </if>
+      <if test="lightningInvoice != null" >
+        lightning_invoice = #{lightningInvoice,jdbcType=INTEGER},
+      </if>
+      <if test="honestShop != null" >
+        honest_shop = #{honestShop,jdbcType=INTEGER},
+      </if>
+      <if test="onTheWay != null" >
+        on_the_way = #{onTheWay,jdbcType=INTEGER},
+      </if>
+      <if test="directional != null" >
+        directional = #{directional,jdbcType=INTEGER},
+      </if>
+      <if test="biddingPrice != null" >
+        bidding_price = #{biddingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="spotListing != null" >
+        spot_listing = #{spotListing,jdbcType=INTEGER},
+      </if>
+      <if test="new != null" >
+        new = #{new,jdbcType=INTEGER},
+      </if>
+      <if test="supplyChain != null" >
+        supply_chain = #{supplyChain,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteePay != null" >
+        guarantee_pay = #{guaranteePay,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=DECIMAL},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=DECIMAL},
+      </if>
+      <if test="breakLength != null" >
+        break_length = #{breakLength,jdbcType=DECIMAL},
+      </if>
+      <if test="breakElongation != null" >
+        break_elongation = #{breakElongation,jdbcType=DECIMAL},
+      </if>
+      <if test="regain != null" >
+        regain = #{regain,jdbcType=DECIMAL},
+      </if>
+      <if test="crimpDegree != null" >
+        crimp_degree = #{crimpDegree,jdbcType=INTEGER},
+      </if>
+      <if test="doubleLength != null" >
+        double_length = #{doubleLength,jdbcType=DECIMAL},
+      </if>
+      <if test="whiteness != null" >
+        whiteness = #{whiteness,jdbcType=DECIMAL},
+      </if>
+      <if test="defect != null" >
+        defect = #{defect,jdbcType=DECIMAL},
+      </if>
+      <if test="oil != null" >
+        oil = #{oil,jdbcType=DECIMAL},
+      </if>
+      <if test="sulfur != null" >
+        sulfur = #{sulfur,jdbcType=DECIMAL},
+      </if>
+      <if test="burn != null" >
+        burn = #{burn,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null" >
+        sale_type = #{saleType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update f_product
+    set create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      classify_id = #{classifyId,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      pro_sn = #{proSn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      variety = #{variety,jdbcType=VARCHAR},
+      thickness = #{thickness,jdbcType=DECIMAL},
+      fineness = #{fineness,jdbcType=DECIMAL},
+      color = #{color,jdbcType=VARCHAR},
+      function = #{function,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      company = #{company,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      whole_weight = #{wholeWeight,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      warehouse = #{warehouse,jdbcType=VARCHAR},
+      sales_address = #{salesAddress,jdbcType=VARCHAR},
+      explaindesc = #{explaindesc,jdbcType=VARCHAR},
+      good_verify = #{goodVerify,jdbcType=INTEGER},
+      quality_verify = #{qualityVerify,jdbcType=INTEGER},
+      quality_warranty = #{qualityWarranty,jdbcType=INTEGER},
+      bargaining = #{bargaining,jdbcType=INTEGER},
+      extension_margin = #{extensionMargin,jdbcType=INTEGER},
+      financing_margin = #{financingMargin,jdbcType=INTEGER},
+      supplier_delivery = #{supplierDelivery,jdbcType=INTEGER},
+      compensation = #{compensation,jdbcType=INTEGER},
+      video_inspection = #{videoInspection,jdbcType=INTEGER},
+      warehouse_charge = #{warehouseCharge,jdbcType=INTEGER},
+      subsidy = #{subsidy,jdbcType=INTEGER},
+      lightning_invoice = #{lightningInvoice,jdbcType=INTEGER},
+      honest_shop = #{honestShop,jdbcType=INTEGER},
+      on_the_way = #{onTheWay,jdbcType=INTEGER},
+      directional = #{directional,jdbcType=INTEGER},
+      bidding_price = #{biddingPrice,jdbcType=INTEGER},
+      spot_listing = #{spotListing,jdbcType=INTEGER},
+      new = #{new,jdbcType=INTEGER},
+      supply_chain = #{supplyChain,jdbcType=INTEGER},
+      guarantee_pay = #{guaranteePay,jdbcType=INTEGER},
+      size = #{size,jdbcType=DECIMAL},
+      length = #{length,jdbcType=DECIMAL},
+      break_length = #{breakLength,jdbcType=DECIMAL},
+      break_elongation = #{breakElongation,jdbcType=DECIMAL},
+      regain = #{regain,jdbcType=DECIMAL},
+      crimp_degree = #{crimpDegree,jdbcType=INTEGER},
+      double_length = #{doubleLength,jdbcType=DECIMAL},
+      whiteness = #{whiteness,jdbcType=DECIMAL},
+      defect = #{defect,jdbcType=DECIMAL},
+      oil = #{oil,jdbcType=DECIMAL},
+      sulfur = #{sulfur,jdbcType=DECIMAL},
+      burn = #{burn,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=VARCHAR},
+      sale_type = #{saleType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.forbes.dal.mapper.BrandAttachMapper" >
+  <resultMap id="BaseResultMap" type="org.forbes.dal.entity.BrandAttach" >
+    <!-- 主键 -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <!-- 创建时间 -->
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <!-- 更新人 -->
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <!-- 更新时间 -->
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <!-- 数据ID -->
+    <result column="data_id" property="dataId" jdbcType="BIGINT" />
+    <!-- 排序 -->
+    <result column="orders_sort" property="ordersSort" jdbcType="INTEGER" />
+    <!-- 后缀 -->
+    <result column="suffix" property="suffix" jdbcType="VARCHAR" />
+    <!-- 中文名称 -->
+    <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    <!-- 文件地址 -->
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <!-- 0-大图，1-小图，3-中图 -->
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_by, create_time, update_by, update_time, data_id, orders_sort, suffix, 
+    cn_name, en_name, file_path, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from f_brand_attach
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_brand_attach
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" >
+    insert into f_brand_attach (id, create_by, create_time, 
+      update_by, update_time, data_id, 
+      orders_sort, suffix, cn_name, 
+      en_name, file_path, type
+      )
+    values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{dataId,jdbcType=BIGINT}, 
+      #{ordersSort,jdbcType=INTEGER}, #{suffix,jdbcType=VARCHAR}, #{cnName,jdbcType=VARCHAR}, 
+      #{enName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into f_brand_attach
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="dataId != null" >
+        data_id,
+      </if>
+      <if test="ordersSort != null" >
+        orders_sort,
+      </if>
+      <if test="suffix != null" >
+        suffix,
+      </if>
+      <if test="cnName != null" >
+        cn_name,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataId != null" >
+        #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersSort != null" >
+        #{ordersSort,jdbcType=INTEGER},
+      </if>
+      <if test="suffix != null" >
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" >
+    update f_brand_attach
+    <set >
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataId != null" >
+        data_id = #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersSort != null" >
+        orders_sort = #{ordersSort,jdbcType=INTEGER},
+      </if>
+      <if test="suffix != null" >
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        cn_name = #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update f_brand_attach
+    set create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      data_id = #{dataId,jdbcType=BIGINT},
+      orders_sort = #{ordersSort,jdbcType=INTEGER},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
