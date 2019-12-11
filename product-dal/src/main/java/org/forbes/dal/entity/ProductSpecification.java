@@ -7,46 +7,7 @@ import lombok.Data;
  * Table: f_product_specification
  */
 @Data
-public class ProductSpecification {
-    /**
-     * 主键
-     * Table:     f_product_specification
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
-
-    /**
-     * Table:     f_product_specification
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_product_specification
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 更新人
-     * Table:     f_product_specification
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     * Table:     f_product_specification
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
+public class ProductSpecification extends BaseEntity{
     /**
      * 0-未启用,1-启用
      * Table:     f_product_specification

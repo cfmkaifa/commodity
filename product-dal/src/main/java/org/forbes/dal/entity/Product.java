@@ -2,52 +2,24 @@ package org.forbes.dal.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * Table: f_product
  */
 @Data
-public class Product{
-    /**
-     * 主键
-     * Table:     f_product
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
+@ApiModel(description="商品信息")
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("f_product")
+public class Product extends BaseEntity{
 
-    /**
-     * Table:     f_product
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_product
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 更新人
-     * Table:     f_product
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     * Table:     f_product
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
+    private static final long serialVersionUID = -215280691828941047L;
     /**
      * 分类id
      * Table:     f_product
