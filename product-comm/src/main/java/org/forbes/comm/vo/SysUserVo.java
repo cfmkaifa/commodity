@@ -16,6 +16,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 
+
 public class SysUserVo implements Serializable {
 
 	/** 

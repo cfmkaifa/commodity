@@ -7,6 +7,7 @@ import org.forbes.comm.vo.SysUserVo;
  * @author Huanghy
  */
 
+
 public final class UserContext {
 
 	/***线程独享用户信息
