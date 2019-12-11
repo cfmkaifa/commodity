@@ -15,6 +15,7 @@ import java.util.Date;
 @ApiModel(description = "用户对象")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+
 public class SysUserVo implements Serializable {
 
 	/** 

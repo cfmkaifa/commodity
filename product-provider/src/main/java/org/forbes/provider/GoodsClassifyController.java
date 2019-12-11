@@ -57,7 +57,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,response=Result.class, message = Result.SELECT_ERROR_CLASSIFY)
     })
-    public Result<IPage<ProductClassify>> selectProductClassifyList(@RequestBody(required = false) BasePageDto<ProductClassifyPageDto> basePageDto){
+    public Result<IPage<ProductClassify>> selectGoodsClassify(@RequestBody(required = false) BasePageDto<ProductClassifyPageDto> basePageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductClassify>> result=new Result<IPage<ProductClassify>>();
         QueryWrapper<ProductClassify> qw=new QueryWrapper<>();
@@ -95,7 +95,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.ADD_ERROR_CLASSIFY),
             @ApiResponse(code=200,response=Result.class, message = Result.ADD_CLASSIFY)
     })
-    public Result<ProductClassify> addProdutClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
+    public Result<ProductClassify> addGoodsClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
         Result<ProductClassify> result=new Result<ProductClassify>();
         String name=productClassify.getName();//获取商品分类名称
@@ -135,7 +135,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.DEL_ERROR_CLASSIFY),
             @ApiResponse(code=200,response=Result.class, message = Result.DEL_CLASSIFY)
     })
-    public Result<ProductClassify> deleteProductClassify(@RequestParam(name = "id",required =true)String id){
+    public Result<ProductClassify> delGoodsClassify(@RequestParam(name = "id",required =true)String id){
         Result<ProductClassify> result=new Result<ProductClassify>();
         ProductClassify productClassify=productClassifyService.getById(id);
         if(ConvertUtils.isNotEmpty(productClassify)){
