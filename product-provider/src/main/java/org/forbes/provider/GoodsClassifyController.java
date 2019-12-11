@@ -159,6 +159,7 @@ public class GoodsClassifyController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
+
     @RequestMapping(value = "/updstatus/{id}",method = RequestMethod.PUT)
     @ApiOperation("禁用/启用商品分类状态")
     @ApiImplicitParam(value="state",name="商品分类状态",required=false)
@@ -175,7 +176,7 @@ public class GoodsClassifyController {
             return result;
         }
         ProductClassify productClassify=productClassifyService.getById(id);
-        if(ConvertUtils.isNotEmpty(productClassify)){
+        if(!ConvertUtils.isNotEmpty(productClassify)){
             result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizFormateMessage(),productClassify.getName()));
             return result;
