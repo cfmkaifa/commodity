@@ -16,7 +16,8 @@ public enum BizResultEnum {
 	EMPTY("002001","参数为空","%s为空"),
 	PRODUCT_CLASSIFY_EXIST("002001001","商品分类已存在","%s对应商品分类已存在"),
 	PRODUCT_CLASSIFY_NOT_EXIST("002001002","商品分类不存在","s%对应商品分类不存在"),
-	PRODUCT_CHILD_EXISTS("002001003","商品分类下包含子级分类","s%对应商品分类下包含子级分类");
+	PRODUCT_CHILD_EXISTS("002001003","商品分类下包含子级分类","s%对应商品分类下包含子级分类"),
+	CLASSIFY_STATUS_NOT_EXIST("002001004","商品分类状态不存在","s%对应商品分类状态不存在"),;
 
 	/**错误编码业务系统代码+功能编码+错误代码**/
 	private String bizCode;

@@ -44,6 +44,10 @@ public class Result<T> implements Serializable {
 	public static final  String DEL_CLASSIFY = "删除分类成功";
 	public static final  String DEL_ERROR_CLASSIFY = "删除分类失败";
 
+	/******修改商品分类状态****/
+	public static final  String UP_CLASSIFY_STATUS = "修改商品分类状态成功";
+	public static final  String UP_CLASSIFY_ERROR_STATUS = "修改商品分类状态失败";
+
 	/**
 	 * 返回代码
 	 */

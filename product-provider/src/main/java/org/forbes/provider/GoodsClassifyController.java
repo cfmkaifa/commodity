@@ -10,6 +10,8 @@ import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
+import org.forbes.comm.enums.ClassifyStausEnum;
+import org.forbes.comm.enums.YesNoEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductClassifyDto;
 import org.forbes.comm.model.ProductClassifyPageDto;
@@ -50,12 +52,9 @@ public class GoodsClassifyController {
      */
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     @ApiOperation("分页查询商品分类")
-    @ApiImplicitParams(value={
-            @ApiImplicitParam(dataTypeClass=ProductClassifyPageDto.class)
-    })
     @ApiResponses(value={
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
-            @ApiResponse(code=200,response=Result.class, message = Result.SELECT_ERROR_CLASSIFY)
+            @ApiResponse(code=200,message = Result.SELECT_ERROR_CLASSIFY)
     })
     public Result<IPage<ProductClassify>> selectGoodsClassify(@RequestBody(required = false) BasePageDto<ProductClassifyPageDto> basePageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
@@ -88,12 +87,9 @@ public class GoodsClassifyController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation("添加商品分类")
-    @ApiImplicitParams(value={
-            @ApiImplicitParam(dataTypeClass=ProductClassify.class)
-    })
     @ApiResponses(value={
             @ApiResponse(code=500,message= Result.ADD_ERROR_CLASSIFY),
-            @ApiResponse(code=200,response=Result.class, message = Result.ADD_CLASSIFY)
+            @ApiResponse(code=200,message = Result.ADD_CLASSIFY)
     })
     public Result<ProductClassify> addGoodsClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
@@ -106,10 +102,10 @@ public class GoodsClassifyController {
             return result;
         }else {
             Long parentId=productClassify.getParentId();
-            if(parentId==null){//添加的是一级分类
+            if(ConvertUtils.isNotEmpty(parentId)){//添加的是一级分类
                 productClassify.setParentId(0L);
             }
-            productClassify.setState(0L);
+            productClassify.setState(YesNoEnum.NO.getCode());
             productClassifyService.save(productClassify);
         }
         result.setResult(productClassify);
@@ -129,11 +125,11 @@ public class GoodsClassifyController {
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ApiOperation("删除商品分类")
     @ApiImplicitParams(value={
-            @ApiImplicitParam(dataTypeClass=ProductClassifyDto.class)
+            @ApiImplicitParam(dataTypeClass=ProductClassify.class)
     })
     @ApiResponses(value={
             @ApiResponse(code=500,message= Result.DEL_ERROR_CLASSIFY),
-            @ApiResponse(code=200,response=Result.class, message = Result.DEL_CLASSIFY)
+            @ApiResponse(code=200,message = Result.DEL_CLASSIFY)
     })
     public Result<ProductClassify> delGoodsClassify(@RequestParam(name = "id",required =true)String id){
         Result<ProductClassify> result=new Result<ProductClassify>();
@@ -151,6 +147,41 @@ public class GoodsClassifyController {
             return result;
         }
         productClassifyService.removeById(id);
+        return result;
+    }
+
+    /***
+     * update方法概述: 修改状态
+     * @param
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductClassify>
+     * @创建人 xfx
+     * @创建时间 2019/12/11
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/updstatus/{id}",method = RequestMethod.PUT)
+    @ApiOperation("禁用/启用商品分类状态")
+    @ApiImplicitParam(value="state",name="商品分类状态",required=false)
+    @ApiResponses(value = {
+            @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_STATUS),
+            @ApiResponse(code=200,response = ProductClassify.class,message = Result.UP_CLASSIFY_STATUS)
+    })
+    public Result<ProductClassify> update(@PathVariable Long id,@RequestParam(value="state",required=true)String state){
+        Result<ProductClassify> result=new Result<ProductClassify>();
+        boolean isClassifyres= ClassifyStausEnum.existsClassifyStausEnum(state);
+        if(!isClassifyres){
+            result.setBizCode(BizResultEnum.CLASSIFY_STATUS_NOT_EXIST.getBizCode());
+            result.setMessage(String.format(BizResultEnum.CLASSIFY_STATUS_NOT_EXIST.getBizFormateMessage(),state));
+            return result;
+        }
+        ProductClassify productClassify=productClassifyService.getById(id);
+        if(ConvertUtils.isNotEmpty(productClassify)){
+            result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizFormateMessage(),productClassify.getName()));
+            return result;
+        }
+        productClassify.setState(state);
+        productClassifyService.updateById(productClassify);
         return result;
     }
 }

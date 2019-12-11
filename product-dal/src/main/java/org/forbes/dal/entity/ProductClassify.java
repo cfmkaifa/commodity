@@ -14,7 +14,8 @@ import lombok.EqualsAndHashCode;
 @ApiModel(description="商品分类信息")
 @EqualsAndHashCode(callSuper = false)
 @TableName("f_product_classify")
-public class ProductClassify extends BaseEntity{
+public class ProductClassify extends BaseEntity {
+    private static final long serialVersionUID = 1756859705133117200L;
     /**
      * 分类编码
      * Table:     f_product_classify
@@ -52,5 +53,5 @@ public class ProductClassify extends BaseEntity{
      * Column:    state
      * Nullable:  true
      */
-    private Long state;
+    private String state;
 }

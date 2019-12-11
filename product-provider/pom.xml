@@ -22,6 +22,21 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+     <dependency>
+      <groupId>org.forbes</groupId>
+      <artifactId>product-comm</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+      <dependency>
+        <groupId>org.forbes</groupId>
+        <artifactId>product-dal</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+    <dependency>
+      <groupId>org.forbes</groupId>
+      <artifactId>product-config</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
       <dependency>
           <groupId>org.forbes</groupId>
           <artifactId>product-biz</artifactId>
