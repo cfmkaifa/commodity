@@ -3,28 +3,24 @@ package org.forbes.provider;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.forbes.biz.IProductService;
 import org.forbes.comm.constant.DataColumnConstant;
 import org.forbes.comm.constant.SaveValid;
+import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.model.BasePageDto;
-import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
+import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author lzw
@@ -102,6 +98,61 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
+    @ApiOperation("编辑")
+    @ApiResponses(value = {
+            @ApiResponse(code=200,message = Result.UPDATE_PRODUCT),
+            @ApiResponse(code=500,message = Result.UPDATE_ERROR_PRODUCT)
+    })
+    @RequestMapping(value = "/update-product",method = RequestMethod.PUT)
+    public Result<Product> updateProduct(@RequestBody @Validated(value=UpdateValid.class) Product product){
+        log.debug("传入的参数为"+JSON.toJSONString(product));
+        Result<Product> result=new Result<Product>();
+        Product oldSysRole = productService.getById(product.getId());
+        if(ConvertUtils.isEmpty(oldSysRole)){
+            result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
+            result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
+            return result;
+        }
+        String procn = product.getProSn();
+        //判断当前商家编码与输入的是否一致
+        if (!procn.equalsIgnoreCase(oldSysRole.getProSn())) {
+            //查询是否和其他商家编码一致
+            int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
+            if (existsCount > 0) {//存在此记录
+                result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
+                result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
+                return result;
+            }
+        }
+        productService.updateById(product);
+        result.setResult(product);
+        return result;
+    }
 
-    
+    /***
+     * deleteProduct方法概述:删除商品信息
+     * @param 
+     * @return 
+     * @创建人 Tom
+     * @创建时间 2019/12/11 18:11
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @ApiOperation("删除商品")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "id",value = "商品ID",required = true)
+    })
+    @RequestMapping(value = "/delete-product", method = RequestMethod.DELETE)
+    public Result<Product> deleteProduct(@RequestParam(name="id",required=true) String id) {
+        Result<Product> result = new Result<Product>();
+        Product product = productService.getById(id);
+        if(ConvertUtils.isEmpty(product)){
+            result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
+            result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
+            return result;
+        }
+        productService.removeById(id);
+        return result;
+    }
+
 }
