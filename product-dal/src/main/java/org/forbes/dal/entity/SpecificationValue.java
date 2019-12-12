@@ -1,15 +1,23 @@
 package org.forbes.dal.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_specification_value
  */
 @Data
+@ApiModel(description="分类规格")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_specification_value")
 public class SpecificationValue extends BaseEntity{
-    /**
+    
+	private static final long serialVersionUID = 8259619795373167378L;
+
+	/**
      * 分类ID
      * Table:     f_specification_value
      * Column:    classify_id
@@ -33,43 +41,12 @@ public class SpecificationValue extends BaseEntity{
      */
     private Long specId;
 
-    /**
-     * 编码
-     * Table:     f_specification_value
-     * Column:    spec_sn
-     * Nullable:  true
-     */
-    private String specSn;
 
-    /**
-     * 库存
-     * Table:     f_specification_value
-     * Column:    stock
-     * Nullable:  true
+    /***规格值
      */
-    private Integer stock;
-
-    /**
-     * 销售价
-     * Table:     f_specification_value
-     * Column:    sale_price
-     * Nullable:  true
+    private String specVal;
+    
+    /***skuId
      */
-    private BigDecimal salePrice;
-
-    /**
-     * 市场价
-     * Table:     f_specification_value
-     * Column:    market_price
-     * Nullable:  true
-     */
-    private BigDecimal marketPrice;
-
-    /**
-     * 成本价
-     * Table:     f_specification_value
-     * Column:    cost_price
-     * Nullable:  true
-     */
-    private BigDecimal costPrice;
+    private Long skuId;
 }

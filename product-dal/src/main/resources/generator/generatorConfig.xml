@@ -45,7 +45,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="org.forbes.dal.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="brand"  domainObjectName="Brand"          enableSelectByPrimaryKey="true"
+        <table tableName="f_product_brand"  domainObjectName="ProductBrand"          enableSelectByPrimaryKey="true"
 			  enableDeleteByPrimaryKey="true"
 			  enableUpdateByPrimaryKey="true"
 			  enableCountByExample="false"
@@ -56,84 +56,7 @@
 			  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>
-		<table tableName="f_attribute_value"  domainObjectName="AttributeValue"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_classify_attribute"  domainObjectName="ClassifyAttribute"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_brand_attach"  domainObjectName="BrandAttach"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_product"  domainObjectName="Product"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_product_attach"  domainObjectName="ProductAttach"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_product_classify"  domainObjectName="ProductClassify"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_product_specification"  domainObjectName="ProductSpecification"          enableSelectByPrimaryKey="true"
-			   enableDeleteByPrimaryKey="true"
-			   enableUpdateByPrimaryKey="true"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false"
-			   selectByPrimaryKeyQueryId="false">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
-		<table tableName="f_specification_value"  domainObjectName="SpecificationValue"          enableSelectByPrimaryKey="true"
+		<table tableName="f_product_sku"  domainObjectName="ProductSku"          enableSelectByPrimaryKey="true"
 			   enableDeleteByPrimaryKey="true"
 			   enableUpdateByPrimaryKey="true"
 			   enableCountByExample="false"

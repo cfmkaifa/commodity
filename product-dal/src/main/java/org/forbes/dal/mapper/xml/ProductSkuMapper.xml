@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.forbes.dal.mapper.BrandMapper" >
-  <resultMap id="BaseResultMap" type="org.forbes.dal.entity.Brand" >
+<mapper namespace="org.forbes.dal.mapper.ProductSkuMapper" >
+  <resultMap id="BaseResultMap" type="org.forbes.dal.entity.ProductSku" >
     <!-- 主键 -->
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
@@ -13,32 +13,47 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <!-- 分类ID -->
     <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="intr" property="intr" jdbcType="VARCHAR" />
+    <!-- 商品ID -->
+    <result column="pro_id" property="proId" jdbcType="BIGINT" />
+    <!-- 编码 -->
+    <result column="sku_sn" property="skuSn" jdbcType="VARCHAR" />
+    <!-- 库存 -->
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <!-- 销售价 -->
+    <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+    <!-- 市场价 -->
+    <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+    <!-- 成本价 -->
+    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, create_by, create_time, update_by, update_time, classify_id, name, intr
+    id, create_by, create_time, update_by, update_time, classify_id, pro_id, sku_sn, 
+    stock, sale_price, market_price, cost_price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from brand
+    from f_product_sku
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from brand
+    delete from f_product_sku
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" >
-    insert into brand (id, create_by, create_time, 
+    insert into f_product_sku (id, create_by, create_time, 
       update_by, update_time, classify_id, 
-      name, intr)
+      pro_id, sku_sn, stock, 
+      sale_price, market_price, cost_price
+      )
     values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{classifyId,jdbcType=BIGINT}, 
-      #{name,jdbcType=VARCHAR}, #{intr,jdbcType=VARCHAR})
+      #{proId,jdbcType=BIGINT}, #{skuSn,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, 
+      #{salePrice,jdbcType=DECIMAL}, #{marketPrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" >
-    insert into brand
+    insert into f_product_sku
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -58,11 +73,23 @@
       <if test="classifyId != null" >
         classify_id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="proId != null" >
+        pro_id,
       </if>
-      <if test="intr != null" >
-        intr,
+      <if test="skuSn != null" >
+        sku_sn,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="costPrice != null" >
+        cost_price,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -84,16 +111,28 @@
       <if test="classifyId != null" >
         #{classifyId,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="proId != null" >
+        #{proId,jdbcType=BIGINT},
       </if>
-      <if test="intr != null" >
-        #{intr,jdbcType=VARCHAR},
+      <if test="skuSn != null" >
+        #{skuSn,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null" >
+        #{costPrice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" >
-    update brand
+    update f_product_sku
     <set >
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=VARCHAR},
@@ -110,24 +149,40 @@
       <if test="classifyId != null" >
         classify_id = #{classifyId,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=BIGINT},
       </if>
-      <if test="intr != null" >
-        intr = #{intr,jdbcType=VARCHAR},
+      <if test="skuSn != null" >
+        sku_sn = #{skuSn,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DECIMAL},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" >
-    update brand
+    update f_product_sku
     set create_by = #{createBy,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       classify_id = #{classifyId,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      intr = #{intr,jdbcType=VARCHAR}
+      pro_id = #{proId,jdbcType=BIGINT},
+      sku_sn = #{skuSn,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      cost_price = #{costPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

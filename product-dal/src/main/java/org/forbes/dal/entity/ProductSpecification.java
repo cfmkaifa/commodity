@@ -1,14 +1,23 @@
 package org.forbes.dal.entity;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_product_specification
  */
 @Data
+@ApiModel(description="分类规格")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_product_specification")
 public class ProductSpecification extends BaseEntity{
-    /**
+  
+	private static final long serialVersionUID = -856092185658314266L;
+
+	/**
      * 0-未启用,1-启用
      * Table:     f_product_specification
      * Column:    state
@@ -30,20 +39,4 @@ public class ProductSpecification extends BaseEntity{
      * Nullable:  true
      */
     private String name;
-
-    /**
-     * 父级规格ID
-     * Table:     f_product_specification
-     * Column:    parent_id
-     * Nullable:  true
-     */
-    private Long parentId;
-
-    /**
-     * 规格编码
-     * Table:     f_product_specification
-     * Column:    spec_sn
-     * Nullable:  true
-     */
-    private String specSn;
 }
