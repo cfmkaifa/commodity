@@ -25,4 +25,25 @@ public interface IProductService extends IService<Product> {
      */
     IPage<ProductVo> PageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
 
+    /***
+     * addProduct方法概述:新增商品信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/12 15:55
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    void addProduct(ProductDto productDto);
+
+    /***
+     * updateProduct方法概述:修改商品信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/12 17:32
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    void updateProduct(ProductDto productDto);
 }

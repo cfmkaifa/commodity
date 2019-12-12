@@ -34,7 +34,7 @@ public enum ProductStausEnum {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public static boolean existsProductStausEnum(Integer code){
+    public static boolean existsProductStausEnum(String code){
         return Arrays.asList(ProductStausEnum.values()).stream()
                 .filter(productStaus -> ((ProductStausEnum)productStaus).getCode().equals(code)).count() > 0 ;
     }

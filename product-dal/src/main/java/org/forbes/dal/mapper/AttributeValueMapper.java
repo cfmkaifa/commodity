@@ -1,17 +1,8 @@
 package org.forbes.dal.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.forbes.dal.entity.AttributeValue;
 
-public interface AttributeValueMapper {
-    int deleteByPrimaryKey(Long id);
+public interface AttributeValueMapper extends BaseMapper<AttributeValue> {
 
-    int insert(AttributeValue record);
-
-    int insertSelective(AttributeValue record);
-
-    AttributeValue selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(AttributeValue record);
-
-    int updateByPrimaryKey(AttributeValue record);
 }

@@ -14,10 +14,12 @@ import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ProductStausEnum;
 import org.forbes.comm.model.BasePageDto;
+import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
+import org.forbes.dal.entity.AttributeValue;
 import org.forbes.dal.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -48,7 +50,7 @@ public class ProductController {
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     @ApiOperation("商品分页查询")
     @ApiResponses(value = {
-            @ApiResponse(code=200,response=ProductVo.class,message = Result.SELECT_PRODUCT),
+            @ApiResponse(code=200,message = Result.SELECT_PRODUCT),
             @ApiResponse(code=500, message = Result.SELECT_ERROR_PRODUCT)
     })
     public Result<IPage<ProductVo>> PageProduct(@RequestBody(required=false)BasePageDto<ProductPageDto> basePageDto){
@@ -62,8 +64,8 @@ public class ProductController {
 
     /***
      * addProduct方法概述:添加商品
-     * @param product
-     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>
+     * @param productDto
+     * @return
      * @创建人 Tom
      * @创建时间 2019/12/11 17:03
      * @修改人 (修改了该文件，请填上修改人的名字)
@@ -75,18 +77,19 @@ public class ProductController {
             @ApiResponse(code=200,message = Result.ADD_PRODUCT),
             @ApiResponse(code=500,message = Result.ADD_ERROR_PRODUCT)
     })
-    public Result<Product> addProduct(@RequestBody @Validated(value = SaveValid.class)Product product){
-        log.debug("传入的参数为"+ JSON.toJSONString(product));
-        Result<Product> result=new Result<Product>();
-        String procn = product.getProSn();
+    public Result<ProductDto> addProduct(@RequestBody @Validated(value = SaveValid.class)ProductDto productDto){
+        log.debug("传入的参数为"+ JSON.toJSONString(productDto));
+        Result<ProductDto> result=new Result<ProductDto>();
+        ProductDto productDtos=new ProductDto();
+        String procn = productDtos.getProSn();
         int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
         if(existsCount > 0 ) {//存在此记录
             result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
             return result;
         }
-        productService.save(product);
-        result.setResult(product);
+        productService.addProduct(productDto);
+        result.setResult(productDto);
         return result;
     }
 
@@ -170,9 +173,9 @@ public class ProductController {
     @ApiImplicitParam(value="state",name="商品状态",required=false)
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.COMM_ACTION_ERROR_MSG),
-            @ApiResponse(code=200,response = Product.class,message = Result.COMM_ACTION_MSG)
+            @ApiResponse(code=200,message = Result.COMM_ACTION_MSG)
     })
-    public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)Integer state){
+    public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
         Result<Product> result=new Result<Product>();
         boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
         Product product = productService.getById(id);

@@ -23,127 +23,127 @@
     id, create_by, create_time, update_by, update_time, orders_sort, classify_id, pro_id, 
     attribute_value
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from f_attribute_value
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from f_attribute_value
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" >
-    insert into f_attribute_value (id, create_by, create_time, 
-      update_by, update_time, orders_sort, 
-      classify_id, pro_id, attribute_value
-      )
-    values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{ordersSort,jdbcType=INTEGER}, 
-      #{classifyId,jdbcType=BIGINT}, #{proId,jdbcType=BIGINT}, #{attributeValue,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" >
-    insert into f_attribute_value
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="createBy != null" >
-        create_by,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateBy != null" >
-        update_by,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="ordersSort != null" >
-        orders_sort,
-      </if>
-      <if test="classifyId != null" >
-        classify_id,
-      </if>
-      <if test="proId != null" >
-        pro_id,
-      </if>
-      <if test="attributeValue != null" >
-        attribute_value,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ordersSort != null" >
-        #{ordersSort,jdbcType=INTEGER},
-      </if>
-      <if test="classifyId != null" >
-        #{classifyId,jdbcType=BIGINT},
-      </if>
-      <if test="proId != null" >
-        #{proId,jdbcType=BIGINT},
-      </if>
-      <if test="attributeValue != null" >
-        #{attributeValue,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" >
-    update f_attribute_value
-    <set >
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ordersSort != null" >
-        orders_sort = #{ordersSort,jdbcType=INTEGER},
-      </if>
-      <if test="classifyId != null" >
-        classify_id = #{classifyId,jdbcType=BIGINT},
-      </if>
-      <if test="proId != null" >
-        pro_id = #{proId,jdbcType=BIGINT},
-      </if>
-      <if test="attributeValue != null" >
-        attribute_value = #{attributeValue,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" >
-    update f_attribute_value
-    set create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      orders_sort = #{ordersSort,jdbcType=INTEGER},
-      classify_id = #{classifyId,jdbcType=BIGINT},
-      pro_id = #{proId,jdbcType=BIGINT},
-      attribute_value = #{attributeValue,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
+    <!--select 'false' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from f_attribute_value-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >-->
+    <!--delete from f_attribute_value-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</delete>-->
+  <!--<insert id="insert" >-->
+    <!--insert into f_attribute_value (id, create_by, create_time, -->
+      <!--update_by, update_time, orders_sort, -->
+      <!--classify_id, pro_id, attribute_value-->
+      <!--)-->
+    <!--values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, -->
+      <!--#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{ordersSort,jdbcType=INTEGER}, -->
+      <!--#{classifyId,jdbcType=BIGINT}, #{proId,jdbcType=BIGINT}, #{attributeValue,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" >-->
+    <!--insert into f_attribute_value-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="createBy != null" >-->
+        <!--create_by,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--update_by,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--orders_sort,-->
+      <!--</if>-->
+      <!--<if test="classifyId != null" >-->
+        <!--classify_id,-->
+      <!--</if>-->
+      <!--<if test="proId != null" >-->
+        <!--pro_id,-->
+      <!--</if>-->
+      <!--<if test="attributeValue != null" >-->
+        <!--attribute_value,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="createBy != null" >-->
+        <!--#{createBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--#{updateBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--#{ordersSort,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="classifyId != null" >-->
+        <!--#{classifyId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="proId != null" >-->
+        <!--#{proId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="attributeValue != null" >-->
+        <!--#{attributeValue,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" >-->
+    <!--update f_attribute_value-->
+    <!--<set >-->
+      <!--<if test="createBy != null" >-->
+        <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--orders_sort = #{ordersSort,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="classifyId != null" >-->
+        <!--classify_id = #{classifyId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="proId != null" >-->
+        <!--pro_id = #{proId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="attributeValue != null" >-->
+        <!--attribute_value = #{attributeValue,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" >-->
+    <!--update f_attribute_value-->
+    <!--set create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--orders_sort = #{ordersSort,jdbcType=INTEGER},-->
+      <!--classify_id = #{classifyId,jdbcType=BIGINT},-->
+      <!--pro_id = #{proId,jdbcType=BIGINT},-->
+      <!--attribute_value = #{attributeValue,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
 </mapper>

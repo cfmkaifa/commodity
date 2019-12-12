@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.dal.entity.Product;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author lzw

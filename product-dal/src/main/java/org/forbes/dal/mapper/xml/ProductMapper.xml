@@ -116,7 +116,7 @@
     <result column="burn" property="burn" jdbcType="DECIMAL" />
     <result column="add_time" property="addTime" jdbcType="VARCHAR" />
     <!-- 1上架2未上架3待审核4审核失败 -->
-    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
     <!-- 库存 -->
     <result column="stock" property="stock" jdbcType="VARCHAR" />
     <!-- 销售类别1现货直销2预售3竞价 -->

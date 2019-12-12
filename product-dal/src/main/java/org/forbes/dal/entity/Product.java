@@ -2,6 +2,7 @@ package org.forbes.dal.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -20,6 +21,12 @@ import lombok.experimental.Accessors;
 public class Product extends BaseEntity{
 
     private static final long serialVersionUID = -215280691828941047L;
+
+    //商品属性
+    List<AttributeValue> attributeValues;
+
+    List<SpecificationValue> specificationValues;
+
     /**
      * 分类id
      * Table:     f_product
@@ -440,7 +447,7 @@ public class Product extends BaseEntity{
      * Column:    state
      * Nullable:  true
      */
-    private Integer state;
+    private String state;
 
     /**
      * 库存
