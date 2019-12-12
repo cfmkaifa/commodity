@@ -155,6 +155,8 @@ public class ProductController {
         productService.removeById(id);
         return result;
     }
+    
+    
     @RequestMapping(value = "/update-product-state",method = RequestMethod.PUT)
     @ApiOperation("上架/下架商品")
     @ApiImplicitParam(value="state",name="商品状态",required=false)
