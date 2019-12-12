@@ -23,6 +23,9 @@ public class Result<T> implements Serializable {
 	 * 返回处理消息
 	 */
 	private String message = "操作成功！";
+	/*****公共操作结果信息*****/
+	public static final  String COMM_ACTION_MSG = "操作成功";
+	public static final  String COMM_ACTION_ERROR_MSG = "操作失败";
 
 	/******查询商品相关信息****/
 	public static final  String SELECT_PRODUCT = "查询商品信息成功";

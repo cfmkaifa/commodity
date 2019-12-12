@@ -12,6 +12,7 @@ import org.forbes.comm.constant.DataColumnConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
+import org.forbes.comm.enums.ProductStausEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.utils.ConvertUtils;
@@ -68,12 +69,12 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
+    @RequestMapping(value = "/add-product",method = RequestMethod.POST)
     @ApiOperation("添加商品")
     @ApiResponses(value = {
             @ApiResponse(code=200,message = Result.ADD_PRODUCT),
             @ApiResponse(code=500,message = Result.ADD_ERROR_PRODUCT)
     })
-    @RequestMapping(value = "/add-product",method = RequestMethod.POST)
     public Result<Product> addProduct(@RequestBody @Validated(value = SaveValid.class)Product product){
         log.debug("传入的参数为"+ JSON.toJSONString(product));
         Result<Product> result=new Result<Product>();
@@ -98,12 +99,12 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
+    @RequestMapping(value = "/update-product",method = RequestMethod.PUT)
     @ApiOperation("编辑")
     @ApiResponses(value = {
             @ApiResponse(code=200,message = Result.UPDATE_PRODUCT),
             @ApiResponse(code=500,message = Result.UPDATE_ERROR_PRODUCT)
     })
-    @RequestMapping(value = "/update-product",method = RequestMethod.PUT)
     public Result<Product> updateProduct(@RequestBody @Validated(value=UpdateValid.class) Product product){
         log.debug("传入的参数为"+JSON.toJSONString(product));
         Result<Product> result=new Result<Product>();
@@ -138,11 +139,11 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
+    @RequestMapping(value = "/delete-product", method = RequestMethod.DELETE)
     @ApiOperation("删除商品")
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "id",value = "商品ID",required = true)
+            @ApiImplicitParam(name="id",value = "商品ID",required = true)
     })
-    @RequestMapping(value = "/delete-product", method = RequestMethod.DELETE)
     public Result<Product> deleteProduct(@RequestParam(name="id",required=true) String id) {
         Result<Product> result = new Result<Product>();
         Product product = productService.getById(id);
@@ -154,5 +155,31 @@ public class ProductController {
         productService.removeById(id);
         return result;
     }
+    @RequestMapping(value = "/update-product-state",method = RequestMethod.PUT)
+    @ApiOperation("上架/下架商品")
+    @ApiImplicitParam(value="state",name="商品状态",required=false)
+    @ApiResponses(value = {
+            @ApiResponse(code=500,message = Result.COMM_ACTION_ERROR_MSG),
+            @ApiResponse(code=200,response = Product.class,message = Result.COMM_ACTION_MSG)
+    })
+    public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)Integer state){
+        Result<Product> result=new Result<Product>();
+        boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
+        if(!isUserStatus){
+            result.setBizCode(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizFormateMessage(), state));
+            return result;
+        }
+        Product product = productService.getById(id);
+        if(ConvertUtils.isEmpty(product)){
+            result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
+            result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
+            return result;
+        }
+        product.setState(state);
+        productService.updateById(product);
+        return result;
+    }
+
 
 }

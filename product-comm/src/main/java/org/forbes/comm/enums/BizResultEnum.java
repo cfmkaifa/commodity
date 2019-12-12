@@ -12,6 +12,7 @@ public enum BizResultEnum {
 	ENTITY_EMPTY("001001000","对象为空",""),
 	/*******商品信息*****/
 	PRODUCT_CODE_EXIST("001001001","商品编码存在","%s对应商品编码存在"),
+	PRODUCT_STATUS_NO_EXISTS("001001002","商品状态不存在","%s对应商品状态不存在"),
 
 	/*******商品分类信息*****/
 	EMPTY("002001","参数为空","%s为空"),

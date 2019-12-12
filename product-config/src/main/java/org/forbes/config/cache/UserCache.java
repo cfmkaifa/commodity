@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.utils.SpringContextUtils;
+import org.forbes.comm.vo.SysUserVo;
 import org.forbes.config.RedisUtil;
 
 import com.google.common.collect.Maps;
