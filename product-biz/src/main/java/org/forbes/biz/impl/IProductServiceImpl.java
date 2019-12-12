@@ -32,7 +32,8 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public IPage<ProductVo> selectProduct(IPage<ProductVo> page, ProductPageDto productPageDto) {
-        return productExtMapper.selectProduct(page,productPageDto);
+    public IPage<ProductVo> PageProduct(IPage<ProductVo> page, ProductPageDto productPageDto) {
+        return productExtMapper.PageProduct(page,productPageDto);
     }
+
 }

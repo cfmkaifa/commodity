@@ -23,5 +23,6 @@ public interface IProductService extends IService<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductVo> selectProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
+    IPage<ProductVo> PageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
+
 }

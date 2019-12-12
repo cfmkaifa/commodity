@@ -126,7 +126,7 @@
     <include refid="org.forbes.dal.mapper.ProductMapper.Base_Column_List" />
   </sql>
   
-  <select id="selectProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultMap="BaseResultMap">
+  <select id="PageProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM
@@ -135,13 +135,10 @@
       <if test="productPageDto.state != null and productPageDto.state != '' and productPageDto.state != 'null'">
         AND p.state=#{productPageDto.state,jdbcType=INTEGER}
       </if>
-      <if test="productPageDto.id != null and productPageDto.id  != '' and productPageDto.id  != 'null'">
-        AND p.id=#{productPageDto.id,jdbcType=BIGINT}
-      </if>
       <if test="productPageDto.proSn != null and productPageDto.proSn != '' and productPageDto.proSn != 'null'">
         AND p.pro_sn like concat('\'%',#{productPageDto.proSn,jdbcType=VARCHAR},'%\'')
       </if>
     </where>
-
   </select>
+
 </mapper>

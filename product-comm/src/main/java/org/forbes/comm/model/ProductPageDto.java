@@ -39,13 +39,4 @@ public class ProductPageDto implements Serializable{
      * Nullable:  true
      */
     private String proSn;
-
-    /**
-     * id
-     */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="商品ID为空",groups=UpdateValid.class)
-    private Long id;
 }

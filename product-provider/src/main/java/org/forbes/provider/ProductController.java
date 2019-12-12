@@ -45,17 +45,17 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/select-product",method = RequestMethod.GET)
-    @ApiOperation("用户分页查询")
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    @ApiOperation("商品分页查询")
     @ApiResponses(value = {
             @ApiResponse(code=200,response=ProductVo.class,message = Result.SELECT_PRODUCT),
             @ApiResponse(code=500, message = Result.SELECT_ERROR_PRODUCT)
     })
-    public Result<IPage<ProductVo>> selectProduct(@RequestBody(required=false)BasePageDto<ProductPageDto> basePageDto){
+    public Result<IPage<ProductVo>> PageProduct(@RequestBody(required=false)BasePageDto<ProductPageDto> basePageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductVo>> result=new Result<IPage<ProductVo>>();
         IPage<ProductVo> page = new Page<ProductVo>(basePageDto.getPageNo(),basePageDto.getPageSize());
-        IPage<ProductVo> pageUsers =  productService.selectProduct(page, basePageDto.getData());
+        IPage<ProductVo> pageUsers =  productService.PageProduct(page, basePageDto.getData());
         result.setResult(pageUsers);
         return result;
     }
@@ -69,7 +69,7 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/add-product",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation("添加商品")
     @ApiResponses(value = {
             @ApiResponse(code=200,message = Result.ADD_PRODUCT),
@@ -99,7 +99,7 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/update-product",method = RequestMethod.PUT)
+    @RequestMapping(value = "/edit",method = RequestMethod.PUT)
     @ApiOperation("编辑")
     @ApiResponses(value = {
             @ApiResponse(code=200,message = Result.UPDATE_PRODUCT),
@@ -155,8 +155,16 @@ public class ProductController {
         productService.removeById(id);
         return result;
     }
-    
-    
+
+    /***
+     * updateProductState方法概述:
+     * @param id, state
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>
+     * @创建人 Tom
+     * @创建时间 2019/12/12 10:34
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
     @RequestMapping(value = "/update-product-state",method = RequestMethod.PUT)
     @ApiOperation("上架/下架商品")
     @ApiImplicitParam(value="state",name="商品状态",required=false)
@@ -167,12 +175,12 @@ public class ProductController {
     public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)Integer state){
         Result<Product> result=new Result<Product>();
         boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
-        if(!isUserStatus){
+        Product product = productService.getById(id);
+        if(isUserStatus){
             result.setBizCode(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizFormateMessage(), state));
             return result;
         }
-        Product product = productService.getById(id);
         if(ConvertUtils.isEmpty(product)){
             result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
@@ -182,6 +190,33 @@ public class ProductController {
         productService.updateById(product);
         return result;
     }
+
+
+    /***
+     * selectProducts方法概述:
+     * @param id
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>
+     * @创建人 Tom
+     * @创建时间 2019/12/12 11:43
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/select-products", method = RequestMethod.GET)
+    @ApiOperation("通过商品id查询商品信息")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name = "id",value = "商品牌号")
+    )
+    @ApiResponses(value={
+            @ApiResponse(code=500,message= Result.SELECT_ERROR_PRODUCT),
+            @ApiResponse(code=200,message = Result.SELECT_PRODUCT)
+    })
+    public Result<Product> selectProducts(@RequestParam(value = "id",required = true)Long id){
+           Result<Product> result=new Result<Product>();
+           Product product=productService.getById(id);
+           result.setResult(product);
+           return result;
+    }
+
 
 
 }
