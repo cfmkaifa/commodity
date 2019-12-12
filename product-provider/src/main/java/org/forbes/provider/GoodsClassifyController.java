@@ -6,17 +6,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import org.forbes.biz.ClassifyAttrService;
 import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
-import org.forbes.comm.enums.YesNoEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductClassifyDto;
 import org.forbes.comm.model.ProductClassifyPageDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.Result;
+import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -39,6 +40,11 @@ public class GoodsClassifyController {
 
     @Autowired
     private IProductClassifyService productClassifyService;
+
+    @Autowired
+    private ClassifyAttrService classifyAttrService;
+
+
 
 
     /***
@@ -77,8 +83,8 @@ public class GoodsClassifyController {
 
 
     /***
-     * addProdutClassify方法概述:
-     * @param productClassify
+     * addProdutClassify方法概述:添加商品分类
+     * @param productClassifyDto
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductClassify>
      * @创建人 xfx
      * @创建时间 2019/12/11
@@ -91,31 +97,30 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.ADD_ERROR_CLASSIFY),
             @ApiResponse(code=200,message = Result.ADD_CLASSIFY)
     })
-    public Result<ProductClassify> addGoodsClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
-        log.debug("============productClassify:"+JSON.toJSONString(productClassify));
-        Result<ProductClassify> result=new Result<ProductClassify>();
-        String name=productClassify.getName();//获取商品分类名称
+    public Result<ProductClassifyDto> addGoodsClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassifyDto productClassifyDto){
+        log.debug("============productClassifyDto:"+JSON.toJSONString(productClassifyDto));
+        Result<ProductClassifyDto> result=new Result<ProductClassifyDto>();
+        String name=productClassifyDto.getName();//获取商品分类名称
         int existcount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.NAME,name));
-        if(existcount>0){//判断商品分类名称是否重复
+        if(existcount>0){//判断商品分类名称是否已存在
             result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizCode());
             result.success(String.format(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizMessage(),name));
             return result;
-        }else {
-            Long parentId=productClassify.getParentId();
-            if(ConvertUtils.isNotEmpty(parentId)){//添加的是一级分类
-                productClassify.setParentId(0L);
-            }
-            productClassify.setState(YesNoEnum.NO.getCode());
-            productClassifyService.save(productClassify);
         }
-        result.setResult(productClassify);
-        log.debug("========productClassify:"+JSON.toJSONString(productClassify));
+        int classifyCount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.CLASSIFY_SN,productClassifyDto.getClassifySn()));
+        if(classifyCount>0){//判断商品分类编码是否已存在
+            result.setBizCode(BizResultEnum.CLASSIFY_SN_EXIST.getBizCode());
+            result.success(String.format(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage(),name));
+            return result;
+        }
+        productClassifyService.addClassify(productClassifyDto);
+        log.debug("========productClassify:"+JSON.toJSONString(productClassifyDto));
         return result;
     }
 
     /***
-     * deleteProductClassify方法概述:
-     * @param id
+     * deleteProductClassify方法概述: 根据商品分类id删除
+     * @param
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductClassify>
      * @创建人 xfx
      * @创建时间 2019/12/11
@@ -134,7 +139,7 @@ public class GoodsClassifyController {
     public Result<ProductClassify> delGoodsClassify(@RequestParam(name = "id",required =true)String id){
         Result<ProductClassify> result=new Result<ProductClassify>();
         ProductClassify productClassify=productClassifyService.getById(id);
-        if(ConvertUtils.isNotEmpty(productClassify)){
+        if(ConvertUtils.isEmpty(productClassify)){
             result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_CLASSIFY_NOT_EXIST.getBizFormateMessage(),productClassify.getName()));
             return result;
@@ -146,13 +151,20 @@ public class GoodsClassifyController {
             result.setMessage(String.format(BizResultEnum.PRODUCT_CHILD_EXISTS.getBizFormateMessage(),productClassify.getName()));
             return result;
         }
+        //删除商品分类时判断是否有相关的分类属性
+        int childAttCount=classifyAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.CLASSIFY_ID,id));
+        if(childAttCount>0){//说明该分类下存在相关分类属性
+            result.setBizCode(BizResultEnum.CLASSIFY_ATTRIBUTE_EXIST.getBizCode());
+            result.setMessage(String.format(BizResultEnum.CLASSIFY_ATTRIBUTE_EXIST.getBizFormateMessage(),productClassify.getId()));
+            return result;
+        }
         productClassifyService.removeById(id);
         return result;
     }
 
     /***
-     * update方法概述: 修改状态
-     * @param
+     * update方法概述: 修改商品分类状态
+     * @param id,state
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductClassify>
      * @创建人 xfx
      * @创建时间 2019/12/11
@@ -162,7 +174,6 @@ public class GoodsClassifyController {
 
     @RequestMapping(value = "/updstatus/{id}",method = RequestMethod.PUT)
     @ApiOperation("禁用/启用商品分类状态")
-    @ApiImplicitParam(value="state",name="商品分类状态",required=false)
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_STATUS),
             @ApiResponse(code=200,response = ProductClassify.class,message = Result.UP_CLASSIFY_STATUS)
@@ -183,6 +194,44 @@ public class GoodsClassifyController {
         }
         productClassify.setState(state);
         productClassifyService.updateById(productClassify);
+        return result;
+    }
+
+
+
+    /***
+     * 方法概述:修改商品分类名称
+     * @param productClassify
+     * @return ProductClassify
+     * @创建人 xfx
+     * @创建时间 2019/12/12
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/updateName",method = RequestMethod.PUT)
+    @ApiOperation("修改商品分类名称或者编码等")
+    @ApiResponses(value = {
+            @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_NAME),
+            @ApiResponse(code=200,response = ProductClassify.class,message = Result.UP_CLASSIFY_NAME)
+    })
+    public Result<ProductClassify> updateName(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
+        Result<ProductClassify> result=new Result<ProductClassify>();
+        String name=productClassify.getName();
+        int  existcount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.NAME,name));
+        if(existcount>0){//判断商品分类名称是否重复
+            result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizCode());
+            result.success(String.format(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizMessage(),name));
+            return result;
+        }
+        int classifycount= productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.CLASSIFY_SN,productClassify.getClassifySn()));
+        if(classifycount>0){//判断商品分类编码是否重复
+            result.setBizCode(BizResultEnum.CLASSIFY_SN_EXIST.getBizCode());
+            result.success(String.format(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage(),name));
+            return result;
+        }
+        productClassify.setName(name);
+        productClassifyService.updateById(productClassify);
+        result.setResult(productClassify);
         return result;
     }
 }

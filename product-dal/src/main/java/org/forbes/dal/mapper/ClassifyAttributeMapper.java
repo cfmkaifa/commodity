@@ -1,17 +1,8 @@
 package org.forbes.dal.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.forbes.dal.entity.ClassifyAttribute;
 
-public interface ClassifyAttributeMapper {
-    int deleteByPrimaryKey(Long id);
+public interface ClassifyAttributeMapper extends BaseMapper<ClassifyAttribute>{
 
-    int insert(ClassifyAttribute record);
-
-    int insertSelective(ClassifyAttribute record);
-
-    ClassifyAttribute selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(ClassifyAttribute record);
-
-    int updateByPrimaryKey(ClassifyAttribute record);
 }

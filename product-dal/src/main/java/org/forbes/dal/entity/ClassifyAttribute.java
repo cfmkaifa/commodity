@@ -1,12 +1,17 @@
 package org.forbes.dal.entity;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_classify_attribute
  */
 @Data
+@ApiModel(description="分类属性信息")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_classify_attribute")
 public class ClassifyAttribute extends BaseEntity{
     /**
      * 名称
@@ -23,4 +28,11 @@ public class ClassifyAttribute extends BaseEntity{
      * Nullable:  true
      */
     private String attributeSn;
+
+    /**商品分类id
+     * Table:     f_classify_attribute
+     * Column:    parent_id
+     * Nullable:  true
+     */
+    private Long classifyId;
 }

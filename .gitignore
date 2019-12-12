@@ -1,18 +1,18 @@
-/target/
+# Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
 
 # IntelliJ project files
 .idea
-.iml
-.gitignore
-.project
-.settings
+*.iml
+out
+gen
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
 out
 gen
 
-product-biz/product-biz.iml
-product-comm/product-comm.iml
-product-config/product-config.iml
-product-dal/product-dal.iml
-product-provider/product-provider.iml

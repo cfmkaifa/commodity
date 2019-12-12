@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public enum ClassifyStausEnum {
 	
 	NORMAL("1","正常"),
-	FREEZE("2","冻结");
+	FREEZE("0","冻结");
 	
 	/***编码
 	 */

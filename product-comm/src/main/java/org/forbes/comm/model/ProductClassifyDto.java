@@ -8,9 +8,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName
@@ -64,12 +66,14 @@ public class ProductClassifyDto  implements Serializable{
      * 分类编码
      */
     @ApiModelProperty(value ="分类编码")
+    @NotEmpty(message = "分类编码不能为空")
     private String classifySn;
 
     /**
      * 分类名称
      */
     @ApiModelProperty(value ="分类名称")
+    @NotEmpty(message = "分类名称不能为空")
     private String name;
 
     /**
@@ -89,4 +93,7 @@ public class ProductClassifyDto  implements Serializable{
      */
     @ApiModelProperty(value ="状态")
     private Long state;
+
+    @ApiModelProperty("添加分类关联分类属性信息")
+    private List<ClassifyAttributeDto> classifyAttributeDtos;
 }

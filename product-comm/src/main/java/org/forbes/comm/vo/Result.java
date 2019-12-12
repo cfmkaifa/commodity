@@ -55,6 +55,10 @@ public class Result<T> implements Serializable {
 	public static final  String UP_CLASSIFY_STATUS = "修改商品分类状态成功";
 	public static final  String UP_CLASSIFY_ERROR_STATUS = "修改商品分类状态失败";
 
+	/******修改商品分类****/
+	public static final  String UP_CLASSIFY_NAME= "修改商品分类成功";
+	public static final  String UP_CLASSIFY_ERROR_NAME = "修改商品分类失败";
+
 	/**
 	 * 返回代码
 	 */
