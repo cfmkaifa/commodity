@@ -65,7 +65,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.SELECT_ERROR_CLASSIFY)
     })
-    public Result<IPage<ProductClassify>> selectGoodsClassify(@RequestBody(required = false) BasePageDto<ProductClassifyPageDto> basePageDto){
+    public Result<IPage<ProductClassify>> selectGoodsClassify(BasePageDto<ProductClassifyPageDto> basePageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductClassify>> result=new Result<IPage<ProductClassify>>();
         QueryWrapper<ProductClassify> qw=new QueryWrapper<>();
@@ -116,7 +116,13 @@ public class GoodsClassifyController {
             result.success(String.format(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage(),name));
             return result;
         }
-        productClassifyService.addClassify(productClassifyDto);
+        try {
+            productClassifyService.addClassify(productClassifyDto);
+        }catch (Exception e){
+            result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
+            result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
+            return result;
+        }
         log.debug("========productClassify:"+JSON.toJSONString(productClassifyDto));
         return result;
     }

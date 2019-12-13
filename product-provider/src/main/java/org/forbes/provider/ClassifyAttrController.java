@@ -93,6 +93,7 @@ public class ClassifyAttrController {
             @ApiResponse(code=200,message = Result.BATCH_ADD_MSG)
     })
     public Result<ClassAttrDto> batchAdd(@RequestBody @Validated(value = SaveValid.class)ClassAttrDto classAttrDto){
+        log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         Result<ClassAttrDto> result=new Result<ClassAttrDto>();
         ProductClassify productClassify=productClassifyService.getById(classAttrDto.getClassifyId());
         if(ConvertUtils.isEmpty(classAttrDto)){
@@ -102,6 +103,7 @@ public class ClassifyAttrController {
         }
         result.setResult(classAttrDto);
         clasAttrService.batchAdd(classAttrDto);
+        log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         return result;
     }
 
@@ -122,6 +124,7 @@ public class ClassifyAttrController {
             @ApiResponse(code=200,message = Result.UPD_ATTR_MSG)
     })
     public Result<ClassifyAttribute> updClassAttr(@RequestBody @Validated(value = SaveValid.class)ClassifyAttributeDto classifyAttributeDto){
+        log.debug("=============classifyAttributeDto:"+JSON.toJSONString(classifyAttributeDto));
         Result<ClassifyAttribute> result=new Result<ClassifyAttribute>();
         ClassifyAttribute classifyAttribute=clasAttrService.getById(classifyAttributeDto.getId());
         if(ConvertUtils.isEmpty(classifyAttribute)){
@@ -132,6 +135,7 @@ public class ClassifyAttrController {
         classifyAttribute.setName(classifyAttributeDto.getName());
         clasAttrService.updateById(classifyAttribute);
         result.setResult(classifyAttribute);
+        log.debug("=============classifyAttributeDto:"+JSON.toJSONString(classifyAttributeDto));
         return result;
     }
 
@@ -152,6 +156,7 @@ public class ClassifyAttrController {
             @ApiResponse(code=200,message = Result.DEL_ATTR_MSG)
     })
     public Result<ClassifyAttribute> delAttr(@PathVariable(name = "id")Long id){
+        log.debug("=============id:"+JSON.toJSONString(id));
         Result<ClassifyAttribute> result=new Result<ClassifyAttribute>();
         ClassifyAttribute classifyAttribute=clasAttrService.getById(id);
         if(ConvertUtils.isEmpty(classifyAttribute)){
@@ -160,6 +165,7 @@ public class ClassifyAttrController {
             return result;
         }
         clasAttrService.removeById(id);
+        log.debug("=============id:"+JSON.toJSONString(id));
         return result;
     }
 }
