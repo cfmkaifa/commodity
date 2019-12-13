@@ -2,6 +2,7 @@ package org.forbes.dal.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -18,6 +19,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("f_product_sku")
 public class ProductSku extends BaseEntity {
+
+    List<SpecificationValue> specificationValues;
 
     /**
      * 分类ID

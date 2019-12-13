@@ -1,17 +1,8 @@
 package org.forbes.dal.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.forbes.dal.entity.ProductSku;
 
-public interface ProductSkuMapper {
-    int deleteByPrimaryKey(Long id);
+public interface ProductSkuMapper extends BaseMapper<ProductSku> {
 
-    int insert(ProductSku record);
-
-    int insertSelective(ProductSku record);
-
-    ProductSku selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(ProductSku record);
-
-    int updateByPrimaryKey(ProductSku record);
 }

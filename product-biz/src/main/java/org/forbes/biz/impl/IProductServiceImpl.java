@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.forbes.biz.IProductService;
 import org.forbes.comm.constant.DataColumnConstant;
 import org.forbes.comm.enums.ProductStausEnum;
-import org.forbes.comm.model.ProductDto;
-import org.forbes.comm.model.ProductPageDto;
-import org.forbes.comm.model.ProductSkuDto;
+import org.forbes.comm.model.*;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.dal.entity.AttributeValue;
@@ -17,6 +15,7 @@ import org.forbes.dal.entity.ProductSku;
 import org.forbes.dal.entity.SpecificationValue;
 import org.forbes.dal.mapper.AttributeValueMapper;
 import org.forbes.dal.mapper.ProductMapper;
+import org.forbes.dal.mapper.ProductSkuMapper;
 import org.forbes.dal.mapper.SpecificationValueMapper;
 import org.forbes.dal.mapper.ext.ProductExtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +37,9 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
 
     @Autowired
     AttributeValueMapper attributeValueMapper;
+
+    @Autowired
+    ProductSkuMapper productSkuMapper;
 
     @Autowired
     SpecificationValueMapper specificationValueMapper;
@@ -71,7 +73,7 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
         productDto.setState(ProductStausEnum.FREEZE.getCode());
         baseMapper.insert(product);
-        List<AttributeValue> attributeValues = productDto.getAttributeValues();
+        List<AttributeValueDto> attributeValues = productDto.getAttributeValueDtos();
         if(ConvertUtils.isNotEmpty(attributeValues)){
             Long proId = product.getId();
             attributeValues.stream().forEach(attributeValue -> {
@@ -86,20 +88,23 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
                 }
             });
         }
-        List<ProductSkuDto> productSkuDtos = productDto.getProductSkuDtos();
-        if(ConvertUtils.isNotEmpty(productSkuDtos)){
+        List<ProductSkuDto> productSkus = productDto.getProductSkuDtos();
+        if(ConvertUtils.isNotEmpty(productSkus)){
             Long proId = product.getId();
-            productSkuDtos.stream().forEach(productSkuDto ->{
+            productSkus.stream().forEach(productSku ->{
                 //判断输入的规格属性分类id是否和商品的分类id是否一致
-                if(productDto.getClassifyId()==productSkuDto.getClassifyId()) {
-                    ProductSkuDto productSku1 = new ProductSkuDto();
+                if(productDto.getClassifyId()==productSku.getClassifyId()) {
+                    ProductSku productSku1 = new ProductSku();
                     productSku1.setProId(proId);
-                    productSku1.setClassifyId(productSkuDto.getClassifyId());
-                    productSku1.setSkuSn(productSkuDto.getSkuSn());
-                    productSku1.setStock(productSkuDto.getStock());
-                    productSku1.setSalePrice(productSkuDto.getSalePrice());
-                    productSku1.setMarketPrice(productSkuDto.getMarketPrice());
-                    productSku1.setCostPrice(productSkuDto.getCostPrice());
+                    productSku1.setClassifyId(productSku.getClassifyId());
+                    productSku1.setSkuSn(productSku.getSkuSn());
+                    productSku1.setStock(productSku.getStock());
+                    productSku1.setSalePrice(productSku.getSalePrice());
+                    productSku1.setMarketPrice(productSku.getMarketPrice());
+                    productSku1.setCostPrice(productSku.getCostPrice());
+                    productSkuMapper.insert(productSku1);
+
+
                 }
             });
         }
@@ -121,7 +126,7 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         Product product=new Product();
         BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
         baseMapper.updateById(product);
-        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.USER_ID, productDto.getId()));
+//        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.USER_ID, productDto.getId()));
 
     }
 

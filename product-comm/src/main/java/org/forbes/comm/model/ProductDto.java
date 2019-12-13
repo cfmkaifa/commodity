@@ -10,9 +10,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.forbes.comm.constant.UpdateValid;
-import org.forbes.dal.entity.AttributeValue;
-import org.forbes.dal.entity.ProductSku;
-import org.forbes.dal.entity.SpecificationValue;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -33,7 +30,7 @@ public class ProductDto implements Serializable{
     private static final long serialVersionUID = 7814229668578335245L;
 
     @ApiModelProperty("商品属性")
-    List<AttributeValue> attributeValues;
+    List<AttributeValueDto> attributeValueDtos;
 
     @ApiModelProperty("商品库存")
     List<ProductSkuDto> productSkuDtos;
