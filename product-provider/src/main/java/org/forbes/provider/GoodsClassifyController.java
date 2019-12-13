@@ -13,9 +13,8 @@ import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
-import org.forbes.comm.model.BasePageDto;
-import org.forbes.comm.model.ProductClassifyDto;
-import org.forbes.comm.model.ProductClassifyPageDto;
+import org.forbes.comm.exception.ForbesException;
+import org.forbes.comm.model.*;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.ClassifyAttribute;
@@ -26,6 +25,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -52,9 +53,8 @@ public class GoodsClassifyController {
 
 
 
-
     /***
-     * selectProductClassifyList方法概述:
+     * selectProductClassifyList方法概述:分页查询商品分类
      * @param basePageDto
      * @return org.forbes.comm.vo.Result<com.baomidou.mybatisplus.core.metadata.IPage<org.forbes.dal.entity.ProductClassify>>
      * @创建人 xfx
@@ -108,7 +108,7 @@ public class GoodsClassifyController {
         Result<ProductClassifyDto> result=new Result<ProductClassifyDto>();
         String name=productClassifyDto.getName();//获取商品分类名称
         int existcount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.NAME,name));
-        if(existcount>0){//判断商品分类名称是否已存在
+        if(existcount>0){//
             result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizCode());
             result.success(String.format(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizMessage(),name));
             return result;
@@ -214,8 +214,6 @@ public class GoodsClassifyController {
 
 
 
-
-
     /***
      * 方法概述:修改商品分类名称或者编码等
      * @param productClassify
@@ -269,7 +267,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message = Result.CLASSIF_ATTR_ERROR),
             @ApiResponse(code=200,message = Result.CLASSIF_ATTR)
     })
-    public Result<List<ClassifyAttribute>> getClasAttr(@PathVariable(name = "id")Long id){
+    public Result<List<ClassifyAttribute>> getClasAttr(@PathVariable Long id){
         log.debug("============id:"+JSON.toJSONString(id));
         Result<List<ClassifyAttribute>> result=new Result<List<ClassifyAttribute>>();
         if(ConvertUtils.isEmpty(id)){
@@ -299,7 +297,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message = Result.PRO_SPEC_ERROR),
             @ApiResponse(code=200,message = Result.PRO_SPEC)
     })
-    public Result<List<ProductSpecification>> getProSpec(@PathVariable(name = "id")Long id){
+    public Result<List<ProductSpecification>> getProSpec(@PathVariable Long id){
         log.debug("============id:"+JSON.toJSONString(id));
         Result<List<ProductSpecification>> result=new Result<List<ProductSpecification>>();
         if(ConvertUtils.isEmpty(id)){
@@ -320,7 +318,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message = Result.CHILD_CLASSIFY_ERROR),
             @ApiResponse(code=200,message = Result.CHILD_CLASSIFY)
     })
-    public Result<List<ProductClassify>> getChildClassify(@PathVariable(name = "id") Long id){
+    public Result<List<ProductClassify>> getChildClassify(@PathVariable Long id){
         Result<List<ProductClassify>> result=new Result<List<ProductClassify>>();
         ProductClassify productClassify=productClassifyService.getById(id);
         if(ConvertUtils.isEmpty(productClassify)){

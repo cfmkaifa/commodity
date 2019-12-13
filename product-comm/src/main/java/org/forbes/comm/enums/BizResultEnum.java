@@ -27,6 +27,7 @@ public enum BizResultEnum {
 	CLASSIFY_ATTRIBUTE_EXIST("004002001","商品分类属性存在","%s对应的商品分类属性存在"),
 	CLASSIFY_ATTRIBUTE_ID_EXIST("004002003","商品分类ID不存在","%s对应的商品分类ID不存在"),
 	BATCH_ADD_ERROR("004002004","分类属性不存在","s%对应分类属性不存在"),
+	REPETITION_ATTR("004002005","存在相同名称分类属性","s%对应属性名称重复"),
 
 
 	/******规格信息*****/

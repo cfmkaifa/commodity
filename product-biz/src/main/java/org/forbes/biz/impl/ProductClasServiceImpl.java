@@ -2,7 +2,9 @@ package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.forbes.biz.ISProductClassifyService;
+import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.YesNoEnum;
+import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.model.ProSpecficDto;
 import org.forbes.comm.model.ProductClassifyDto;
@@ -19,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName
@@ -58,8 +62,18 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
         }
         productClassify.setState(YesNoEnum.NO.getCode());
         baseMapper.insert(productClassify);
-        //分类属性关联
         List<ClassifyAttributeDto> classifyAttributeDtos=productClassifyDto.getClassifyAttributeDtos();
+        //判断是否包含相同属性名称
+        if(classifyAttributeDtos.size()>0){
+            Map<String,List<ClassifyAttributeDto>> classifyAttrMmap = classifyAttributeDtos.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
+            classifyAttrMmap.forEach((namestr,keyList) -> {
+                int attrSize = keyList.size();
+                if(attrSize > 0 ){
+                    throw new ForbesException(namestr);
+                }
+            });
+        }
+        //分类属性关联
         if(ConvertUtils.isNotEmpty(classifyAttributeDtos)){
             Long classifyId=productClassify.getId();
             classifyAttributeDtos.stream().forEach(item -> {
@@ -69,8 +83,18 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
                 classifyAttributeMapper.insert(classifyAttribute);
             });
         }
-        //规格相关联
+        //判断是否包含相同规格名称
         List<ProSpecficDto> proSpecficDtos=productClassifyDto.getProSpecficDtos();
+        if(proSpecficDtos.size()>0){
+            Map<String,List<ProSpecficDto>> classifyAttrMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
+            classifyAttrMmap.forEach((namestr,keyList) -> {
+                int attrSize = keyList.size();
+                if(attrSize > 0 ){
+                    throw new ForbesException(namestr);
+                }
+            });
+        }
+        //规格相关联
         if(ConvertUtils.isNotEmpty(proSpecficDtos)){
             Long classifyId=productClassify.getId();
             proSpecficDtos.stream().forEach(temp ->{
