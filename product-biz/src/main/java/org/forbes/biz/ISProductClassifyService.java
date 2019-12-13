@@ -5,11 +5,11 @@ import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.model.ProductClassifyDto;
 import org.forbes.dal.entity.ProductClassify;
 
-public interface IProductClassifyService extends IService<ProductClassify>{
+public interface ISProductClassifyService extends IService<ProductClassify>{
 
     
     /***
-     * 方法概述: 添加商品分类+添加分类属性
+     * 方法概述: 添加商品分类+添加分类属性+添加规格
      * @param productClassifyDto
      * @return 
      * @创建人 xfx

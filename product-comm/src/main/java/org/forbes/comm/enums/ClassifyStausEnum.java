@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /***
- * ClassifyStausEnum概要说明：用户状态
+ * ClassifyStausEnum概要说明：商品分类状态
  * @author Huanghy
  */
 public enum ClassifyStausEnum {

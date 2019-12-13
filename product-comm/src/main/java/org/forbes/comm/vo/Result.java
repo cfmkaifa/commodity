@@ -39,7 +39,7 @@ public class Result<T> implements Serializable {
 	public static final  String UPDATE_PRODUCT = "添加商品信息成功";
 	public static final  String UPDATE_ERROR_PRODUCT = "添加商品信息失败";
 
-	/******查询分类相关信息****/
+	/******查询分类信息****/
 	public static final  String SELECT_CLASSIFY = "查询分类成功";
 	public static final  String SELECT_ERROR_CLASSIFY = "查询分类失败";
 
@@ -59,6 +59,29 @@ public class Result<T> implements Serializable {
 	public static final  String UP_CLASSIFY_NAME= "修改商品分类成功";
 	public static final  String UP_CLASSIFY_ERROR_NAME = "修改商品分类失败";
 
+	/******查询商品分类属性信息****/
+	public static final  String CLASSIF_ATTR= "查询商品分类属性信息成功";
+	public static final  String CLASSIF_ATTR_ERROR = "查询商品分类属性信息失败";
+
+	/******查询规格信息****/
+	public static final  String PRO_SPEC= "查询规格成功";
+	public static final  String PRO_SPEC_ERROR = "查询规格失败";
+
+	/******查询子级分类****/
+	public static final  String CHILD_CLASSIFY= "查询子级分类成功";
+	public static final  String CHILD_CLASSIFY_ERROR = "查询子级分类失败";
+
+	/********批量添加商品分类***********/
+	public static final  String BATCH_ADD_MSG="批量添加分类属性成功";
+	public static final  String BATCH_ADD_ERROR_MSG="批量添加分类属性失败";
+
+	/********修改分类属性***********/
+	public static final  String UPD_ATTR_MSG="修改分类属性成功";
+	public static final  String UPD_ATTR_ERROR_MSG="修改分类属性失败";
+
+	/********删除分类属性***********/
+	public static final  String DEL_ATTR_MSG="删除分类属性成功";
+	public static final  String DEL_ATTR_ERROR_MSG="删除分类属性失败";
 	/**
 	 * 返回代码
 	 */

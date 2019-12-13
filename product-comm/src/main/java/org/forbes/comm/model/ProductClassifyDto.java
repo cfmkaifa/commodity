@@ -96,4 +96,7 @@ public class ProductClassifyDto  implements Serializable{
 
     @ApiModelProperty("添加分类关联分类属性信息")
     private List<ClassifyAttributeDto> classifyAttributeDtos;
+
+    @ApiModelProperty("添加分类关联分类规格信息")
+    private List<ProSpecficDto> proSpecficDtos;
 }

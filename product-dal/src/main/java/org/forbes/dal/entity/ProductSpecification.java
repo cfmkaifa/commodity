@@ -39,4 +39,11 @@ public class ProductSpecification extends BaseEntity{
      * Nullable:  true
      */
     private String name;
+
+    /**商品分类id
+     * Table:     f_product_specification
+     * Column:    classify_id
+     * Nullable:  true
+     */
+    private Long classifyId;
 }

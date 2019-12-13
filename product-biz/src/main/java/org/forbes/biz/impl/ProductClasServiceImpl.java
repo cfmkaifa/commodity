@@ -1,15 +1,18 @@
 package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.forbes.biz.IProductClassifyService;
+import org.forbes.biz.ISProductClassifyService;
 import org.forbes.comm.enums.YesNoEnum;
 import org.forbes.comm.model.ClassifyAttributeDto;
+import org.forbes.comm.model.ProSpecficDto;
 import org.forbes.comm.model.ProductClassifyDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
+import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ClassifyAttributeMapper;
 import org.forbes.dal.mapper.ProductClassifyMapper;
+import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
@@ -25,12 +28,15 @@ import java.util.List;
  * @Version 1.0
  **/
 @Service
-public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements IProductClassifyService{
+public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements ISProductClassifyService {
 
 
 
     @Autowired
     private ClassifyAttributeMapper classifyAttributeMapper;
+
+    @Autowired
+    private ProductSpecificationMapper productSpecificationMapper;
     /***
      * 方法概述: 添加商品分类+添加分类属性
      * @param productClassifyDto
@@ -61,6 +67,19 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
                 classifyAttribute.setName(item.getName());
                 classifyAttribute.setClassifyId(classifyId);
                 classifyAttributeMapper.insert(classifyAttribute);
+            });
+        }
+        //规格相关联
+        List<ProSpecficDto> proSpecficDtos=productClassifyDto.getProSpecficDtos();
+        if(ConvertUtils.isNotEmpty(proSpecficDtos)){
+            Long classifyId=productClassify.getId();
+            proSpecficDtos.stream().forEach(temp ->{
+                ProductSpecification productSpecification=new ProductSpecification();
+                productSpecification.setName(temp.getName());
+                productSpecification.setOrderSorts(temp.getOrderSorts());
+                productSpecification.setState(0L);
+                productSpecification.setClassifyId(classifyId);
+                productSpecificationMapper.insert(productSpecification);
             });
         }
     }
