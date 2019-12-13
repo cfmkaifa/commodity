@@ -108,16 +108,16 @@ public class ProductController {
             @ApiResponse(code=200,message = Result.UPDATE_PRODUCT),
             @ApiResponse(code=500,message = Result.UPDATE_ERROR_PRODUCT)
     })
-    public Result<Product> updateProduct(@RequestBody @Validated(value=UpdateValid.class) Product product){
-        log.debug("传入的参数为"+JSON.toJSONString(product));
-        Result<Product> result=new Result<Product>();
-        Product oldSysRole = productService.getById(product.getId());
+    public Result<ProductDto> updateProduct(@RequestBody @Validated(value=UpdateValid.class) ProductDto productDto){
+        log.debug("传入的参数为"+JSON.toJSONString(productDto));
+        Result<ProductDto> result=new Result<ProductDto>();
+        Product oldSysRole = productService.getById(productDto.getId());
         if(ConvertUtils.isEmpty(oldSysRole)){
             result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
             return result;
         }
-        String procn = product.getProSn();
+        String procn = productDto.getProSn();
         //判断当前商家编码与输入的是否一致
         if (!procn.equalsIgnoreCase(oldSysRole.getProSn())) {
             //查询是否和其他商家编码一致
@@ -128,8 +128,8 @@ public class ProductController {
                 return result;
             }
         }
-        productService.updateById(product);
-        result.setResult(product);
+        productService.updateProduct(productDto);
+        result.setResult(productDto);
         return result;
     }
 

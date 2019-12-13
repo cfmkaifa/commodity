@@ -104,12 +104,22 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
                     productSku1.setCostPrice(productSku.getCostPrice());
                     productSkuMapper.insert(productSku1);
 
-
+                    List<SpecificationValueDto> specificationValueDtos = productSku.getSpecificationValueDtos();
+                    if(ConvertUtils.isNotEmpty(specificationValueDtos)){
+                        Long proIds=product.getId();
+                        specificationValueDtos.stream().forEach(specificationValueDto ->{
+                            SpecificationValue specificationValue=new SpecificationValue();
+                            specificationValue.setProId(proIds);
+                            specificationValue.setClassifyId(specificationValueDto.getClassifyId());
+                            specificationValue.setSpecId(specificationValueDto.getSpecId());
+                            specificationValue.setSpecVal(specificationValueDto.getSpecVal());
+                            specificationValue.setSkuId(specificationValueDto.getSkuId());
+                            specificationValueMapper.insert(specificationValue);
+                        });
+                    }
                 }
             });
         }
-
-
     }
 
     /***
@@ -126,8 +136,57 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         Product product=new Product();
         BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
         baseMapper.updateById(product);
-//        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.USER_ID, productDto.getId()));
+        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, productDto.getId()));
+        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, productDto.getId()));
+        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, productDto.getId()));
 
+        List<AttributeValueDto> attributeValues = productDto.getAttributeValueDtos();
+        if(ConvertUtils.isNotEmpty(attributeValues)){
+            Long proId = product.getId();
+            attributeValues.stream().forEach(attributeValue -> {
+                //判断输入的规格属性分类id是否和商品的分类id是否一致
+                if(productDto.getClassifyId()==attributeValue.getClassifyId()){
+                    AttributeValue  attributeValue1 = new AttributeValue();
+                    attributeValue1.setProId(proId);
+                    attributeValue1.setClassifyId(attributeValue.getClassifyId());
+                    attributeValue1.setAttributeValue(attributeValue.getAttributeValue());
+                    attributeValue1.setOrdersSort(attributeValue.getOrdersSort());
+                    attributeValueMapper.insert(attributeValue1);
+                }
+            });
+        }
+        List<ProductSkuDto> productSkus = productDto.getProductSkuDtos();
+        if(ConvertUtils.isNotEmpty(productSkus)){
+            Long proId = product.getId();
+            productSkus.stream().forEach(productSku ->{
+                //判断输入的规格属性分类id是否和商品的分类id是否一致
+                if(productDto.getClassifyId()==productSku.getClassifyId()) {
+                    ProductSku productSku1 = new ProductSku();
+                    productSku1.setProId(proId);
+                    productSku1.setClassifyId(productSku.getClassifyId());
+                    productSku1.setSkuSn(productSku.getSkuSn());
+                    productSku1.setStock(productSku.getStock());
+                    productSku1.setSalePrice(productSku.getSalePrice());
+                    productSku1.setMarketPrice(productSku.getMarketPrice());
+                    productSku1.setCostPrice(productSku.getCostPrice());
+                    productSkuMapper.insert(productSku1);
+
+                    List<SpecificationValueDto> specificationValueDtos = productSku.getSpecificationValueDtos();
+                    if(ConvertUtils.isNotEmpty(specificationValueDtos)){
+                        Long proIds=product.getId();
+                        specificationValueDtos.stream().forEach(specificationValueDto ->{
+                            SpecificationValue specificationValue=new SpecificationValue();
+                            specificationValue.setProId(proIds);
+                            specificationValue.setClassifyId(specificationValueDto.getClassifyId());
+                            specificationValue.setSpecId(specificationValueDto.getSpecId());
+                            specificationValue.setSpecVal(specificationValueDto.getSpecVal());
+                            specificationValue.setSkuId(specificationValueDto.getSkuId());
+                            specificationValueMapper.insert(specificationValue);
+                        });
+                    }
+                }
+            });
+        }
     }
 
 }
