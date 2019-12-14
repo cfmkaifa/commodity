@@ -12,6 +12,7 @@ import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
+import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.comm.model.ProSpecficDto;
@@ -69,7 +70,7 @@ public class ProductSpecificationController {
             if(ConvertUtils.isNotEmpty(proSpecficDto.getName())){
                 qw.like(PermsCommonConstant.PRO_SPEC_NAME,proSpecficDto.getName());
             }
-            if(ConvertUtils.isNotEmpty(proSpecficDto.getState())){
+            if(ClassifyStausEnum.existsClassifyStausEnum(String.valueOf(proSpecficDto.getState()))){
                 qw.eq(PermsCommonConstant.PRO_SPEC_STATE,proSpecficDto.getState());
             }
         }
