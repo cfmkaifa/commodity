@@ -11,6 +11,7 @@ import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationM
      * @修改日期 (请填上修改该文件时的日期)
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void batchAdd(ProSpecBatchDto proSpecBatchDto) {
         List<ProSpecficDto> proSpecficDtos=proSpecBatchDto.getProSpecficDtos();
         //判断是否包含相同规格名称

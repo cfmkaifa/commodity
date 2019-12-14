@@ -10,6 +10,7 @@ import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.mapper.ClassifyAttributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
      * @修改日期 (请填上修改该文件时的日期)
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void batchAdd(ClassAttrDto classAttrDto) {
         List<ClassifyAttributeDto> attrnames=classAttrDto.getAttrnames();
         //判断是否包含相同分类属性名称
