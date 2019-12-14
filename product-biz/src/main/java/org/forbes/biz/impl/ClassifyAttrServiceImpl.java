@@ -2,6 +2,7 @@ package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.forbes.biz.ISClasAttrService;
+import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.utils.ConvertUtils;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName
@@ -37,6 +40,17 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
     @Override
     public void batchAdd(ClassAttrDto classAttrDto) {
         List<ClassifyAttributeDto> attrnames=classAttrDto.getAttrnames();
+        //判断是否包含相同分类属性名称
+        if(attrnames.size()>0){
+            Map<String,List<ClassifyAttributeDto>> tempMmap = attrnames.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
+            tempMmap.forEach((namestr,keyList) -> {
+                int attrSize = keyList.size();
+                if(attrSize > 0 ){
+                    throw new ForbesException(namestr);
+                }
+            });
+        }
+
         if(ConvertUtils.isNotEmpty(attrnames)){
             Long classifyId=classAttrDto.getClassifyId();
             attrnames.stream().forEach(temp -> {

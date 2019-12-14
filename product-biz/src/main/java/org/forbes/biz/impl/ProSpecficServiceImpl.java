@@ -2,17 +2,19 @@ package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.forbes.biz.ISProSpecficService;
-import org.forbes.comm.model.ClassAttrDto;
+import org.forbes.comm.exception.ForbesException;
+import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.comm.model.ProSpecficDto;
 import org.forbes.comm.utils.ConvertUtils;
-import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName
@@ -39,6 +41,17 @@ public class ProSpecficServiceImpl extends ServiceImpl<ProductSpecificationMappe
     @Override
     public void batchAdd(ProSpecBatchDto proSpecBatchDto) {
         List<ProSpecficDto> proSpecficDtos=proSpecBatchDto.getProSpecficDtos();
+        //判断是否包含相同规格名称
+        if(proSpecficDtos.size()>0){
+            Map<String,List<ProSpecficDto>> tempMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
+            tempMmap.forEach((namestr,keyList) -> {
+                int attrSize = keyList.size();
+                if(attrSize > 0 ){
+                    throw new ForbesException(namestr);
+                }
+            });
+        }
+
         if(ConvertUtils.isEmpty(proSpecficDtos)){
             Long classifyId=proSpecBatchDto.getClassifyId();
             proSpecficDtos.stream().forEach(temp -> {

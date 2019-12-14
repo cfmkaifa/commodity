@@ -21,6 +21,7 @@ public enum BizResultEnum {
 	PRODUCT_CHILD_EXISTS("004001003","商品分类下包含子级分类","s%对应商品分类下包含子级分类"),
 	CLASSIFY_STATUS_NOT_EXIST("004001004","商品分类状态不存在","s%对应商品分类状态不存在"),
 	CLASSIFY_SN_EXIST("004001004","商品分类编码已存在","s%对应商品分类编码已存在"),
+	PRO_CLAS_NAME_SAME("004001005","存在相同商品分类名称","s%对应存在相同商品分类名称"),
 
 
 	/******分类属性信息*****/
@@ -34,7 +35,8 @@ public enum BizResultEnum {
 	PRO_SPEC_CLASSIFY_ID("004003001","商品分类ID不存在","s%对应商品分类ID不存在"),
 	PRO_SPEC_EXIST("004003002","存在相关规格","s%存在对应相关规格"),
 	PRO_SPEC_CLASSFY_ID_EXIST("004002003","商品分类ID不存在","%s对应的商品分类ID不存在"),
-	PRO_SPEC_NAME_EXIST("004002004","规格名称已存在","s%对应规格名称已存在")
+	PRO_SPEC_NAME_EXIST("004002004","规格名称已存在","s%对应规格名称已存在"),
+	PRO_SPEC_NAME_SAME("004002005","存在相同规格名称","s%对应存在相同规格名称"),
 	;
 
 	/**错误编码业务系统代码+功能编码+错误代码**/

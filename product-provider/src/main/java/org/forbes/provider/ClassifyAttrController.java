@@ -65,13 +65,13 @@ public class ClassifyAttrController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.CLASSIF_ATTR_ERROR)
     })
-    public Result<IPage<ClassifyAttribute>> page(BasePageDto<ClassAttrPageDto> basePageDto){
+    public Result<IPage<ClassifyAttribute>> page(BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
         log.debug("=============basePageDto:"+basePageDto);
         Result<IPage<ClassifyAttribute>> result=new Result<IPage<ClassifyAttribute>>();
         QueryWrapper<ClassifyAttribute> qw=new QueryWrapper<>();
-        if(ConvertUtils.isNotEmpty(basePageDto.getData())){
-            if(ConvertUtils.isNotEmpty(basePageDto.getData().getName())){
-                qw.like(PermsCommonConstant.ATTR_NAME,basePageDto.getData().getName());
+        if(ConvertUtils.isNotEmpty(classAttrPageDto)){
+            if(ConvertUtils.isNotEmpty(classAttrPageDto.getName())){
+                qw.like(PermsCommonConstant.ATTR_NAME,classAttrPageDto.getName());
             }
         }
         IPage<ClassifyAttribute> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
@@ -106,7 +106,13 @@ public class ClassifyAttrController {
             return result;
         }
         result.setResult(classAttrDto);
-        clasAttrService.batchAdd(classAttrDto);
+        try {
+            clasAttrService.batchAdd(classAttrDto);
+        }catch (Exception e){
+            result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
+            result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
+            return result;
+        }
         log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         return result;
     }

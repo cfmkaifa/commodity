@@ -65,16 +65,16 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.SELECT_ERROR_CLASSIFY)
     })
-    public Result<IPage<ProductClassify>> selectGoodsClassify(BasePageDto<ProductClassifyPageDto> basePageDto){
+    public Result<IPage<ProductClassify>> selectGoodsClassify(BasePageDto basePageDto,ProductClassifyPageDto productClassifyPageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductClassify>> result=new Result<IPage<ProductClassify>>();
         QueryWrapper<ProductClassify> qw=new QueryWrapper<>();
-        if(ConvertUtils.isNotEmpty(basePageDto.getData())){
-            if(ConvertUtils.isNotEmpty(basePageDto.getData().getLevel())){
-                qw.eq(PermsCommonConstant.LEVEL,basePageDto.getData().getLevel());
+        if(ConvertUtils.isNotEmpty(productClassifyPageDto)){
+            if(ConvertUtils.isNotEmpty(productClassifyPageDto.getLevel())){
+                qw.eq(PermsCommonConstant.LEVEL,productClassifyPageDto.getLevel());
             }
-            if(ConvertUtils.isNotEmpty(basePageDto.getData().getName())){
-                qw.like(PermsCommonConstant.CLASSIFY_NAME,basePageDto.getData().getName());
+            if(ConvertUtils.isNotEmpty(productClassifyPageDto.getName())){
+                qw.like(PermsCommonConstant.CLASSIFY_NAME,productClassifyPageDto.getName());
             }
         }
         IPage<ProductClassify> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
@@ -119,8 +119,8 @@ public class GoodsClassifyController {
         try {
             productClassifyService.addClassify(productClassifyDto);
         }catch (Exception e){
-            result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
-            result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
+            result.setBizCode(BizResultEnum.PRO_CLAS_NAME_SAME.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRO_CLAS_NAME_SAME.getBizFormateMessage()));
             return result;
         }
         log.debug("========productClassify:"+JSON.toJSONString(productClassifyDto));

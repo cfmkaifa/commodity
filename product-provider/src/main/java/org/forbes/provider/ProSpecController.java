@@ -61,16 +61,16 @@ public class ProSpecController {
             @ApiResponse(code = 200,message = Result.PAGE_PRO_SPEC),
             @ApiResponse(code=500,message = Result.PAGE_PRO_SPEC_ERROR)
     })
-    public Result<IPage<ProductSpecification>> page(BasePageDto<ProSpecficDto> basePageDto){
+    public Result<IPage<ProductSpecification>> page(BasePageDto basePageDto,ProSpecficDto proSpecficDto){
         log.debug("================basePageDto:"+basePageDto);
         Result<IPage<ProductSpecification>> result=new Result<>();
         QueryWrapper<ProductSpecification> qw=new QueryWrapper<>();
-        if(ConvertUtils.isNotEmpty(basePageDto.getData())){
-            if(ConvertUtils.isNotEmpty(basePageDto.getData().getName())){
-                qw.like(PermsCommonConstant.PRO_SPEC_NAME,basePageDto.getData().getName());
+        if(ConvertUtils.isNotEmpty(proSpecficDto)){
+            if(ConvertUtils.isNotEmpty(proSpecficDto.getName())){
+                qw.like(PermsCommonConstant.PRO_SPEC_NAME,proSpecficDto.getName());
             }
-            if(ConvertUtils.isNotEmpty(basePageDto.getData().getState())){
-                qw.eq(PermsCommonConstant.PRO_SPEC_STATE,basePageDto.getData().getState());
+            if(ConvertUtils.isNotEmpty(proSpecficDto.getState())){
+                qw.eq(PermsCommonConstant.PRO_SPEC_STATE,proSpecficDto.getState());
             }
         }
         IPage<ProductSpecification> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
@@ -94,7 +94,14 @@ public class ProSpecController {
             result.setMessage(String.format(BizResultEnum.PRO_SPEC_CLASSFY_ID_EXIST.getBizFormateMessage(),proSpecBatchDto.getClassifyId()));
             return result;
         }
-        proSpecficService.batchAdd(proSpecBatchDto);
+        try {
+            proSpecficService.batchAdd(proSpecBatchDto);
+        }catch (Exception e){
+            result.setBizCode(BizResultEnum.PRO_SPEC_NAME_SAME.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRO_SPEC_NAME_SAME.getBizFormateMessage()));
+            return result;
+        }
+
         result.setResult(proSpecBatchDto);
         log.debug("============proSpecBatchDto:"+JSON.toJSONString(proSpecBatchDto));
         return result;
