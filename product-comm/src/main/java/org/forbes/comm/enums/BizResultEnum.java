@@ -32,7 +32,9 @@ public enum BizResultEnum {
 
 	/******规格信息*****/
 	PRO_SPEC_CLASSIFY_ID("004003001","商品分类ID不存在","s%对应商品分类ID不存在"),
-	PRO_SPEC_EXIST("004003002","存在相关规格","s%存在对应相关规格")
+	PRO_SPEC_EXIST("004003002","存在相关规格","s%存在对应相关规格"),
+	PRO_SPEC_CLASSFY_ID_EXIST("004002003","商品分类ID不存在","%s对应的商品分类ID不存在"),
+	PRO_SPEC_NAME_EXIST("004002004","规格名称已存在","s%对应规格名称已存在")
 	;
 
 	/**错误编码业务系统代码+功能编码+错误代码**/

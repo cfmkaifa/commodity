@@ -22,5 +22,7 @@ public interface PermsCommonConstant {
 
     /*****规格相关变量*****/
     public static final String PRO_SPEC_CLASSIFY_ID= "classify_id";//商品分类id
+    public static final String PRO_SPEC_NAME = "name";//规格名称
+    public static final String PRO_SPEC_STATE = "state";//状态
 
 }

@@ -82,6 +82,22 @@ public class Result<T> implements Serializable {
 	/********删除分类属性***********/
 	public static final  String DEL_ATTR_MSG="删除分类属性成功";
 	public static final  String DEL_ATTR_ERROR_MSG="删除分类属性失败";
+
+	/********分页查询规格***********/
+	public static final  String PAGE_PRO_SPEC="分页查询规格成功";
+	public static final  String PAGE_PRO_SPEC_ERROR="分页查询规格失败";
+
+	/********添加规格***********/
+	public static final  String ADD_PAGE_PRO_SPEC="添加规格成功";
+	public static final  String ADD_PAGE_PRO_SPEC_ERROR="添加规格失败";
+
+	/********删除规格***********/
+	public static final  String DEL_PRO_SPEC="删除规格成功";
+	public static final  String DEL_PRO_SPEC_ERROR="删除规格失败";
+
+	/********修改规格***********/
+	public static final  String UPD_PRO_SPEC="修改规格成功";
+	public static final  String UPD_PRO_SPEC_ERROR="修改规格失败";
 	/**
 	 * 返回代码
 	 */

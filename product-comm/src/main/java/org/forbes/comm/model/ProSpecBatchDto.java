@@ -7,49 +7,32 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName
  * @Description TODO
  * @Author
- * @Date 2019/12/13 15:54
+ * @Date 2019/12/14 11:25
  * @Version 1.0
  **/
 @Data
 @ApiModel(description="规格")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ProSpecficDto implements Serializable{
+public class ProSpecBatchDto implements Serializable{
 
-    private static final long serialVersionUID = 1977858035105779148L;
-
-
-
-    /**
-     * id
-     */
-    @ApiModelProperty("规格id")
-    private Long id;
-
-    /**状态
-     * 0-未启用,1-启用
-     */
-    @ApiModelProperty("状态")
-    private Long state;
-
-    /**
-     * 排序
-     */
-    @ApiModelProperty("排序")
-    private Integer orderSorts;
-
-    /**
-     */
-    @ApiModelProperty("规格名称")
-    private String name;
+    private static final long serialVersionUID = 9138233952667774803L;
 
     /**商品分类id
      */
     @ApiModelProperty("商品分类id")
     private Long classifyId;
+
+    /**
+     *规格相关信息集合
+     **/
+    @ApiModelProperty("规格相关信息集合")
+    private List<ProSpecficDto> proSpecficDtos;
+
 }
