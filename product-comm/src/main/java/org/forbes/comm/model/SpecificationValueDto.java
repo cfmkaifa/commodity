@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -35,35 +36,13 @@ public class SpecificationValueDto implements Serializable {
     @NotNull(message="主键ID为空",groups=UpdateValid.class)
     private Long id;
 
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
     /**
      * 分类ID
      * Table:     f_specification_value
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty("分类ID")
     private Long classifyId;
 
     /**
@@ -72,6 +51,7 @@ public class SpecificationValueDto implements Serializable {
      * Column:    pro_id
      * Nullable:  true
      */
+    @ApiModelProperty("商品ID")
     private Long proId;
 
     /**
@@ -80,14 +60,17 @@ public class SpecificationValueDto implements Serializable {
      * Column:    spec_id
      * Nullable:  true
      */
+    @ApiModelProperty("规格ID")
     private Long specId;
 
 
     /***规格值
      */
+    @ApiModelProperty("规格值")
     private String specVal;
 
     /***skuId
      */
+    @ApiModelProperty("库存Id")
     private Long skuId;
 }

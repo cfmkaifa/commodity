@@ -1,6 +1,7 @@
 package org.forbes.comm.model;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,6 +24,7 @@ public class ProductPageDto implements Serializable{
      * Column:    state
      * Nullable:  true
      */
+    @ApiModelProperty(value = "1上架2未上架3待审核4审核失败")
     private Integer state;
 
     /**
@@ -31,5 +33,6 @@ public class ProductPageDto implements Serializable{
      * Column:    pro_sn
      * Nullable:  true
      */
+    @ApiModelProperty(value = "商品编码")
     private String proSn;
 }

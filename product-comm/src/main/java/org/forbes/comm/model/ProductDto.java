@@ -29,6 +29,9 @@ public class ProductDto implements Serializable{
 
     private static final long serialVersionUID = 7814229668578335245L;
 
+    @ApiModelProperty("商品附件")
+    List<ProductAttachDto> productAttachDtos;
+
     @ApiModelProperty("商品属性")
     List<AttributeValueDto> attributeValueDtos;
 
@@ -44,35 +47,13 @@ public class ProductDto implements Serializable{
     @NotNull(message="主键ID为空",groups=UpdateValid.class)
     private Long id;
 
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
     /**
      * 分类id
      * Table:     f_product
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "分类id")
     private Long classifyId;
 
     /**
@@ -81,6 +62,7 @@ public class ProductDto implements Serializable{
      * Column:    brand_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "品牌id")
     private Long brandId;
 
     /**
@@ -89,6 +71,7 @@ public class ProductDto implements Serializable{
      * Column:    shop_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "店铺id")
     private Long shopId;
 
     /**
@@ -97,6 +80,7 @@ public class ProductDto implements Serializable{
      * Column:    pro_sn
      * Nullable:  true
      */
+    @ApiModelProperty(value = "商品编码")
     private String proSn;
 
     /**
@@ -105,6 +89,7 @@ public class ProductDto implements Serializable{
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty(value = "商品名称")
     private String name;
 
     /**
@@ -113,6 +98,7 @@ public class ProductDto implements Serializable{
      * Column:    variety
      * Nullable:  true
      */
+    @ApiModelProperty(value = "品种")
     private String variety;
 
     /**
@@ -121,6 +107,7 @@ public class ProductDto implements Serializable{
      * Column:    thickness
      * Nullable:  true
      */
+    @ApiModelProperty("厚度单位为mm")
     private BigDecimal thickness;
 
     /**
@@ -129,6 +116,7 @@ public class ProductDto implements Serializable{
      * Column:    fineness
      * Nullable:  true
      */
+    @ApiModelProperty("细度单位dtex")
     private BigDecimal fineness;
 
     /**
@@ -137,6 +125,7 @@ public class ProductDto implements Serializable{
      * Column:    color
      * Nullable:  true
      */
+    @ApiModelProperty("颜色")
     private String color;
 
     /**
@@ -145,6 +134,7 @@ public class ProductDto implements Serializable{
      * Column:    function
      * Nullable:  true
      */
+    @ApiModelProperty("功能")
     private String function;
 
     /**
@@ -152,6 +142,7 @@ public class ProductDto implements Serializable{
      * Column:    unit_price
      * Nullable:  true
      */
+    @ApiModelProperty("细度单位dtex")
     private BigDecimal unitPrice;
 
     /**
@@ -160,6 +151,7 @@ public class ProductDto implements Serializable{
      * Column:    price
      * Nullable:  true
      */
+    @ApiModelProperty("单价")
     private BigDecimal price;
 
     /**
@@ -168,6 +160,7 @@ public class ProductDto implements Serializable{
      * Column:    company
      * Nullable:  true
      */
+    @ApiModelProperty("单位")
     private String company;
 
     /**
@@ -176,6 +169,7 @@ public class ProductDto implements Serializable{
      * Column:    number
      * Nullable:  true
      */
+    @ApiModelProperty("数量")
     private Integer number;
 
     /**
@@ -184,6 +178,7 @@ public class ProductDto implements Serializable{
      * Column:    whole_weight
      * Nullable:  true
      */
+    @ApiModelProperty("集装箱重")
     private String wholeWeight;
 
     /**
@@ -192,6 +187,7 @@ public class ProductDto implements Serializable{
      * Column:    origin
      * Nullable:  true
      */
+    @ApiModelProperty("产地")
     private String origin;
 
     /**
@@ -200,6 +196,7 @@ public class ProductDto implements Serializable{
      * Column:    deposit
      * Nullable:  true
      */
+    @ApiModelProperty("存放地")
     private String deposit;
 
     /**
@@ -208,6 +205,7 @@ public class ProductDto implements Serializable{
      * Column:    warehouse
      * Nullable:  true
      */
+    @ApiModelProperty("仓库")
     private String warehouse;
 
     /**
@@ -216,6 +214,7 @@ public class ProductDto implements Serializable{
      * Column:    sales_address
      * Nullable:  true
      */
+    @ApiModelProperty("销售地址")
     private String salesAddress;
 
     /**
@@ -224,6 +223,7 @@ public class ProductDto implements Serializable{
      * Column:    explaindesc
      * Nullable:  true
      */
+    @ApiModelProperty("说明")
     private String explaindesc;
 
     /**
@@ -232,6 +232,7 @@ public class ProductDto implements Serializable{
      * Column:    good_verify
      * Nullable:  true
      */
+    @ApiModelProperty("实物验证")
     private Integer goodVerify;
 
     /**
@@ -240,6 +241,7 @@ public class ProductDto implements Serializable{
      * Column:    quality_verify
      * Nullable:  true
      */
+    @ApiModelProperty("质量验证")
     private Integer qualityVerify;
 
     /**
@@ -248,6 +250,7 @@ public class ProductDto implements Serializable{
      * Column:    quality_warranty
      * Nullable:  true
      */
+    @ApiModelProperty("质保书1无2有")
     private Integer qualityWarranty;
 
     /**
@@ -256,6 +259,7 @@ public class ProductDto implements Serializable{
      * Column:    bargaining
      * Nullable:  true
      */
+    @ApiModelProperty("议价1有2无")
     private Integer bargaining;
 
     /**
@@ -264,6 +268,7 @@ public class ProductDto implements Serializable{
      * Column:    extension_margin
      * Nullable:  true
      */
+    @ApiModelProperty("延期保证金")
     private Integer extensionMargin;
 
     /**
@@ -272,6 +277,7 @@ public class ProductDto implements Serializable{
      * Column:    financing_margin
      * Nullable:  true
      */
+    @ApiModelProperty("融资保证金")
     private Integer financingMargin;
 
     /**
@@ -280,6 +286,7 @@ public class ProductDto implements Serializable{
      * Column:    supplier_delivery
      * Nullable:  true
      */
+    @ApiModelProperty("供方代运")
     private Integer supplierDelivery;
 
     /**
@@ -288,6 +295,7 @@ public class ProductDto implements Serializable{
      * Column:    compensation
      * Nullable:  true
      */
+    @ApiModelProperty("先行赔付")
     private Integer compensation;
 
     /**
@@ -296,6 +304,7 @@ public class ProductDto implements Serializable{
      * Column:    video_inspection
      * Nullable:  true
      */
+    @ApiModelProperty("视频验货")
     private Integer videoInspection;
 
     /**
@@ -304,6 +313,7 @@ public class ProductDto implements Serializable{
      * Column:    warehouse_charge
      * Nullable:  true
      */
+    @ApiModelProperty("仓费快结")
     private Integer warehouseCharge;
 
     /**
@@ -312,6 +322,7 @@ public class ProductDto implements Serializable{
      * Column:    subsidy
      * Nullable:  true
      */
+    @ApiModelProperty("代运补贴")
     private Integer subsidy;
 
     /**
@@ -320,6 +331,7 @@ public class ProductDto implements Serializable{
      * Column:    lightning_invoice
      * Nullable:  true
      */
+    @ApiModelProperty("闪电开票")
     private Integer lightningInvoice;
 
     /**
@@ -328,6 +340,7 @@ public class ProductDto implements Serializable{
      * Column:    honest_shop
      * Nullable:  true
      */
+    @ApiModelProperty("诚信店铺")
     private Integer honestShop;
 
     /**
@@ -336,6 +349,7 @@ public class ProductDto implements Serializable{
      * Column:    on_the_way
      * Nullable:  true
      */
+    @ApiModelProperty("在途")
     private Integer onTheWay;
 
     /**
@@ -344,6 +358,7 @@ public class ProductDto implements Serializable{
      * Column:    directional
      * Nullable:  true
      */
+    @ApiModelProperty("定向")
     private Integer directional;
 
     /**
@@ -352,6 +367,7 @@ public class ProductDto implements Serializable{
      * Column:    bidding_price
      * Nullable:  true
      */
+    @ApiModelProperty("竞价")
     private Integer biddingPrice;
 
     /**
@@ -360,6 +376,7 @@ public class ProductDto implements Serializable{
      * Column:    spot_listing
      * Nullable:  true
      */
+    @ApiModelProperty("现货挂牌")
     private Integer spotListing;
 
     /**
@@ -368,6 +385,7 @@ public class ProductDto implements Serializable{
      * Column:    supply_chain
      * Nullable:  true
      */
+    @ApiModelProperty("供应链")
     private Integer supplyChain;
 
     /**
@@ -376,6 +394,7 @@ public class ProductDto implements Serializable{
      * Column:    guarantee_pay
      * Nullable:  true
      */
+    @ApiModelProperty("担保交易")
     private Integer guaranteePay;
 
     /**
@@ -384,6 +403,7 @@ public class ProductDto implements Serializable{
      * Column:    size
      * Nullable:  true
      */
+    @ApiModelProperty("纤维纤度")
     private BigDecimal size;
 
     /**
@@ -392,6 +412,7 @@ public class ProductDto implements Serializable{
      * Column:    length
      * Nullable:  true
      */
+    @ApiModelProperty("长度")
     private BigDecimal length;
 
     /**
@@ -400,6 +421,7 @@ public class ProductDto implements Serializable{
      * Column:    break_length
      * Nullable:  true
      */
+    @ApiModelProperty("断裂长度")
     private BigDecimal breakLength;
 
     /**
@@ -408,6 +430,7 @@ public class ProductDto implements Serializable{
      * Column:    break_elongation
      * Nullable:  true
      */
+    @ApiModelProperty("延伸率")
     private BigDecimal breakElongation;
 
     /**
@@ -416,6 +439,7 @@ public class ProductDto implements Serializable{
      * Column:    regain
      * Nullable:  true
      */
+    @ApiModelProperty("回潮率")
     private BigDecimal regain;
 
     /**
@@ -424,6 +448,7 @@ public class ProductDto implements Serializable{
      * Column:    crimp_degree
      * Nullable:  true
      */
+    @ApiModelProperty("卷曲度")
     private Integer crimpDegree;
 
     /**
@@ -432,6 +457,7 @@ public class ProductDto implements Serializable{
      * Column:    double_length
      * Nullable:  true
      */
+    @ApiModelProperty("倍长纤维")
     private BigDecimal doubleLength;
 
     /**
@@ -440,6 +466,7 @@ public class ProductDto implements Serializable{
      * Column:    whiteness
      * Nullable:  true
      */
+    @ApiModelProperty("白度")
     private BigDecimal whiteness;
 
     /**
@@ -448,6 +475,7 @@ public class ProductDto implements Serializable{
      * Column:    defect
      * Nullable:  true
      */
+    @ApiModelProperty("疵点")
     private BigDecimal defect;
 
     /**
@@ -456,6 +484,7 @@ public class ProductDto implements Serializable{
      * Column:    oil
      * Nullable:  true
      */
+    @ApiModelProperty("油污")
     private BigDecimal oil;
 
     /**
@@ -464,6 +493,7 @@ public class ProductDto implements Serializable{
      * Column:    sulfur
      * Nullable:  true
      */
+    @ApiModelProperty("残留物")
     private BigDecimal sulfur;
 
     /**
@@ -472,6 +502,7 @@ public class ProductDto implements Serializable{
      * Column:    burn
      * Nullable:  true
      */
+    @ApiModelProperty("灼烧残留物")
     private BigDecimal burn;
 
     /**
@@ -487,6 +518,7 @@ public class ProductDto implements Serializable{
      * Column:    state
      * Nullable:  true
      */
+    @ApiModelProperty("1上架2未上架3待审核4审核失败")
     private String state;
 
     /**
@@ -495,6 +527,7 @@ public class ProductDto implements Serializable{
      * Column:    stock
      * Nullable:  true
      */
+    @ApiModelProperty("库存")
     private String stock;
 
     /**
@@ -503,6 +536,7 @@ public class ProductDto implements Serializable{
      * Column:    sale_type
      * Nullable:  true
      */
+    @ApiModelProperty("销售类别1现货直销2预售3竞价")
     private Integer saleType;
 
 }

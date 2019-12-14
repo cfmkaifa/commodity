@@ -20,6 +20,8 @@ import lombok.experimental.Accessors;
 @TableName("f_product_sku")
 public class ProductSku extends BaseEntity {
 
+    private static final long serialVersionUID = -1635539519945799634L;
+
     List<SpecificationValue> specificationValues;
 
     /**

@@ -23,7 +23,7 @@ public interface IProductService extends IService<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductVo> PageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
+    IPage<ProductVo> pageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
 
     /***
      * addProduct方法概述:新增商品信息
@@ -46,4 +46,5 @@ public interface IProductService extends IService<Product> {
      * @修改日期 (请填上修改该文件时的日期)
      */
     void updateProduct(ProductDto productDto);
+
 }

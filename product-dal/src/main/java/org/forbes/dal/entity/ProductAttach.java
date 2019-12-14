@@ -8,6 +8,8 @@ import lombok.Data;
  */
 @Data
 public class ProductAttach extends BaseEntity{
+
+    private static final long serialVersionUID = 1968445381323876705L;
     /**
      * 数据ID
      * Table:     f_product_attach

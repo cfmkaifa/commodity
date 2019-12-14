@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class AttributeValue extends BaseEntity{
 
+    private static final long serialVersionUID = -2615173738384945093L;
     /**
      * Table:     f_attribute_value
      * Column:    orders_sort
