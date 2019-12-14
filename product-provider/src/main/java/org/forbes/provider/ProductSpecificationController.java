@@ -37,7 +37,7 @@ import java.util.Arrays;
 @RequestMapping("/spec")
 @Api(tags={"规格"})
 @Slf4j
-public class ProSpecController {
+public class ProductSpecificationController {
 
     @Autowired
     private ISProSpecficService proSpecficService;
@@ -86,7 +86,7 @@ public class ProSpecController {
             @ApiResponse(code = 200,message = Result.ADD_PAGE_PRO_SPEC),
             @ApiResponse(code = 500,message = Result.ADD_PAGE_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecBatchDto> add(@RequestBody @Validated(value = SaveValid.class)ProSpecBatchDto proSpecBatchDto){
+    public Result<ProSpecBatchDto> add(@RequestBody ProSpecBatchDto proSpecBatchDto){
         Result<ProSpecBatchDto> result=new Result<ProSpecBatchDto>();
         ProductClassify productClassify=productClassifyService.getById(proSpecBatchDto.getClassifyId());
         if (ConvertUtils.isEmpty(productClassify)){
@@ -148,7 +148,7 @@ public class ProSpecController {
             @ApiResponse(code = 200,message = Result.UPD_PRO_SPEC),
             @ApiResponse(code=500,message = Result.UPD_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecficDto> update(@RequestBody @Validated(value = SaveValid.class)ProSpecficDto proSpecficDto){
+    public Result<ProSpecficDto> update(@RequestBody ProSpecficDto proSpecficDto){
         Result<ProSpecficDto> result=new Result<ProSpecficDto>();
         ProductSpecification productSpecification=proSpecficService.getById(proSpecficDto.getId());
         if(ConvertUtils.isEmpty(productSpecification)){

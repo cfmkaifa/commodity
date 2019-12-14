@@ -98,6 +98,10 @@ public class Result<T> implements Serializable {
 	/********修改规格***********/
 	public static final  String UPD_PRO_SPEC="修改规格成功";
 	public static final  String UPD_PRO_SPEC_ERROR="修改规格失败";
+
+	/********商品审核信息***********/
+	public static final  String CHECK_GOOD="商品审核成功";
+	public static final  String CHECK_GOOD_ERROR="商品审核失败";
 	/**
 	 * 返回代码
 	 */

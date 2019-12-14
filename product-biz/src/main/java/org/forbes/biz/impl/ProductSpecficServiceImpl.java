@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
-public class ProSpecficServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecficService {
+public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecficService {
 
     @Autowired
     private ProductSpecificationMapper proSpecificMapper;
@@ -43,26 +43,20 @@ public class ProSpecficServiceImpl extends ServiceImpl<ProductSpecificationMappe
         List<ProSpecficDto> proSpecficDtos=proSpecBatchDto.getProSpecficDtos();
         //判断是否包含相同规格名称
         if(proSpecficDtos.size()>0){
+            Long classifyId=proSpecBatchDto.getClassifyId();
             Map<String,List<ProSpecficDto>> tempMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
             tempMmap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
-            });
-        }
-
-        if(ConvertUtils.isEmpty(proSpecficDtos)){
-            Long classifyId=proSpecBatchDto.getClassifyId();
-            proSpecficDtos.stream().forEach(temp -> {
                 ProductSpecification productSpecification=new ProductSpecification();
                 productSpecification.setClassifyId(classifyId);
-                productSpecification.setName(temp.getName());
-                productSpecification.setState(temp.getState());
-                productSpecification.setOrderSorts(temp.getOrderSorts());
+                productSpecification.setName(keyList.get(0).getName());
+                productSpecification.setState(keyList.get(0).getState());
+                productSpecification.setOrderSorts(keyList.get(0).getOrderSorts());
                 proSpecificMapper.insert(productSpecification);
             });
         }
-
     }
 }

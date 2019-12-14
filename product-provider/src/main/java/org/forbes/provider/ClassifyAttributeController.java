@@ -41,7 +41,7 @@ import java.util.Arrays;
 @RequestMapping("/attr")
 @Api(tags={"分类属性"})
 @Slf4j
-public class ClassifyAttrController {
+public class ClassifyAttributeController {
 
     @Autowired
     private ISClasAttrService clasAttrService;
@@ -50,7 +50,7 @@ public class ClassifyAttrController {
     private ISProductClassifyService productClassifyService;
 
     /***
-     * page方法概述:
+     * page方法概述:分页查询分类属性
      * @param basePageDto
      * @return org.forbes.comm.vo.Result<com.baomidou.mybatisplus.core.metadata.IPage<org.forbes.dal.entity.ClassifyAttribute>>
      * @创建人 xfx
@@ -96,7 +96,7 @@ public class ClassifyAttrController {
             @ApiResponse(code=500,message = Result.BATCH_ADD_ERROR_MSG),
             @ApiResponse(code=200,message = Result.BATCH_ADD_MSG)
     })
-    public Result<ClassAttrDto> batchAdd(@RequestBody @Validated(value = SaveValid.class)ClassAttrDto classAttrDto){
+    public Result<ClassAttrDto> batchAdd(@RequestBody ClassAttrDto classAttrDto){
         log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         Result<ClassAttrDto> result=new Result<ClassAttrDto>();
         ProductClassify productClassify=productClassifyService.getById(classAttrDto.getClassifyId());
@@ -133,7 +133,7 @@ public class ClassifyAttrController {
             @ApiResponse(code = 500,message =Result.UPD_ATTR_ERROR_MSG),
             @ApiResponse(code=200,message = Result.UPD_ATTR_MSG)
     })
-    public Result<ClassifyAttribute> updClassAttr(@RequestBody @Validated(value = SaveValid.class)ClassifyAttributeDto classifyAttributeDto){
+    public Result<ClassifyAttribute> updClassAttr(@RequestBody ClassifyAttributeDto classifyAttributeDto){
         log.debug("=============classifyAttributeDto:"+JSON.toJSONString(classifyAttributeDto));
         Result<ClassifyAttribute> result=new Result<ClassifyAttribute>();
         ClassifyAttribute classifyAttribute=clasAttrService.getById(classifyAttributeDto.getId());

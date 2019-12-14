@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
+
 /**
  * @author lzw
  * @date 2019/12/11 15:34
@@ -218,6 +220,24 @@ public class ProductController {
            Product product=productService.getById(id);
            result.setResult(product);
            return result;
+    }
+
+
+    @RequestMapping(value = "/check",method = RequestMethod.PUT)
+    @ApiOperation("审核商品")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message =Result.CHECK_GOOD),
+            @ApiResponse(code = 500,message = Result.CHECK_GOOD_ERROR)
+    })
+    public Result<Product> check(@RequestParam(value="id",required = true)Long id,@RequestParam(value = "state",required = true)String state){
+        Result<Product> result=new Result<Product>();
+        Product product=productService.getById(id);
+        if(ConvertUtils.isEmpty(product)){//判断商品是否存在
+            result.setBizCode(BizResultEnum.PRO_EXIST.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRO_EXIST.getBizFormateMessage()));
+            return result;
+        }
+        return result;
     }
 
 
