@@ -223,6 +223,15 @@ public class ProductController {
     }
 
 
+    /***
+     * check方法概述:审核商品
+     * @param id, state
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>
+     * @创建人 xfx
+     * @创建时间 2019/12/14
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
     @RequestMapping(value = "/check",method = RequestMethod.PUT)
     @ApiOperation("审核商品")
     @ApiResponses(value = {
@@ -230,6 +239,7 @@ public class ProductController {
             @ApiResponse(code = 500,message = Result.CHECK_GOOD_ERROR)
     })
     public Result<Product> check(@RequestParam(value="id",required = true)Long id,@RequestParam(value = "state",required = true)String state){
+        log.debug("==============id:"+JSON.toJSONString(id)+"==================state:"+JSON.toJSONString(state));
         Result<Product> result=new Result<Product>();
         Product product=productService.getById(id);
         if(ConvertUtils.isEmpty(product)){//判断商品是否存在
@@ -237,9 +247,9 @@ public class ProductController {
             result.setMessage(String.format(BizResultEnum.PRO_EXIST.getBizFormateMessage()));
             return result;
         }
+        product.setState(state);
+        productService.updateById(product);
+        result.setResult(product);
         return result;
     }
-
-
-
 }
