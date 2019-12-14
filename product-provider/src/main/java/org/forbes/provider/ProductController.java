@@ -53,11 +53,11 @@ public class ProductController {
             @ApiResponse(code=200,message = Result.SELECT_PRODUCT),
             @ApiResponse(code=500, message = Result.SELECT_ERROR_PRODUCT)
     })
-    public Result<IPage<ProductVo>> PageProduct(@RequestBody(required=false)BasePageDto<ProductPageDto> basePageDto){
+    public Result<IPage<ProductVo>> PageProduct(BasePageDto basePageDto,ProductPageDto productPageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductVo>> result=new Result<IPage<ProductVo>>();
         IPage<ProductVo> page = new Page<ProductVo>(basePageDto.getPageNo(),basePageDto.getPageSize());
-        IPage<ProductVo> pageUsers =  productService.PageProduct(page, basePageDto.getData());
+        IPage<ProductVo> pageUsers =  productService.PageProduct(page, productPageDto);
         result.setResult(pageUsers);
         return result;
     }
