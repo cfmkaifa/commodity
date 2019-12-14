@@ -1,16 +1,9 @@
 package org.forbes.comm.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.forbes.comm.constant.UpdateValid;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
