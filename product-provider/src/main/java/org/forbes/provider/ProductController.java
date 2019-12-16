@@ -217,13 +217,13 @@ public class ProductController {
     })
     public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
         Result<Product> result=new Result<Product>();
-        boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
         Product product = productService.getById(id);
         if(ConvertUtils.isEmpty(product)){
             result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
             return result;
         }
+        boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
         if(isUserStatus){
             result.setBizCode(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizFormateMessage(), state));

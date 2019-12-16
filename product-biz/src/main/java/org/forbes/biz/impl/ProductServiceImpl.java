@@ -172,7 +172,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, productDto.getId()));
         specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, productDto.getId()));
         Long proId = product.getId();
-
         //添加附件值
         List<ProductAttachDto> productAttachDtos = productDto.getProductAttachDtos();
         if(ConvertUtils.isNotEmpty(productAttachDtos)){
@@ -188,7 +187,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productAttachMapper.insert(productAttach);
             });
         }
-
         //添加属性值
         List<AttributeValueDto> attributeValues = productDto.getAttributeValueDtos();
         if(ConvertUtils.isNotEmpty(attributeValues)){
@@ -206,7 +204,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 attributeValueMapper.insert(attributeNewValue);
             });
         }
-
         //添加库存规格值
         List<ProductSkuDto> productSkus = productDto.getProductSkuDtos();
         if(ConvertUtils.isNotEmpty(productSkus)){
@@ -225,7 +222,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productSku1.setMarketPrice(productSku.getMarketPrice());
                 productSku1.setCostPrice(productSku.getCostPrice());
                 productSkuMapper.insert(productSku1);
-
                 //添加规格值
                 List<SpecificationValueDto> specificationValueDtos = productSku.getSpecificationValueDtos();
                 if(ConvertUtils.isNotEmpty(specificationValueDtos)){
