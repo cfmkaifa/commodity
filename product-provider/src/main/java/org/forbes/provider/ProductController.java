@@ -13,6 +13,7 @@ import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ProductStausEnum;
+import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
@@ -82,16 +83,21 @@ public class ProductController {
     public Result<ProductDto> addProduct(@RequestBody @Validated(value = SaveValid.class)ProductDto productDto){
         log.debug("传入的参数为"+ JSON.toJSONString(productDto));
         Result<ProductDto> result=new Result<ProductDto>();
-        ProductDto productDtos=new ProductDto();
-        String procn = productDtos.getProSn();
-        int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
-        if(existsCount > 0 ) {//存在此记录
-            result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
-            return result;
+        try {
+            ProductDto productDtos=new ProductDto();
+            String procn = productDtos.getProSn();
+            int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
+            if(existsCount > 0 ) {//存在此记录
+                result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
+                result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
+                return result;
+            }
+            productService.addProduct(productDto);
+            result.setResult(productDto);
+        }catch(ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
         }
-        productService.addProduct(productDto);
-        result.setResult(productDto);
         return result;
     }
 
@@ -113,25 +119,30 @@ public class ProductController {
     public Result<ProductDto> updateProduct(@RequestBody @Validated(value=UpdateValid.class) ProductDto productDto){
         log.debug("传入的参数为"+JSON.toJSONString(productDto));
         Result<ProductDto> result=new Result<ProductDto>();
-        Product oldProduct = productService.getById(productDto.getId());
-        if(ConvertUtils.isEmpty(oldProduct)){
-            result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
-            result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
-            return result;
-        }
-        String procn = productDto.getProSn();
-        //判断当前商家编码与输入的是否一致
-        if (!procn.equalsIgnoreCase(oldProduct.getProSn())) {
-            //查询是否和其他商家编码一致
-            int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
-            if (existsCount > 0) {//存在此记录
-                result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
-                result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
+        try {
+            Product oldProduct = productService.getById(productDto.getId());
+            if(ConvertUtils.isEmpty(oldProduct)){
+                result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
+                result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
                 return result;
             }
+            String procn = productDto.getProSn();
+            //判断当前商家编码与输入的是否一致
+            if (!procn.equalsIgnoreCase(oldProduct.getProSn())) {
+                //查询是否和其他商家编码一致
+                int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
+                if (existsCount > 0) {//存在此记录
+                    result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
+                    result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
+                    return result;
+                }
+            }
+            productService.updateProduct(productDto);
+            result.setResult(productDto);
+        }catch(ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
         }
-        productService.updateProduct(productDto);
-        result.setResult(productDto);
         return result;
     }
 
@@ -178,7 +189,12 @@ public class ProductController {
     @RequestMapping(value = "/delete-batch", method = RequestMethod.DELETE)
     public Result<Boolean> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
         Result<Boolean> result = new Result<Boolean>();
-        productService.removeByIds(Arrays.asList(ids.split(CommonConstant.SEPARATOR)));
+        try {
+            productService.removeByIds(Arrays.asList(ids.split(CommonConstant.SEPARATOR)));
+        }catch(ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
+        }
         return result;
     }
 

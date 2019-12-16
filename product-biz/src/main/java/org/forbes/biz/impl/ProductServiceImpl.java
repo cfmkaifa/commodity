@@ -269,6 +269,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean removeByIds(Collection<? extends Serializable> idList) {
+        List<Product> products =  baseMapper.selectBatchIds(idList);
+        if(ConvertUtils.isNotEmpty(products)){
+            throw new ForbesException(BizResultEnum.ENTITY_EMPTY.getBizCode()
+                    ,String.format(BizResultEnum.ENTITY_EMPTY.getBizMessage()));
+        }
         productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.DATAID, idList));
         attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, idList));
         productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, idList));
