@@ -88,10 +88,11 @@
             av.classify_id,
             av.pro_id,
             av.attribute_value
-            FROM f_product p JOIN f_product_attach pa on p.id = pa.data_id
-            JOIN f_specification_value sv on p.id = sv.pro_id
-            JOIN f_product_sku pk on p.id = pk.pro_id
-            JOIN f_attribute_value av on p.id = av.pro_id
+            FROM f_product p
+            LEFT JOIN f_product_attach pa on p.id = pa.data_id
+            LEFT JOIN f_specification_value sv on p.id = sv.pro_id
+            LEFT JOIN f_product_sku pk on p.id = pk.pro_id
+            LEFT JOIN f_attribute_value av on p.id = av.pro_id
     <where>
       <if test="productPageDto.state != null and productPageDto.state != '' and productPageDto.state != 'null'">
         AND p.state=#{productPageDto.state,jdbcType=INTEGER}
