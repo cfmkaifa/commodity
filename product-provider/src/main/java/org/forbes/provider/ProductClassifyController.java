@@ -13,6 +13,7 @@ import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
+import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.*;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.Result;
@@ -116,12 +117,11 @@ public class ProductClassifyController {
         }
         try {
             productClassifyService.addClassify(productClassifyDto);
-        }catch (Exception e){
-            result.setBizCode(BizResultEnum.PRO_CLAS_NAME_SAME.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRO_CLAS_NAME_SAME.getBizFormateMessage()));
+        }catch (ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
             return result;
         }
-        log.debug("========productClassify:"+JSON.toJSONString(productClassifyDto));
         return result;
     }
 

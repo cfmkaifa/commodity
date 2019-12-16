@@ -87,9 +87,10 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
+                ProSpecficDto proSpecficDto = keyList.get(0);
                 ProductSpecification productSpecification=new ProductSpecification();
-                productSpecification.setName(keyList.get(0).getName());
-                productSpecification.setOrderSorts(keyList.get(0).getOrderSorts());
+                productSpecification.setName(proSpecficDto.getName());
+                productSpecification.setOrderSorts(proSpecficDto.getOrderSorts());
                 productSpecification.setState(0L);
                 productSpecification.setClassifyId(classifyId);
                 productSpecificationMapper.insert(productSpecification);
