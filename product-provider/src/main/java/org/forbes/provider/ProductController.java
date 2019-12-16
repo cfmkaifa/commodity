@@ -39,18 +39,6 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-    @Autowired
-    IProductAttachService productAttachService;
-
-    @Autowired
-    IAttributeValueService attributeValueService;
-
-    @Autowired
-    IProductSpecificationService productSpecificationService;
-
-    @Autowired
-    ISpecificationValueService specificationValueService;
-
     /***
      * selectProduct方法概述:分页查询商品信息
      * @param
@@ -240,7 +228,7 @@ public class ProductController {
     @RequestMapping(value = "/select-products", method = RequestMethod.GET)
     @ApiOperation("通过商品id查询商品信息")
     @ApiImplicitParams(
-            @ApiImplicitParam(name = "id",value = "商品牌号")
+            @ApiImplicitParam(name = "id",value = "商品id")
     )
     @ApiResponses(value={
             @ApiResponse(code=500,message= Result.SELECT_ERROR_PRODUCT),
@@ -249,8 +237,6 @@ public class ProductController {
     public Result<Product> selectProducts(@RequestParam(value = "id",required = true)Long id){
            Result<Product> result=new Result<Product>();
            Product product=productService.getById(id);
-           Long proId = product.getId();
-           productAttachService.getById(proId);
            result.setResult(product);
            return result;
     }
