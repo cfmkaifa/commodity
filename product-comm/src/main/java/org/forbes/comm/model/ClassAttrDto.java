@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -20,8 +21,9 @@ import java.util.List;
 @ApiModel(description="分类属性")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ClassAttrDto {
+public class ClassAttrDto implements Serializable{
 
+    private static final long serialVersionUID = -2720585649050208895L;
     /**商品分类id
      */
     @ApiModelProperty("商品分类id")

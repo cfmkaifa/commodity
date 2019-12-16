@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author Huanghy
  */
 @Data
-public class BasePageDto<T> {
+public class BasePageDto {
 
 	/***当前页码
 	 */

@@ -23,6 +23,6 @@
     <result column="spec_val" property="specVal" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, create_by, create_time, update_by, update_time, classify_id, pro_id, sku_id,spec_val
+    id, create_by, create_time, update_by, update_time, classify_id, pro_id,spec_id,sku_id,spec_val
   </sql>
 </mapper>

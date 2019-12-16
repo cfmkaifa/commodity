@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
-public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements ISProductClassifyService {
+public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements ISProductClassifyService {
 
 
 
@@ -63,7 +63,8 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
         productClassify.setState(YesNoEnum.NO.getCode());
         baseMapper.insert(productClassify);
         List<ClassifyAttributeDto> classifyAttributeDtos=productClassifyDto.getClassifyAttributeDtos();
-        //判断是否包含相同属性名称
+        Long classifyId=productClassify.getId();
+        //判断是否包含相同属性名称+添加属性
         if(classifyAttributeDtos.size()>0){
             Map<String,List<ClassifyAttributeDto>> classifyAttrMmap = classifyAttributeDtos.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
             classifyAttrMmap.forEach((namestr,keyList) -> {
@@ -71,19 +72,13 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
-            });
-        }
-        //分类属性关联
-        if(ConvertUtils.isNotEmpty(classifyAttributeDtos)){
-            Long classifyId=productClassify.getId();
-            classifyAttributeDtos.stream().forEach(item -> {
                 ClassifyAttribute classifyAttribute = new ClassifyAttribute();
-                classifyAttribute.setName(item.getName());
+                classifyAttribute.setName(keyList.get(0).getName());
                 classifyAttribute.setClassifyId(classifyId);
                 classifyAttributeMapper.insert(classifyAttribute);
             });
         }
-        //判断是否包含相同规格名称
+        //判断是否包含相同规格名称+添加规格
         List<ProSpecficDto> proSpecficDtos=productClassifyDto.getProSpecficDtos();
         if(proSpecficDtos.size()>0){
             Map<String,List<ProSpecficDto>> classifyAttrMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
@@ -92,15 +87,9 @@ public class ProductClasServiceImpl extends ServiceImpl<ProductClassifyMapper, P
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
-            });
-        }
-        //规格相关联
-        if(ConvertUtils.isNotEmpty(proSpecficDtos)){
-            Long classifyId=productClassify.getId();
-            proSpecficDtos.stream().forEach(temp ->{
                 ProductSpecification productSpecification=new ProductSpecification();
-                productSpecification.setName(temp.getName());
-                productSpecification.setOrderSorts(temp.getOrderSorts());
+                productSpecification.setName(keyList.get(0).getName());
+                productSpecification.setOrderSorts(keyList.get(0).getOrderSorts());
                 productSpecification.setState(0L);
                 productSpecification.setClassifyId(classifyId);
                 productSpecificationMapper.insert(productSpecification);

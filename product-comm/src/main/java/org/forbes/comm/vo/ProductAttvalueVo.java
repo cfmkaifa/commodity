@@ -1,4 +1,4 @@
-package org.forbes.comm.model;
+package org.forbes.comm.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -10,24 +10,26 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.forbes.comm.constant.UpdateValid;
+import org.forbes.comm.model.AttributeValueDto;
+import org.forbes.comm.model.ProductAttachDto;
+import org.forbes.comm.model.ProductSkuDto;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author lzw
- * @date 2019/12/11 15:56
+ * @date 2019/12/16 9:49
  */
 @Data
-@ApiModel(description="商品增加修改参数")
+@ApiModel(description="商品查询返回对象")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ProductDto implements Serializable{
+public class ProductAttvalueVo implements Serializable{
 
-    private static final long serialVersionUID = 7814229668578335245L;
+    private static final long serialVersionUID = 8848645335864724946L;
 
     @ApiModelProperty("商品附件")
     List<ProductAttachDto> productAttachDtos;
@@ -538,5 +540,4 @@ public class ProductDto implements Serializable{
      */
     @ApiModelProperty("销售类别1现货直销2预售3竞价")
     private Integer saleType;
-
 }

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public class ISProSpecificServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecificService{
+public class SProSpecificServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecificService{
 
 }

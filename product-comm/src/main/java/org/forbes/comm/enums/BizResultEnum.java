@@ -13,6 +13,7 @@ public enum BizResultEnum {
 	/*******商品信息*****/
 	PRODUCT_CODE_EXIST("004001001","商品编码存在","%s对应商品编码存在"),
 	PRODUCT_STATUS_NO_EXISTS("004001002","商品状态不存在","%s对应商品状态不存在"),
+	PRO_EXIST("004001003","商品不存在","s%对应商品不存在"),
 
 	/*******商品分类信息*****/
 	EMPTY("004001","参数为空","%s为空"),
@@ -22,10 +23,12 @@ public enum BizResultEnum {
 	CLASSIFY_STATUS_NOT_EXIST("004001004","商品分类状态不存在","s%对应商品分类状态不存在"),
 	CLASSIFY_SN_EXIST("004001004","商品分类编码已存在","s%对应商品分类编码已存在"),
 	PRO_CLAS_NAME_SAME("004001005","存在相同商品分类名称","s%对应存在相同商品分类名称"),
+	PRO_CLASSIFY_STATE("004001006","启用状态","s%对应分类状态为启用状态"),
 
 
 	/******分类属性信息*****/
 	CLASSIFY_ATTRIBUTE_EXIST("004002001","商品分类属性存在","%s对应的商品分类属性存在"),
+	CLASSIFY_ATTRIBUTE_ID_NOT_EXIST("004002002","属性所在分类ID与商品所属分类不对应",""),
 	CLASSIFY_ATTRIBUTE_ID_EXIST("004002003","商品分类ID不存在","%s对应的商品分类ID不存在"),
 	BATCH_ADD_ERROR("004002004","分类属性不存在","s%对应分类属性不存在"),
 	REPETITION_ATTR("004002005","存在相同名称分类属性","s%对应属性名称重复"),

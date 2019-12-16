@@ -9,5 +9,6 @@ public interface DataColumnConstant {
 	/******商品相关*******/
 	public static final String PROCN = "pro_sn";
 	public static final String PROID = "pro_id";
+	public static final String DATAID = "data_id";
 
 }

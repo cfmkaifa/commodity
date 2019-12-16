@@ -10,6 +10,7 @@ import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.mapper.ClassifyAttributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -38,25 +39,21 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
      * @修改日期 (请填上修改该文件时的日期)
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void batchAdd(ClassAttrDto classAttrDto) {
         List<ClassifyAttributeDto> attrnames=classAttrDto.getAttrnames();
         //判断是否包含相同分类属性名称
         if(attrnames.size()>0){
-            Map<String,List<ClassifyAttributeDto>> tempMmap = attrnames.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
-            tempMmap.forEach((namestr,keyList) -> {
+            Long classifyId=classAttrDto.getClassifyId();
+            Map<String,List<ClassifyAttributeDto>> tempMap = attrnames.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
+            tempMap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
-            });
-        }
-
-        if(ConvertUtils.isNotEmpty(attrnames)){
-            Long classifyId=classAttrDto.getClassifyId();
-            attrnames.stream().forEach(temp -> {
                 ClassifyAttribute classifyAttribute=new ClassifyAttribute();
                 classifyAttribute.setClassifyId(classifyId);
-                classifyAttribute.setName(temp.getName());
+                classifyAttribute.setName(keyList.get(0).getName());
                 clasAttrMapper.insert(classifyAttribute);
             });
         }

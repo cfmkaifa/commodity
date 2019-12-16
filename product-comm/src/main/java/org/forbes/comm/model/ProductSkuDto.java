@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -39,35 +40,13 @@ public class ProductSkuDto implements Serializable {
     @NotNull(message="主键ID为空",groups=UpdateValid.class)
     private Long id;
 
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
     /**
      * 分类ID
      * Table:     f_product_sku
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty("分类ID")
     private Long classifyId;
 
     /**
@@ -76,6 +55,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    pro_id
      * Nullable:  true
      */
+    @ApiModelProperty("商品ID")
     private Long proId;
 
     /**
@@ -84,6 +64,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    sku_sn
      * Nullable:  true
      */
+    @ApiModelProperty("编码")
     private String skuSn;
 
     /**
@@ -92,6 +73,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    stock
      * Nullable:  true
      */
+    @ApiModelProperty("库存")
     private Integer stock;
 
     /**
@@ -100,6 +82,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    sale_price
      * Nullable:  true
      */
+    @ApiModelProperty("销售价")
     private BigDecimal salePrice;
 
     /**
@@ -108,6 +91,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    market_price
      * Nullable:  true
      */
+    @ApiModelProperty("市场价")
     private BigDecimal marketPrice;
 
     /**
@@ -116,5 +100,6 @@ public class ProductSkuDto implements Serializable {
      * Column:    cost_price
      * Nullable:  true
      */
+    @ApiModelProperty("成本价")
     private BigDecimal costPrice;
 }

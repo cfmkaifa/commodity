@@ -12,6 +12,7 @@ import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
+import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.comm.model.ProSpecficDto;
@@ -37,7 +38,7 @@ import java.util.Arrays;
 @RequestMapping("/spec")
 @Api(tags={"规格"})
 @Slf4j
-public class ProSpecController {
+public class ProductSpecificationController {
 
     @Autowired
     private ISProSpecficService proSpecficService;
@@ -69,7 +70,7 @@ public class ProSpecController {
             if(ConvertUtils.isNotEmpty(proSpecficDto.getName())){
                 qw.like(PermsCommonConstant.PRO_SPEC_NAME,proSpecficDto.getName());
             }
-            if(ConvertUtils.isNotEmpty(proSpecficDto.getState())){
+            if(ClassifyStausEnum.existsClassifyStausEnum(String.valueOf(proSpecficDto.getState()))){
                 qw.eq(PermsCommonConstant.PRO_SPEC_STATE,proSpecficDto.getState());
             }
         }
@@ -86,7 +87,7 @@ public class ProSpecController {
             @ApiResponse(code = 200,message = Result.ADD_PAGE_PRO_SPEC),
             @ApiResponse(code = 500,message = Result.ADD_PAGE_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecBatchDto> add(@RequestBody @Validated(value = SaveValid.class)ProSpecBatchDto proSpecBatchDto){
+    public Result<ProSpecBatchDto> add(@RequestBody ProSpecBatchDto proSpecBatchDto){
         Result<ProSpecBatchDto> result=new Result<ProSpecBatchDto>();
         ProductClassify productClassify=productClassifyService.getById(proSpecBatchDto.getClassifyId());
         if (ConvertUtils.isEmpty(productClassify)){
@@ -148,7 +149,7 @@ public class ProSpecController {
             @ApiResponse(code = 200,message = Result.UPD_PRO_SPEC),
             @ApiResponse(code=500,message = Result.UPD_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecficDto> update(@RequestBody @Validated(value = SaveValid.class)ProSpecficDto proSpecficDto){
+    public Result<ProSpecficDto> update(@RequestBody ProSpecficDto proSpecficDto){
         Result<ProSpecficDto> result=new Result<ProSpecficDto>();
         ProductSpecification productSpecification=proSpecficService.getById(proSpecficDto.getId());
         if(ConvertUtils.isEmpty(productSpecification)){

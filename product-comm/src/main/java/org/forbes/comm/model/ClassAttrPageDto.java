@@ -1,7 +1,10 @@
 package org.forbes.comm.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -13,6 +16,9 @@ import java.io.Serializable;
  * @Version 1.0
  **/
 @Data
+@ApiModel(description="分类属性分页dto")
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class ClassAttrPageDto implements Serializable {
     private static final long serialVersionUID = 8055341873746064011L;
 

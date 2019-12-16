@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
  * @ClassName
  * @Description TODO
@@ -37,7 +36,7 @@ import java.util.List;
 @RequestMapping("/clssify")
 @Api(tags={"商品分类"})
 @Slf4j
-public class GoodsClassifyController {
+public class ProductClassifyController {
 
     @Autowired
     private ISProductClassifyService productClassifyService;
@@ -84,7 +83,6 @@ public class GoodsClassifyController {
         return result;
     }
 
-
     /***
      * addProdutClassify方法概述:添加商品分类
      * @param productClassifyDto
@@ -100,7 +98,7 @@ public class GoodsClassifyController {
             @ApiResponse(code=500,message= Result.ADD_ERROR_CLASSIFY),
             @ApiResponse(code=200,message = Result.ADD_CLASSIFY)
     })
-    public Result<ProductClassifyDto> addGoodsClassify(@RequestBody @Validated(value = SaveValid.class) ProductClassifyDto productClassifyDto){
+    public Result<ProductClassifyDto> addGoodsClassify(@RequestBody ProductClassifyDto productClassifyDto){
         log.debug("============productClassifyDto:"+JSON.toJSONString(productClassifyDto));
         Result<ProductClassifyDto> result=new Result<ProductClassifyDto>();
         String name=productClassifyDto.getName();//获取商品分类名称
@@ -161,20 +159,17 @@ public class GoodsClassifyController {
             result.setMessage(String.format(BizResultEnum.PRODUCT_CHILD_EXISTS.getBizFormateMessage(),productClassify.getName()));
             return result;
         }
-        //删除商品分类时判断是否有相关的分类属性
-        int childAttCount=classifyAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.CLASSIFY_ID,id));
-        if(childAttCount>0){//说明该分类下存在相关分类属性
-            result.setBizCode(BizResultEnum.CLASSIFY_ATTRIBUTE_EXIST.getBizCode());
-            result.setMessage(String.format(BizResultEnum.CLASSIFY_ATTRIBUTE_EXIST.getBizFormateMessage(),productClassify.getId()));
+        //判断分类状态，启用状态时不可以删除下面分类
+        String state=productClassify.getState();
+        boolean res=ClassifyStausEnum.NORMAL.getCode().equals(state);
+        if(res){//启用状态
+            result.setBizCode(BizResultEnum.PRO_CLASSIFY_STATE.getBizCode());
+            result.setMessage(String.format(BizResultEnum.PRO_CLASSIFY_STATE.getBizFormateMessage(),productClassify.getName()));
             return result;
         }
-        //删除商品分类时判断是否含有相关的规格
-        int childSpecCount=proSpecificService.count(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_CLASSIFY_ID,id));
-        if(childSpecCount>0){//说明该分类下存在相关规格
-            result.setBizCode(BizResultEnum.PRO_SPEC_EXIST.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRO_SPEC_EXIST.getBizFormateMessage(),productClassify.getId()));
-            return result;
-        }
+        //禁用状态，可删除相关分类和规格
+        classifyAttrService.remove(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.CLASSIFY_ID,productClassify.getId()));
+        proSpecificService.remove(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_CLASSIFY_ID,productClassify.getId()));
         productClassifyService.removeById(id);
         return result;
     }
@@ -189,7 +184,7 @@ public class GoodsClassifyController {
      * @修改日期 (请填上修改该文件时的日期)
      */
 
-    @RequestMapping(value = "/updstatus/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value = "/uppate-status/{id}",method = RequestMethod.PUT)
     @ApiOperation("禁用/启用商品分类状态")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_STATUS),
@@ -226,13 +221,13 @@ public class GoodsClassifyController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/updateName",method = RequestMethod.PUT)
+    @RequestMapping(value = "/update-name",method = RequestMethod.PUT)
     @ApiOperation("修改商品分类名称或者编码等")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_NAME),
             @ApiResponse(code=200,message = Result.UP_CLASSIFY_NAME)
     })
-    public Result<ProductClassify> updateName(@RequestBody @Validated(value = SaveValid.class) ProductClassify productClassify){
+    public Result<ProductClassify> updateName(@RequestBody ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
         Result<ProductClassify> result=new Result<ProductClassify>();
         String name=productClassify.getName();
@@ -264,7 +259,7 @@ public class GoodsClassifyController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/getClasAttr/{id}",method =RequestMethod.GET )
+    @RequestMapping(value = "/getclass-attr/{id}",method =RequestMethod.GET )
     @ApiOperation("根据商品分类id查询分类属性")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.CLASSIF_ATTR_ERROR),
@@ -294,7 +289,7 @@ public class GoodsClassifyController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/getProSpec/{id}",method =RequestMethod.GET )
+    @RequestMapping(value = "/get-pro-spec/{id}",method =RequestMethod.GET )
     @ApiOperation("根据商品分类id查询规格")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.PRO_SPEC_ERROR),

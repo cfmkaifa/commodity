@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
+import org.forbes.comm.vo.ProductAttvalueVo;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.dal.entity.Product;
 
@@ -23,7 +24,7 @@ public interface IProductService extends IService<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductVo> PageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
+    IPage<ProductAttvalueVo> pageProduct(IPage<ProductAttvalueVo> page, ProductPageDto productPageDto);
 
     /***
      * addProduct方法概述:新增商品信息
@@ -46,4 +47,27 @@ public interface IProductService extends IService<Product> {
      * @修改日期 (请填上修改该文件时的日期)
      */
     void updateProduct(ProductDto productDto);
+
+    /***
+     * deleteProduct方法概述:根据id删除商品信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 10:55
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    boolean deleteProduct(Long id);
+
+    /***
+     * selectProducts方法概述:通过id查询商品详细信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 9:52
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    ProductAttvalueVo selectProducts(Long id);
+
 }

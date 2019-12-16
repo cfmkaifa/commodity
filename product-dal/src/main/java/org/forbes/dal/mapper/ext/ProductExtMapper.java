@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 import org.forbes.comm.model.ProductPageDto;
+import org.forbes.comm.vo.ProductAttvalueVo;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.dal.entity.Product;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,28 @@ public interface ProductExtMapper extends BaseMapper<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductVo> PageProduct(IPage<ProductVo> page, @Param("productDto") ProductPageDto productPageDto);
+    IPage<ProductAttvalueVo> pageProduct(IPage<ProductAttvalueVo> page, @Param("productDto") ProductPageDto productPageDto);
+
+    /***
+     * deleteProduct方法概述:根据id删除商品信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 10:55
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    boolean deleteProduct(Long id);
+
+    /***
+     * selectProducts方法概述:通过id查询商品详细信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 9:52
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    ProductAttvalueVo selectProducts(Long id);
 
 }
