@@ -97,7 +97,7 @@
         AND p.state=#{productPageDto.state,jdbcType=INTEGER}
       </if>
       <if test="productPageDto.proSn != null and productPageDto.proSn != '' and productPageDto.proSn != 'null'">
-        AND p.pro_sn like concat('\'%',#{productPageDto.proSn,jdbcType=VARCHAR},'%'\')
+        AND p.pro_sn LIKE concat('%',#{productPageDto.proSn,jdbcType=VARCHAR},'%')
       </if>
     </where>
   </select>
