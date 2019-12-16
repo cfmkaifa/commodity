@@ -270,7 +270,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public boolean removeByIds(Collection<? extends Serializable> idList) {
         List<Product> products =  baseMapper.selectBatchIds(idList);
-        if(ConvertUtils.isNotEmpty(products)){
+        if(ConvertUtils.isEmpty(products)){
             throw new ForbesException(BizResultEnum.ENTITY_EMPTY.getBizCode()
                     ,String.format(BizResultEnum.ENTITY_EMPTY.getBizMessage()));
         }
