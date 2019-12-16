@@ -17,6 +17,7 @@ import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.utils.ConvertUtils;
+import org.forbes.comm.vo.ProductAttvalueVo;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Product;
@@ -148,7 +149,7 @@ public class ProductController {
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name="id",value = "商品ID",required = true)
     })
-    public Result<Boolean> deleteProduct(@RequestParam(name="id",required=true) String id) {
+    public Result<Boolean> deleteProduct(@RequestParam(name="id",required=true) Long id) {
         Result<Boolean> result = new Result<Boolean>();
         Product product = productService.getById(id);
         if(ConvertUtils.isEmpty(product)){
@@ -156,7 +157,8 @@ public class ProductController {
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
             return result;
         }
-        productService.removeById(id);
+        Boolean deleteProduct=productService.deleteProduct(id);
+        result.setResult(deleteProduct);
         return result;
     }
 
@@ -234,10 +236,10 @@ public class ProductController {
             @ApiResponse(code=500,message= Result.SELECT_ERROR_PRODUCT),
             @ApiResponse(code=200,message = Result.SELECT_PRODUCT)
     })
-    public Result<Product> selectProducts(@RequestParam(value = "id",required = true)Long id){
-           Result<Product> result=new Result<Product>();
-           Product product=productService.getById(id);
-           result.setResult(product);
+    public Result<ProductAttvalueVo> selectProducts(@RequestParam(value = "id",required = true)Long id){
+           Result<ProductAttvalueVo> result=new Result<ProductAttvalueVo>();
+           ProductAttvalueVo pra=productService.selectProducts(id);
+           result.setResult(pra);
            return result;
     }
 

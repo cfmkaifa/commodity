@@ -11,6 +11,7 @@ import org.forbes.comm.enums.ProductStausEnum;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.*;
 import org.forbes.comm.utils.ConvertUtils;
+import org.forbes.comm.vo.ProductAttvalueVo;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.dal.entity.*;
 import org.forbes.dal.mapper.*;
@@ -248,32 +249,45 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /***
-     *  重写删除方法
+     * deleteProduct方法概述:根据id删除商品信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 10:55
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean removeById(Serializable id) {
-        Product product=new Product();
-        Long proId = product.getId();
-        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.PROID, proId));
-        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, id));
-        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, id));
-        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, id));
-        boolean delBool =  SqlHelper.delBool(baseMapper.deleteById(id));
-        return delBool;
+    public boolean deleteProduct(Long id) {
+        return productExtMapper.deleteProduct(id);
     }
 
-    /***批量删除
+    /**
+     * 批量删除
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean removeByIds(Collection<? extends Serializable> idList) {
-        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.PROID, idList));
+        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.DATAID, idList));
         attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, idList));
         productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, idList));
         specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, idList));
         boolean delBool =  SqlHelper.delBool(baseMapper.deleteBatchIds(idList));
         return delBool;
+    }
+
+    /***
+     * selectProducts方法概述:通过id查询商品详细信息
+     * @param
+     * @return
+     * @创建人 Tom
+     * @创建时间 2019/12/16 9:52
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    public ProductAttvalueVo selectProducts(Long id) {
+        return productExtMapper.selectProducts(id);
     }
 
 }
