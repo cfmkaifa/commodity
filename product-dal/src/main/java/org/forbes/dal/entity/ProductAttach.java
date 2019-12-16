@@ -1,12 +1,22 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * Table: f_product_attach
  */
 @Data
+@ApiModel(description="库存信息")
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("f_product_attach")
 public class ProductAttach extends BaseEntity{
 
     private static final long serialVersionUID = 1968445381323876705L;
@@ -16,6 +26,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    data_id
      * Nullable:  true
      */
+    @ApiModelProperty("数据ID")
     private Long dataId;
 
     /**
@@ -24,6 +35,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    orders_sort
      * Nullable:  true
      */
+    @ApiModelProperty("排序")
     private Integer ordersSort;
 
     /**
@@ -32,6 +44,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    suffix
      * Nullable:  true
      */
+    @ApiModelProperty("后缀")
     private String suffix;
 
     /**
@@ -40,6 +53,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    cn_name
      * Nullable:  true
      */
+    @ApiModelProperty("中文名称")
     private String cnName;
 
     /**
@@ -47,6 +61,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    en_name
      * Nullable:  true
      */
+    @ApiModelProperty("英文名")
     private String enName;
 
     /**
@@ -55,6 +70,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    file_path
      * Nullable:  true
      */
+    @ApiModelProperty("文件地址")
     private String filePath;
 
     /**
@@ -63,5 +79,6 @@ public class ProductAttach extends BaseEntity{
      * Column:    type
      * Nullable:  true
      */
+    @ApiModelProperty("0-大图，1-小图，3-中图")
     private String type;
 }

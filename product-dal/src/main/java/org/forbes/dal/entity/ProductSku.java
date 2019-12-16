@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -22,14 +23,13 @@ public class ProductSku extends BaseEntity {
 
     private static final long serialVersionUID = -1635539519945799634L;
 
-    List<SpecificationValue> specificationValues;
-
     /**
      * 分类ID
      * Table:     f_product_sku
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty("分类ID")
     private Long classifyId;
 
     /**
@@ -38,6 +38,7 @@ public class ProductSku extends BaseEntity {
      * Column:    pro_id
      * Nullable:  true
      */
+    @ApiModelProperty("商品ID")
     private Long proId;
 
     /**
@@ -46,6 +47,7 @@ public class ProductSku extends BaseEntity {
      * Column:    sku_sn
      * Nullable:  true
      */
+    @ApiModelProperty("编码")
     private String skuSn;
 
     /**
@@ -54,6 +56,7 @@ public class ProductSku extends BaseEntity {
      * Column:    stock
      * Nullable:  true
      */
+    @ApiModelProperty("库存")
     private Integer stock;
 
     /**
@@ -62,6 +65,7 @@ public class ProductSku extends BaseEntity {
      * Column:    sale_price
      * Nullable:  true
      */
+    @ApiModelProperty("销售价")
     private BigDecimal salePrice;
 
     /**
@@ -70,6 +74,7 @@ public class ProductSku extends BaseEntity {
      * Column:    market_price
      * Nullable:  true
      */
+    @ApiModelProperty("市场价")
     private BigDecimal marketPrice;
 
     /**
@@ -78,5 +83,6 @@ public class ProductSku extends BaseEntity {
      * Column:    cost_price
      * Nullable:  true
      */
+    @ApiModelProperty("成本价")
     private BigDecimal costPrice;
 }

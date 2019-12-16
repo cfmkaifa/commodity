@@ -92,7 +92,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productAttachMapper.insert(productAttach);
             });
         }
-
         //添加属性值
         List<AttributeValueDto> attributeValues = productDto.getAttributeValueDtos();
         if(ConvertUtils.isNotEmpty(attributeValues)){
@@ -110,7 +109,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 attributeValueMapper.insert(attributeNewValue);
             });
         }
-
         //添加库存规格值
         List<ProductSkuDto> productSkus = productDto.getProductSkuDtos();
         if(ConvertUtils.isNotEmpty(productSkus)){
@@ -120,16 +118,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         ,String.format(BizResultEnum.CLASSIFY_ATTRIBUTE_ID_NOT_EXIST.getBizMessage()));
             }
             productSkus.stream().forEach(productSku ->{
-                    ProductSku productSku1 = new ProductSku();
-                    productSku1.setProId(proId);
-                    productSku1.setClassifyId(productSku.getClassifyId());
-                    productSku1.setSkuSn(productSku.getSkuSn());
-                    productSku1.setStock(productSku.getStock());
-                    productSku1.setSalePrice(productSku.getSalePrice());
-                    productSku1.setMarketPrice(productSku.getMarketPrice());
-                    productSku1.setCostPrice(productSku.getCostPrice());
-                    productSkuMapper.insert(productSku1);
-
+                    ProductSku productSkuss = new ProductSku();
+                    productSkuss.setProId(proId);
+                    productSkuss.setClassifyId(productSku.getClassifyId());
+                    productSkuss.setSkuSn(productSku.getSkuSn());
+                    productSkuss.setStock(productSku.getStock());
+                    productSkuss.setSalePrice(productSku.getSalePrice());
+                    productSkuss.setMarketPrice(productSku.getMarketPrice());
+                    productSkuss.setCostPrice(productSku.getCostPrice());
+                    productSkuMapper.insert(productSkuss);
                     //添加规格值
                     List<SpecificationValueDto> specificationValueDtos = productSku.getSpecificationValueDtos();
                     if(ConvertUtils.isNotEmpty(specificationValueDtos)){
@@ -144,7 +141,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                             specificationValue.setClassifyId(specificationValueDto.getClassifyId());
                             specificationValue.setSpecId(specificationValueDto.getSpecId());
                             specificationValue.setSpecVal(specificationValueDto.getSpecVal());
-                            specificationValue.setSkuId(productSku1.getId());
+                            specificationValue.setSkuId(productSkuss.getId());
                             specificationValueMapper.insert(specificationValue);
                         });
                     }
@@ -270,10 +267,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             throw new ForbesException(BizResultEnum.ENTITY_EMPTY.getBizCode()
                     ,String.format(BizResultEnum.ENTITY_EMPTY.getBizMessage()));
         }
-        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.DATAID, idList));
-        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, idList));
-        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, idList));
-        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, idList));
+//        productAttachMapper.delete(new QueryWrapper<ProductAttach>().in(DataColumnConstant.PROID, idList));
+        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().in(DataColumnConstant.PROID, idList));
+        productSkuMapper.delete(new QueryWrapper<ProductSku>().in(DataColumnConstant.PROID, idList));
+        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().in(DataColumnConstant.PROID, idList));
         boolean delBool =  SqlHelper.delBool(baseMapper.deleteBatchIds(idList));
         return delBool;
     }

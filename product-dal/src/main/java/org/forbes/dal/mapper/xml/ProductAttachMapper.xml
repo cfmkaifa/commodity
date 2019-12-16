@@ -29,159 +29,159 @@
     id, create_by, create_time, update_by, update_time, data_id, orders_sort, suffix, 
     cn_name, en_name, file_path, type
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from f_product_attach
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from f_product_attach
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" >
-    insert into f_product_attach (id, create_by, create_time, 
-      update_by, update_time, data_id, 
-      orders_sort, suffix, cn_name, 
-      en_name, file_path, type
-      )
-    values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{dataId,jdbcType=BIGINT}, 
-      #{ordersSort,jdbcType=INTEGER}, #{suffix,jdbcType=VARCHAR}, #{cnName,jdbcType=VARCHAR}, 
-      #{enName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" >
-    insert into f_product_attach
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="createBy != null" >
-        create_by,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateBy != null" >
-        update_by,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="dataId != null" >
-        data_id,
-      </if>
-      <if test="ordersSort != null" >
-        orders_sort,
-      </if>
-      <if test="suffix != null" >
-        suffix,
-      </if>
-      <if test="cnName != null" >
-        cn_name,
-      </if>
-      <if test="enName != null" >
-        en_name,
-      </if>
-      <if test="filePath != null" >
-        file_path,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dataId != null" >
-        #{dataId,jdbcType=BIGINT},
-      </if>
-      <if test="ordersSort != null" >
-        #{ordersSort,jdbcType=INTEGER},
-      </if>
-      <if test="suffix != null" >
-        #{suffix,jdbcType=VARCHAR},
-      </if>
-      <if test="cnName != null" >
-        #{cnName,jdbcType=VARCHAR},
-      </if>
-      <if test="enName != null" >
-        #{enName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" >
-    update f_product_attach
-    <set >
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dataId != null" >
-        data_id = #{dataId,jdbcType=BIGINT},
-      </if>
-      <if test="ordersSort != null" >
-        orders_sort = #{ordersSort,jdbcType=INTEGER},
-      </if>
-      <if test="suffix != null" >
-        suffix = #{suffix,jdbcType=VARCHAR},
-      </if>
-      <if test="cnName != null" >
-        cn_name = #{cnName,jdbcType=VARCHAR},
-      </if>
-      <if test="enName != null" >
-        en_name = #{enName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        file_path = #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" >
-    update f_product_attach
-    set create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      data_id = #{dataId,jdbcType=BIGINT},
-      orders_sort = #{ordersSort,jdbcType=INTEGER},
-      suffix = #{suffix,jdbcType=VARCHAR},
-      cn_name = #{cnName,jdbcType=VARCHAR},
-      en_name = #{enName,jdbcType=VARCHAR},
-      file_path = #{filePath,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
+    <!--select 'false' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from f_product_attach-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >-->
+    <!--delete from f_product_attach-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</delete>-->
+  <!--<insert id="insert" >-->
+    <!--insert into f_product_attach (id, create_by, create_time, -->
+      <!--update_by, update_time, data_id, -->
+      <!--orders_sort, suffix, cn_name, -->
+      <!--en_name, file_path, type-->
+      <!--)-->
+    <!--values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, -->
+      <!--#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{dataId,jdbcType=BIGINT}, -->
+      <!--#{ordersSort,jdbcType=INTEGER}, #{suffix,jdbcType=VARCHAR}, #{cnName,jdbcType=VARCHAR}, -->
+      <!--#{enName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" >-->
+    <!--insert into f_product_attach-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="createBy != null" >-->
+        <!--create_by,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--update_by,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+      <!--<if test="dataId != null" >-->
+        <!--data_id,-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--orders_sort,-->
+      <!--</if>-->
+      <!--<if test="suffix != null" >-->
+        <!--suffix,-->
+      <!--</if>-->
+      <!--<if test="cnName != null" >-->
+        <!--cn_name,-->
+      <!--</if>-->
+      <!--<if test="enName != null" >-->
+        <!--en_name,-->
+      <!--</if>-->
+      <!--<if test="filePath != null" >-->
+        <!--file_path,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="createBy != null" >-->
+        <!--#{createBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--#{updateBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="dataId != null" >-->
+        <!--#{dataId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--#{ordersSort,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="suffix != null" >-->
+        <!--#{suffix,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cnName != null" >-->
+        <!--#{cnName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="enName != null" >-->
+        <!--#{enName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="filePath != null" >-->
+        <!--#{filePath,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" >-->
+    <!--update f_product_attach-->
+    <!--<set >-->
+      <!--<if test="createBy != null" >-->
+        <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null" >-->
+        <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="dataId != null" >-->
+        <!--data_id = #{dataId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="ordersSort != null" >-->
+        <!--orders_sort = #{ordersSort,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="suffix != null" >-->
+        <!--suffix = #{suffix,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cnName != null" >-->
+        <!--cn_name = #{cnName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="enName != null" >-->
+        <!--en_name = #{enName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="filePath != null" >-->
+        <!--file_path = #{filePath,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" >-->
+    <!--update f_product_attach-->
+    <!--set create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--data_id = #{dataId,jdbcType=BIGINT},-->
+      <!--orders_sort = #{ordersSort,jdbcType=INTEGER},-->
+      <!--suffix = #{suffix,jdbcType=VARCHAR},-->
+      <!--cn_name = #{cnName,jdbcType=VARCHAR},-->
+      <!--en_name = #{enName,jdbcType=VARCHAR},-->
+      <!--file_path = #{filePath,jdbcType=VARCHAR},-->
+      <!--type = #{type,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
 </mapper>

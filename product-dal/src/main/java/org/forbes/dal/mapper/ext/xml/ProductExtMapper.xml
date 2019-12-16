@@ -125,7 +125,7 @@
   <sql id="Base_Column_List" >
     <include refid="org.forbes.dal.mapper.ProductMapper.Base_Column_List" />
   </sql>
-  
+    <!--分页查询商品详细信息-->
   <select id="PageProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultMap="BaseResultMap">
     SELECT  p.classify_id,
             p.classify_id,
@@ -221,23 +221,24 @@
     </where>
   </select>
 
-  <delete id="deleteProduct" parameterType="Long">
-    DELETE  f_product,
-			f_product_attach,
-			f_specification_value,
-			f_product_sku,
-			f_attribute_value
-			FROM f_product
-			JOIN f_product_attach on f_product.id = f_product_attach.data_id
-			JOIN f_specification_value on f_product.id = f_specification_value.pro_id
-			JOIN f_product_sku on f_product.id = f_product_sku.pro_id
-			JOIN f_attribute_value on f_product.id = f_attribute_value.pro_id
-			WHERE f_product.id=#{id,jdbcType=BIGINT}
+    <!--删除商品信息-->
+  <delete id="deleteProduct">
+    DELETE   f_product,
+			 f_product_attach,
+			 f_specification_value,
+			 f_product_sku,
+			 f_attribute_value
+			 FROM f_product
+			 LEFT JOIN f_product_attach on f_product.id = f_product_attach.data_id
+		     LEFT JOIN f_specification_value on f_product.id = f_specification_value.pro_id
+		     LEFT JOIN f_product_sku on f_product.id = f_product_sku.pro_id
+		     LEFT JOIN f_attribute_value on f_product.id = f_attribute_value.pro_id
+			 WHERE f_product.id=#{id}
   </delete>
 
+    <!--通过id查询商品详细信息-->
   <select id="selectProducts" resultType="org.forbes.comm.vo.ProductAttvalueVo">
-    SELECT
-                p.classify_id,
+     SELECT
 				p.classify_id,
 				p.brand_id,
 				p.shop_id,

@@ -22,11 +22,6 @@ public class Product extends BaseEntity{
 
     private static final long serialVersionUID = -215280691828941047L;
 
-    //商品属性
-    List<AttributeValue> attributeValues;
-
-    List<SpecificationValue> specificationValues;
-
     /**
      * 分类id
      * Table:     f_product
