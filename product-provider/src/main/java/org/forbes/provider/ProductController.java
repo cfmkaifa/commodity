@@ -249,11 +249,8 @@ public class ProductController {
     public Result<Product> selectProducts(@RequestParam(value = "id",required = true)Long id){
            Result<Product> result=new Result<Product>();
            Product product=productService.getById(id);
-
-           productAttachService.getById(id);
-           attributeValueService.getById(id);
-           productSpecificationService.getById(id);
-           specificationValueService.getById(id);
+           Long proId = product.getId();
+           productAttachService.getById(proId);
            result.setResult(product);
            return result;
     }
