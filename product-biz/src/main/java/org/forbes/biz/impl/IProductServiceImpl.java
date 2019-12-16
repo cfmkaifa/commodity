@@ -73,9 +73,9 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
         productDto.setState(ProductStausEnum.FREEZE.getCode());
         baseMapper.insert(product);
+        Long proId = product.getId();
         List<AttributeValueDto> attributeValues = productDto.getAttributeValueDtos();
         if(ConvertUtils.isNotEmpty(attributeValues)){
-            Long proId = product.getId();
             attributeValues.stream().forEach(attributeValue -> {
                 //判断输入的规格属性分类id是否和商品的分类id是否一致
                 if(productDto.getClassifyId()==attributeValue.getClassifyId()){
@@ -90,7 +90,6 @@ public class IProductServiceImpl extends ServiceImpl<ProductMapper, Product> imp
         }
         List<ProductSkuDto> productSkus = productDto.getProductSkuDtos();
         if(ConvertUtils.isNotEmpty(productSkus)){
-            Long proId = product.getId();
             productSkus.stream().forEach(productSku ->{
                 //判断输入的规格属性分类id是否和商品的分类id是否一致
                 if(productDto.getClassifyId()==productSku.getClassifyId()) {

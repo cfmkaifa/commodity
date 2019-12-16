@@ -11,8 +11,8 @@ import com.google.common.collect.Maps;
  */
 public enum ProductStausEnum {
 
-    NORMAL("1","上架"),
-    FREEZE("2","未上架"),
+	FREEZE("1","未上架"),
+    NORMAL("2","上架"),
     TOBEAUDITED("3","待审核"),
     AUDITFAILURE("4","审核失败");
 
