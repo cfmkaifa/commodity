@@ -3,44 +3,238 @@
 <mapper namespace="org.forbes.dal.mapper.ext.SysProductExtMapper" >
     <!--总后台商品分页-->
     <resultMap id="sysResultMap" type="org.forbes.comm.vo.ProductSysPageVo">
+        <!-- 主键 -->
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
         <!-- 创建时间 -->
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <!-- 更新人 -->
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <!-- 更新时间 -->
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <!-- 分类id -->
         <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
-        <!-- 库存 -->
-        <result column="stock" property="stock" jdbcType="VARCHAR" />
-        <!-- 单价 -->
-        <result column="price" property="price" jdbcType="DECIMAL" />
-        <!-- 商品名称 -->
-        <result column="productName" property="productName" jdbcType="VARCHAR" />
-        <!-- 1上架2未上架3待审核4审核失败 -->
-        <result column="state" property="state" jdbcType="VARCHAR" />
+        <!-- 品牌ID -->
+        <result column="brand_id" property="brandId" jdbcType="BIGINT" />
+        <!-- 店铺ID -->
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
         <!-- 商品编码 -->
         <result column="pro_sn" property="proSn" jdbcType="VARCHAR" />
+        <!-- 商品名称 -->
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <!-- 品种 -->
+        <result column="variety" property="variety" jdbcType="VARCHAR" />
+        <!-- 厚度单位为mm -->
+        <result column="thickness" property="thickness" jdbcType="DECIMAL" />
+        <!-- 细度单位dtex -->
+        <result column="fineness" property="fineness" jdbcType="DECIMAL" />
+        <!-- 颜色 -->
+        <result column="color" property="color" jdbcType="VARCHAR" />
+        <!-- 功能 -->
+        <result column="function" property="function" jdbcType="VARCHAR" />
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+        <!-- 单价 -->
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <!-- 单位 -->
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <!-- 数量 -->
+        <result column="number" property="number" jdbcType="INTEGER" />
+        <!-- 集装箱重-改为件重 -->
+        <result column="whole_weight" property="wholeWeight" jdbcType="VARCHAR" />
+        <!-- 产地 -->
+        <result column="origin" property="origin" jdbcType="VARCHAR" />
+        <!-- 存放地 -->
+        <result column="deposit" property="deposit" jdbcType="VARCHAR" />
+        <!-- 仓库 -->
+        <result column="warehouse" property="warehouse" jdbcType="VARCHAR" />
+        <!-- 销售地址 -->
+        <result column="sales_address" property="salesAddress" jdbcType="VARCHAR" />
+        <!-- 说明 -->
+        <result column="explaindesc" property="explaindesc" jdbcType="VARCHAR" />
+        <!-- 实物验证 -->
+        <result column="good_verify" property="goodVerify" jdbcType="INTEGER" />
+        <!-- 质量验证 -->
+        <result column="quality_verify" property="qualityVerify" jdbcType="INTEGER" />
+        <!-- 质保书1无2有 -->
+        <result column="quality_warranty" property="qualityWarranty" jdbcType="INTEGER" />
+        <!-- 议价1有2无 -->
+        <result column="bargaining" property="bargaining" jdbcType="INTEGER" />
+        <!-- 延期保证金 -->
+        <result column="extension_margin" property="extensionMargin" jdbcType="INTEGER" />
+        <!-- 融资保证金 -->
+        <result column="financing_margin" property="financingMargin" jdbcType="INTEGER" />
+        <!-- 供方代运 -->
+        <result column="supplier_delivery" property="supplierDelivery" jdbcType="INTEGER" />
+        <!-- 先行赔付 -->
+        <result column="compensation" property="compensation" jdbcType="INTEGER" />
+        <!-- 视频验货 -->
+        <result column="video_inspection" property="videoInspection" jdbcType="INTEGER" />
+        <!-- 仓费快结 -->
+        <result column="warehouse_charge" property="warehouseCharge" jdbcType="INTEGER" />
+        <!-- 代运补贴 -->
+        <result column="subsidy" property="subsidy" jdbcType="INTEGER" />
+        <!-- 闪电开票 -->
+        <result column="lightning_invoice" property="lightningInvoice" jdbcType="INTEGER" />
+        <!-- 诚信店铺 -->
+        <result column="honest_shop" property="honestShop" jdbcType="INTEGER" />
+        <!-- 在途 -->
+        <result column="on_the_way" property="onTheWay" jdbcType="INTEGER" />
+        <!-- 定向 -->
+        <result column="directional" property="directional" jdbcType="INTEGER" />
+        <!-- 竞价 -->
+        <result column="bidding_price" property="biddingPrice" jdbcType="INTEGER" />
+        <!-- 现货挂牌 -->
+        <result column="spot_listing" property="spotListing" jdbcType="INTEGER" />
+        <!-- 新资源 -->
+        <result column="new" property="new" jdbcType="INTEGER" />
+        <!-- 供应链 -->
+        <result column="supply_chain" property="supplyChain" jdbcType="INTEGER" />
+        <!-- 担保交易 -->
+        <result column="guarantee_pay" property="guaranteePay" jdbcType="INTEGER" />
+        <!-- 纤维纤度 -->
+        <result column="size" property="size" jdbcType="DECIMAL" />
+        <!-- 长度 -->
+        <result column="length" property="length" jdbcType="DECIMAL" />
+        <!-- 断裂长度 -->
+        <result column="break_length" property="breakLength" jdbcType="DECIMAL" />
+        <!-- 延伸率 -->
+        <result column="break_elongation" property="breakElongation" jdbcType="DECIMAL" />
+        <!-- 回潮率 -->
+        <result column="regain" property="regain" jdbcType="DECIMAL" />
+        <!-- 卷曲度 -->
+        <result column="crimp_degree" property="crimpDegree" jdbcType="INTEGER" />
+        <!-- 倍长纤维 -->
+        <result column="double_length" property="doubleLength" jdbcType="DECIMAL" />
+        <!-- 白度 -->
+        <result column="whiteness" property="whiteness" jdbcType="DECIMAL" />
+        <!-- 疵点 -->
+        <result column="defect" property="defect" jdbcType="DECIMAL" />
+        <!-- 油污 -->
+        <result column="oil" property="oil" jdbcType="DECIMAL" />
+        <!-- 残硫物 -->
+        <result column="sulfur" property="sulfur" jdbcType="DECIMAL" />
+        <!-- 灼烧残留物 -->
+        <result column="burn" property="burn" jdbcType="DECIMAL" />
+        <result column="add_time" property="addTime" jdbcType="VARCHAR" />
+        <!-- 1上架2未上架3待审核4审核失败 -->
+        <result column="state" property="state" jdbcType="VARCHAR" />
+        <!-- 库存 -->
+        <result column="stock" property="stock" jdbcType="VARCHAR" />
+        <!-- 销售类别1现货直销2预售3竞价 -->
+        <result column="sale_type" property="saleType" jdbcType="INTEGER" />
 
-        <association property="productAttachVo" javaType="org.forbes.comm.vo.ProductAttachVo">
-            <!-- 数据ID -->
-            <result column="data_id" property="dataId" jdbcType="BIGINT" />
-            <!-- 排序 -->
-            <result column="orders_sort" property="ordersSort" jdbcType="INTEGER" />
-            <!-- 后缀 -->
-            <result column="suffix" property="suffix" jdbcType="VARCHAR" />
-            <!-- 中文名称 -->
-            <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
-            <result column="en_name" property="enName" jdbcType="VARCHAR" />
-            <!-- 文件地址 -->
-            <result column="file_path" property="filePath" jdbcType="VARCHAR" />
-            <!-- 0-大图，1-小图，3-中图 -->
-            <result column="type" property="type" jdbcType="VARCHAR" />
-        </association>
-        <association property="productClassifyVo" javaType="org.forbes.comm.vo.ProductClassifyVo">
-            <result column="name" property="name" jdbcType="VARCHAR" />
-        </association>
+        <collection property="productAttachDtos" resultMap="productAttach"/>
+        <collection property="attributeValueDtos" resultMap="attribute"/>
+        <collection property="productSkuDtos" resultMap="stock"/>
     </resultMap>
+    <!--商品附件-->
+    <resultMap id="productAttach" type="org.forbes.comm.model.ProductAttachDto">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <!-- 数据ID -->
+        <result column="data_id" property="dataId" jdbcType="BIGINT" />
+        <!-- 排序 -->
+        <result column="orders_sort" property="ordersSort" jdbcType="INTEGER" />
+        <!-- 后缀 -->
+        <result column="suffix" property="suffix" jdbcType="VARCHAR" />
+        <!-- 中文名称 -->
+        <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+        <result column="en_name" property="enName" jdbcType="VARCHAR" />
+        <!-- 文件地址 -->
+        <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+        <!-- 0-大图，1-小图，3-中图 -->
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--商品属性-->
+    <resultMap id="attribute" type="org.forbes.comm.model.AttributeValueDto">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <!-- 排序 -->
+        <result column="orders_sort" property="ordersSort" jdbcType="INTEGER" />
+        <!-- 商品分类id -->
+        <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
+        <!-- 商品id -->
+        <result column="pro_id" property="proId" jdbcType="BIGINT" />
+        <!-- 商品id -->
+        <result column="attribute_value" property="attributeValue" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--商品库存-->
+    <resultMap id="stock" type="org.forbes.comm.model.ProductSkuDto">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <!-- 商品分类id -->
+        <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
+        <!-- 商品id -->
+        <result column="pro_id" property="proId" jdbcType="BIGINT" />
+        <!-- 编码 -->
+        <result column="sku_sn" property="skuSn" jdbcType="BIGINT" />
+        <!-- 库存 -->
+        <result column="stock" property="stock" jdbcType="INTEGER" />
+        <!-- 销售价 -->
+        <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+        <!-- 市场价 -->
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+        <!-- 市场价 -->
+        <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    </resultMap>
+
     <!--总后台多条件分页查询商品-->
     <select id="sysPage" parameterType="org.forbes.comm.model.ProductPageDto" resultMap="sysResultMap">
         SELECT
-        fpc.name,
+        fp.classify_id,
+        fp.classify_id,
+        fp.brand_id,
+        fp.shop_id,
+        fp.pro_sn,
+        fp.name,
+        fp.variety,
+        fp.thickness,
+        fp.fineness,
+        fp.color,
+        fp.function,
+        fp.unit_price,
+        fp.price,
+        fp.company,
+        fp.number,
+        fp.whole_weight,
+        fp.origin,
+        fp.deposit,
+        fp.warehouse,
+        fp.sales_address,
+        fp.explaindesc,
+        fp.good_verify,
+        fp.quality_verify,
+        fp.quality_warranty,
+        fp.bargaining,
+        fp.extension_margin,
+        fp.financing_margin,
+        fp.supplier_delivery,
+        fp.compensation,
+        fp.video_inspection,
+        fp.warehouse_charge,
+        fp.subsidy,
+        fp.lightning_invoice,
+        fp.honest_shop,
+        fp.on_the_way,
+        fp.directional,
+        fp.bidding_price,
+        fp.spot_listing,
+        fp.new,
+        fp.supply_chain,
+        fp.guarantee_pay,
+        fp.size,
+        fp.length,
+        fp.break_length,
+        fp.break_elongation,
+        fp.regain,
+        fp.crimp_degree,
+        fp.double_length,
+        fp.whiteness,
+        fp.defect,
+        fp.oil,
+        fp.sulfur,
+        fp.burn,
+        fp.add_time,
+        fp.state,
+        fp.stock,
+        fp.sale_type,
         fpa.data_id,
         fpa.orders_sort,
         fpa.suffix,
@@ -48,16 +242,27 @@
         fpa.en_name,
         fpa.file_path,
         fpa.type,
-        fp.create_time,
-        fp.name AS productName,
-        fp.pro_sn,
-        fp.price,
-        fp.stock,
-        fp.state
-        FROM
-        f_product AS fp
-        LEFT JOIN f_product_attach AS fpa ON fpa.data_id = fp.id
-        LEFT JOIN f_product_classify AS fpc ON fpc.id = fp.classify_id
+        fsv.classify_id,
+        fsv.pro_id,
+        fsv.spec_id,
+        fsv.sku_id,
+        fsv.spec_val,
+        fpk.classify_id,
+        fpk.pro_id,
+        fpk.sku_sn,
+        fpk.stock,
+        fpk.sale_price,
+        fpk.market_price,
+        fpk.cost_price,
+        fav.orders_sort,
+        fav.classify_id,
+        fav.pro_id,
+        fav.attribute_value
+        FROM f_product fp
+        LEFT JOIN f_product_attach fpa ON fp.id = fpa.data_id
+        LEFT JOIN f_specification_value fsv ON fp.id = fsv.pro_id
+        LEFT JOIN f_product_sku fpk ON fp.id = fpk.pro_id
+        LEFT JOIN f_attribute_value fav ON fp.id = fav.pro_id
         <where>
             <if test="productPageDto.state != null and productPageDto.state != '' and productPageDto.state != 'null'">
                 AND fp.state=#{productPageDto.state,jdbcType=VARCHAR}
@@ -68,9 +273,66 @@
         </where>
     </select>
 
+    <!--商品详情-->
     <select id="detail" parameterType="long" resultMap="sysResultMap">
-         SELECT
-        fpc.name,
+        SELECT
+        fp.classify_id,
+        fp.classify_id,
+        fp.brand_id,
+        fp.shop_id,
+        fp.pro_sn,
+        fp.name,
+        fp.variety,
+        fp.thickness,
+        fp.fineness,
+        fp.color,
+        fp.function,
+        fp.unit_price,
+        fp.price,
+        fp.company,
+        fp.number,
+        fp.whole_weight,
+        fp.origin,
+        fp.deposit,
+        fp.warehouse,
+        fp.sales_address,
+        fp.explaindesc,
+        fp.good_verify,
+        fp.quality_verify,
+        fp.quality_warranty,
+        fp.bargaining,
+        fp.extension_margin,
+        fp.financing_margin,
+        fp.supplier_delivery,
+        fp.compensation,
+        fp.video_inspection,
+        fp.warehouse_charge,
+        fp.subsidy,
+        fp.lightning_invoice,
+        fp.honest_shop,
+        fp.on_the_way,
+        fp.directional,
+        fp.bidding_price,
+        fp.spot_listing,
+        fp.new,
+        fp.supply_chain,
+        fp.guarantee_pay,
+        fp.size,
+        fp.length,
+        fp.break_length,
+        fp.break_elongation,
+        fp.regain,
+        fp.crimp_degree,
+        fp.double_length,
+        fp.whiteness,
+        fp.defect,
+        fp.oil,
+        fp.sulfur,
+        fp.burn,
+        fp.add_time,
+        fp.state,
+        fp.stock,
+        fp.sale_type,
         fpa.data_id,
         fpa.orders_sort,
         fpa.suffix,
@@ -78,16 +340,27 @@
         fpa.en_name,
         fpa.file_path,
         fpa.type,
-        fp.create_time,
-        fp.name AS productName,
-        fp.pro_sn,
-        fp.price,
-        fp.stock,
-        fp.state
-        FROM
-        f_product AS fp
-        LEFT JOIN f_product_attach AS fpa ON fpa.data_id = fp.id
-        LEFT JOIN f_product_classify AS fpc ON fpc.id = fp.classify_id
+        fsv.classify_id,
+        fsv.pro_id,
+        fsv.spec_id,
+        fsv.sku_id,
+        fsv.spec_val,
+        fpk.classify_id,
+        fpk.pro_id,
+        fpk.sku_sn,
+        fpk.stock,
+        fpk.sale_price,
+        fpk.market_price,
+        fpk.cost_price,
+        fav.orders_sort,
+        fav.classify_id,
+        fav.pro_id,
+        fav.attribute_value
+        FROM f_product fp
+        LEFT JOIN f_product_attach fpa ON fp.id = fpa.data_id
+        LEFT JOIN f_specification_value fsv ON fp.id = fsv.pro_id
+        LEFT JOIN f_product_sku fpk ON fp.id = fpk.pro_id
+        LEFT JOIN f_attribute_value fav ON fp.id = fav.pro_id
         WHERE fp.id=#{id,jdbcType=BIGINT}
     </select>
 </mapper>
