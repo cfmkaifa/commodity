@@ -5,7 +5,7 @@ import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.dal.entity.ProductSpecification;
 
-public interface ISProSpecficService extends IService<ProductSpecification>{
+public interface IProSpecficService extends IService<ProductSpecification>{
 
     /***
      * 方法概述:批量添加规格

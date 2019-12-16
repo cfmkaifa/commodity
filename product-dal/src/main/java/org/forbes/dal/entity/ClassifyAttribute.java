@@ -2,6 +2,7 @@ package org.forbes.dal.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +20,7 @@ public class ClassifyAttribute extends BaseEntity{
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty("属性名称")
     private String name;
 
     /**
@@ -27,6 +29,7 @@ public class ClassifyAttribute extends BaseEntity{
      * Column:    attribute_sn
      * Nullable:  true
      */
+    @ApiModelProperty("属性编码")
     private String attributeSn;
 
     /**商品分类id
@@ -34,5 +37,6 @@ public class ClassifyAttribute extends BaseEntity{
      * Column:    parent_id
      * Nullable:  true
      */
+    @ApiModelProperty("商品分类id")
     private Long classifyId;
 }

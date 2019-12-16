@@ -1,7 +1,7 @@
 package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.forbes.biz.ISProSpecificService;
+import org.forbes.biz.IProSpecificService;
 import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public class SProSpecificServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecificService{
+public class ProSpecificServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements IProSpecificService {
 
 }

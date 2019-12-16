@@ -1,8 +1,8 @@
 package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.forbes.biz.ISProductClassifyService;
-import org.forbes.comm.enums.BizResultEnum;
+import org.forbes.biz.IProductClassifyService;
+import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.enums.YesNoEnum;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassifyAttributeDto;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
-public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements ISProductClassifyService {
+public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMapper, ProductClassify> implements IProductClassifyService {
 
 
 
@@ -72,8 +72,9 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
+                ClassifyAttributeDto classifyAttributeDto=keyList.get(0);
                 ClassifyAttribute classifyAttribute = new ClassifyAttribute();
-                classifyAttribute.setName(keyList.get(0).getName());
+                classifyAttribute.setName(classifyAttributeDto.getName());
                 classifyAttribute.setClassifyId(classifyId);
                 classifyAttributeMapper.insert(classifyAttribute);
             });
@@ -91,7 +92,7 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
                 ProductSpecification productSpecification=new ProductSpecification();
                 productSpecification.setName(proSpecficDto.getName());
                 productSpecification.setOrderSorts(proSpecficDto.getOrderSorts());
-                productSpecification.setState(0L);
+                productSpecification.setState(ClassifyStausEnum.FREEZE.getCode().toString());
                 productSpecification.setClassifyId(classifyId);
                 productSpecificationMapper.insert(productSpecification);
             });

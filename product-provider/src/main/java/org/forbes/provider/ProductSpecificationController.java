@@ -1,16 +1,14 @@
 package org.forbes.provider;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-import org.forbes.biz.ISProSpecficService;
-import org.forbes.biz.ISProductClassifyService;
+import org.forbes.biz.IProSpecficService;
+import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
-import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.model.BasePageDto;
@@ -22,7 +20,6 @@ import org.forbes.config.exception.ForbesException;
 import org.forbes.dal.entity.ProductClassify;
 import org.forbes.dal.entity.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -41,10 +38,10 @@ import java.util.Arrays;
 public class ProductSpecificationController {
 
     @Autowired
-    private ISProSpecficService proSpecficService;
+    private IProSpecficService proSpecficService;
 
     @Autowired
-    private ISProductClassifyService productClassifyService;
+    private IProductClassifyService productClassifyService;
 
 
     /***
@@ -62,7 +59,7 @@ public class ProductSpecificationController {
             @ApiResponse(code = 200,message = Result.PAGE_PRO_SPEC),
             @ApiResponse(code=500,message = Result.PAGE_PRO_SPEC_ERROR)
     })
-    public Result<IPage<ProductSpecification>> page(BasePageDto basePageDto,ProSpecficDto proSpecficDto){
+    public Result<IPage<ProductSpecification>> page(@RequestParam(value = "id",required = true)Long id, BasePageDto basePageDto,ProSpecficDto proSpecficDto){
         log.debug("================basePageDto:"+basePageDto);
         Result<IPage<ProductSpecification>> result=new Result<>();
         QueryWrapper<ProductSpecification> qw=new QueryWrapper<>();
@@ -73,11 +70,13 @@ public class ProductSpecificationController {
             if(ClassifyStausEnum.existsClassifyStausEnum(String.valueOf(proSpecficDto.getState()))){
                 qw.eq(PermsCommonConstant.PRO_SPEC_STATE,proSpecficDto.getState());
             }
+            if(ConvertUtils.isNotEmpty(id)){
+                qw.eq(PermsCommonConstant.ID,id);
+            }
         }
         IPage<ProductSpecification> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
         IPage<ProductSpecification> productSPsecs=proSpecficService.page(page,qw);
         result.setResult(productSPsecs);
-        log.debug("========返回值为=======："+ JSON.toJSONString(productSPsecs));
         return result;
     }
 
@@ -97,14 +96,13 @@ public class ProductSpecificationController {
         }
         try {
             proSpecficService.batchAdd(proSpecBatchDto);
-        }catch (Exception e){
-            result.setBizCode(BizResultEnum.PRO_SPEC_NAME_SAME.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRO_SPEC_NAME_SAME.getBizFormateMessage()));
+        }catch (ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
             return result;
         }
 
         result.setResult(proSpecBatchDto);
-        log.debug("============proSpecBatchDto:"+JSON.toJSONString(proSpecBatchDto));
         return result;
     }
 
@@ -167,7 +165,6 @@ public class ProductSpecificationController {
         productSpecification.setState(proSpecficDto.getState());
         productSpecification.setName(proSpecficDto.getName());
         proSpecficService.updateById(productSpecification);
-        log.debug("==============productSpecification:"+JSON.toJSONString(productSpecification));
         return result;
     }
 }

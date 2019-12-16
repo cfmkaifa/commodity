@@ -5,7 +5,7 @@ import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.model.ProductClassifyDto;
 import org.forbes.dal.entity.ProductClassify;
 
-public interface ISProductClassifyService extends IService<ProductClassify>{
+public interface IProductClassifyService extends IService<ProductClassify>{
 
     
     /***

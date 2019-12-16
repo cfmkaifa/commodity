@@ -1,12 +1,10 @@
 package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.forbes.biz.ISProSpecficService;
+import org.forbes.biz.IProSpecficService;
 import org.forbes.comm.exception.ForbesException;
-import org.forbes.comm.model.ClassifyAttributeDto;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.comm.model.ProSpecficDto;
-import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
-public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements ISProSpecficService {
+public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationMapper,ProductSpecification> implements IProSpecficService {
 
     @Autowired
     private ProductSpecificationMapper proSpecificMapper;
@@ -52,11 +50,12 @@ public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationM
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
+                ProSpecficDto proSpecficDto=keyList.get(0);
                 ProductSpecification productSpecification=new ProductSpecification();
                 productSpecification.setClassifyId(classifyId);
-                productSpecification.setName(keyList.get(0).getName());
-                productSpecification.setState(keyList.get(0).getState());
-                productSpecification.setOrderSorts(keyList.get(0).getOrderSorts());
+                productSpecification.setName(proSpecficDto.getName());
+                productSpecification.setState(proSpecficDto.getState());
+                productSpecification.setOrderSorts(proSpecficDto.getOrderSorts());
                 proSpecificMapper.insert(productSpecification);
             });
         }

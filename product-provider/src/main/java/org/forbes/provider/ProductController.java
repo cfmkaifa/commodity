@@ -19,7 +19,6 @@ import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.ProductAttvalueVo;
-import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,8 +147,8 @@ public class ProductController {
 
     /***
      * deleteProduct方法概述:删除商品信息
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @创建人 Tom
      * @创建时间 2019/12/11 18:11
      * @修改人 (修改了该文件，请填上修改人的名字)

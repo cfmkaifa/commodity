@@ -3,6 +3,7 @@ package org.forbes.dal.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,7 +24,8 @@ public class ProductSpecification extends BaseEntity{
      * Column:    state
      * Nullable:  true
      */
-    private Long state;
+	@ApiModelProperty(value = "状态 0-未启用,1-启用 ")
+    private String state;
 
     /**
      * 排序
@@ -31,6 +33,7 @@ public class ProductSpecification extends BaseEntity{
      * Column:    order_sorts
      * Nullable:  true
      */
+    @ApiModelProperty(value = "排序")
     private Integer orderSorts;
 
     /**
@@ -38,6 +41,7 @@ public class ProductSpecification extends BaseEntity{
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty(value = "规格名称")
     private String name;
 
     /**商品分类id
@@ -45,5 +49,6 @@ public class ProductSpecification extends BaseEntity{
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "商品分类id")
     private Long classifyId;
 }

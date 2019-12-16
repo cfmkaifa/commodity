@@ -17,6 +17,7 @@ public interface PermsCommonConstant {
     /*****分类属性相关变量*****/
     public static final String CLASSIFY_ID = "classify_id";//商品分类id
     public static final String ATTR_NAME = "name";//属性名称
+    public static final String ID = "id";//属性名称
 
 
 
@@ -24,5 +25,9 @@ public interface PermsCommonConstant {
     public static final String PRO_SPEC_CLASSIFY_ID= "classify_id";//商品分类id
     public static final String PRO_SPEC_NAME = "name";//规格名称
     public static final String PRO_SPEC_STATE = "state";//状态
+
+
+    /*****商品相关变量*****/
+    public static final String PRO_NAME= "name";//商品分类id
 
 }

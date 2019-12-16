@@ -1,11 +1,10 @@
 package org.forbes.biz.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.forbes.biz.ISClasAttrService;
+import org.forbes.biz.IClasAttrService;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.comm.model.ClassifyAttributeDto;
-import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.mapper.ClassifyAttributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
-public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper,ClassifyAttribute> implements ISClasAttrService {
+public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper,ClassifyAttribute> implements IClasAttrService {
 
     @Autowired
     private ClassifyAttributeMapper clasAttrMapper;
@@ -51,9 +50,10 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
                 if(attrSize > 0 ){
                     throw new ForbesException(namestr);
                 }
+                ClassifyAttributeDto classifyAttributeDto=keyList.get(0);
                 ClassifyAttribute classifyAttribute=new ClassifyAttribute();
                 classifyAttribute.setClassifyId(classifyId);
-                classifyAttribute.setName(keyList.get(0).getName());
+                classifyAttribute.setName(classifyAttributeDto.getName());
                 clasAttrMapper.insert(classifyAttribute);
             });
         }

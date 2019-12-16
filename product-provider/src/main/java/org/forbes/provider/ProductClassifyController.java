@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-import org.forbes.biz.ISClasAttrService;
-import org.forbes.biz.ISProSpecificService;
-import org.forbes.biz.ISProductClassifyService;
+import org.forbes.biz.IClasAttrService;
+import org.forbes.biz.IProSpecificService;
+import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.PermsCommonConstant;
-import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.exception.ForbesException;
@@ -21,7 +20,6 @@ import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
 import org.forbes.dal.entity.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,13 +38,13 @@ import java.util.List;
 public class ProductClassifyController {
 
     @Autowired
-    private ISProductClassifyService productClassifyService;
+    private IProductClassifyService productClassifyService;
 
     @Autowired
-    private ISClasAttrService classifyAttrService;
+    private IClasAttrService classifyAttrService;
 
     @Autowired
-    private ISProSpecificService proSpecificService;
+    private IProSpecificService proSpecificService;
 
 
 
@@ -65,7 +63,7 @@ public class ProductClassifyController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.SELECT_ERROR_CLASSIFY)
     })
-    public Result<IPage<ProductClassify>> selectGoodsClassify(BasePageDto basePageDto,ProductClassifyPageDto productClassifyPageDto){
+    public Result<IPage<ProductClassify>> page(BasePageDto basePageDto,ProductClassifyPageDto productClassifyPageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
         Result<IPage<ProductClassify>> result=new Result<IPage<ProductClassify>>();
         QueryWrapper<ProductClassify> qw=new QueryWrapper<>();
@@ -80,7 +78,6 @@ public class ProductClassifyController {
         IPage<ProductClassify> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
         IPage<ProductClassify> productClassifies=productClassifyService.page(page,qw);
         result.setResult(productClassifies);
-        log.debug("========返回值为=======："+JSON.toJSONString(productClassifies));
         return result;
     }
 
@@ -221,13 +218,13 @@ public class ProductClassifyController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/update-name",method = RequestMethod.PUT)
-    @ApiOperation("修改商品分类名称或者编码等")
+    @RequestMapping(value = "/edit",method = RequestMethod.PUT)
+    @ApiOperation("编辑商品分类")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_NAME),
             @ApiResponse(code=200,message = Result.UP_CLASSIFY_NAME)
     })
-    public Result<ProductClassify> updateName(@RequestBody ProductClassify productClassify){
+    public Result<ProductClassify> editProductClassify(@RequestBody ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
         Result<ProductClassify> result=new Result<ProductClassify>();
         String name=productClassify.getName();

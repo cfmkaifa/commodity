@@ -25,7 +25,7 @@ public class ProductPageDto implements Serializable{
      * Nullable:  true
      */
     @ApiModelProperty(value = "1上架2未上架3待审核4审核失败")
-    private Integer state;
+    private String state;
 
     /**
      * 商品编码

@@ -2,10 +2,13 @@ package org.forbes.biz;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.vo.ProductAttvalueVo;
+import org.forbes.comm.vo.ProductSysPageVo;
 import org.forbes.comm.vo.ProductVo;
+import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Product;
 
 /**

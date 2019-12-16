@@ -9,11 +9,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.forbes.biz.ISClasAttrService;
-import org.forbes.biz.ISProductClassifyService;
+import org.forbes.biz.IClasAttrService;
+import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
-import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ClassAttrDto;
@@ -25,7 +24,6 @@ import org.forbes.config.exception.ForbesException;
 import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -44,10 +42,10 @@ import java.util.Arrays;
 public class ClassifyAttributeController {
 
     @Autowired
-    private ISClasAttrService clasAttrService;
+    private IClasAttrService clasAttrService;
 
     @Autowired
-    private ISProductClassifyService productClassifyService;
+    private IProductClassifyService productClassifyService;
 
     /***
      * page方法概述:分页查询分类属性
@@ -65,7 +63,7 @@ public class ClassifyAttributeController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.CLASSIF_ATTR_ERROR)
     })
-    public Result<IPage<ClassifyAttribute>> page(BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
+    public Result<IPage<ClassifyAttribute>> page(@RequestParam(value = "id",required = true)Long id, BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
         log.debug("=============basePageDto:"+basePageDto);
         Result<IPage<ClassifyAttribute>> result=new Result<IPage<ClassifyAttribute>>();
         QueryWrapper<ClassifyAttribute> qw=new QueryWrapper<>();
@@ -73,11 +71,13 @@ public class ClassifyAttributeController {
             if(ConvertUtils.isNotEmpty(classAttrPageDto.getName())){
                 qw.like(PermsCommonConstant.ATTR_NAME,classAttrPageDto.getName());
             }
+            if(ConvertUtils.isNotEmpty(id)){
+                qw.eq(PermsCommonConstant.ID,id);
+            }
         }
         IPage<ClassifyAttribute> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
         IPage<ClassifyAttribute> clasAttributes=clasAttrService.page(page,qw);
         result.setResult(clasAttributes);
-        log.debug("========返回值为=======："+ JSON.toJSONString(clasAttributes));
         return result;
     }
 
@@ -108,12 +108,11 @@ public class ClassifyAttributeController {
         result.setResult(classAttrDto);
         try {
             clasAttrService.batchAdd(classAttrDto);
-        }catch (Exception e){
-            result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
-            result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
+        }catch (ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
             return result;
         }
-        log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         return result;
     }
 
@@ -152,7 +151,6 @@ public class ClassifyAttributeController {
         classifyAttribute.setName(classifyAttributeDto.getName());
         clasAttrService.updateById(classifyAttribute);
         result.setResult(classifyAttribute);
-        log.debug("=============classifyAttributeDto:"+JSON.toJSONString(classifyAttributeDto));
         return result;
     }
 

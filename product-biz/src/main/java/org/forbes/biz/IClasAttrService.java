@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.dal.entity.ClassifyAttribute;
 
-public interface ISClasAttrService extends IService<ClassifyAttribute> {
+public interface IClasAttrService extends IService<ClassifyAttribute> {
 
 
     /***

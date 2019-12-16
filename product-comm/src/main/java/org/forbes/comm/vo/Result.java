@@ -102,6 +102,15 @@ public class Result<T> implements Serializable {
 	/********商品审核信息***********/
 	public static final  String CHECK_GOOD="商品审核成功";
 	public static final  String CHECK_GOOD_ERROR="商品审核失败";
+
+	/********总后台分页查询商品***********/
+	public static final  String SYS_GOOD_PAGE="分页查询商品成功";
+	public static final  String SYS_GOOD_PAGE_ERROR="分页查询商品失败";
+
+	/********总后台查看商品详情***********/
+	public static final  String SYS_GOOD_DETAIL="查询商品详情成功";
+	public static final  String SYS_GOOD_DETAIL_ERROR="查询商品详情失败";
+
 	/**
 	 * 返回代码
 	 */
