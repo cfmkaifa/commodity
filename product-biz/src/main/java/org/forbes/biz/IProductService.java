@@ -15,7 +15,7 @@ import org.forbes.dal.entity.Product;
 public interface IProductService extends IService<Product> {
 
     /***
-     * selectProduct方法慨述:分页查询用户信息
+     * selectProduct方法慨述:分页查询用户信息列表
      * @param page
      * @param productPageDto
      * @return IPage<ProductVo>
