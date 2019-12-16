@@ -24,7 +24,7 @@ public interface ProductExtMapper extends BaseMapper<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductVo> pageProduct(IPage<ProductVo> page, @Param("productDto") ProductPageDto productPageDto);
+    IPage<ProductAttvalueVo> pageProduct(IPage<ProductAttvalueVo> page, @Param("productDto") ProductPageDto productPageDto);
 
     /***
      * deleteProduct方法概述:根据id删除商品信息
