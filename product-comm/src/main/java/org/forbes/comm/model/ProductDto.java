@@ -53,7 +53,7 @@ public class ProductDto implements Serializable{
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "分类id")
+    @ApiModelProperty(value = "分类id",example = "0")
     private Long classifyId;
 
     /**
@@ -62,7 +62,7 @@ public class ProductDto implements Serializable{
      * Column:    brand_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "品牌id")
+    @ApiModelProperty(value = "品牌id",example = "0")
     private Long brandId;
 
     /**
@@ -71,7 +71,7 @@ public class ProductDto implements Serializable{
      * Column:    shop_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "店铺id")
+    @ApiModelProperty(value = "店铺id",example = "0")
     private Long shopId;
 
     /**

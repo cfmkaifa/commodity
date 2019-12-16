@@ -14,7 +14,6 @@ import java.io.Serializable;
 @Data
 @ApiModel(description="商品查询参数")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class ProductPageDto implements Serializable{
 
     private static final long serialVersionUID = 6314536822829481483L;

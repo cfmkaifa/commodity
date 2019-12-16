@@ -52,17 +52,6 @@ public interface IProductService extends IService<Product> {
     void updateProduct(ProductDto productDto);
 
     /***
-     * deleteProduct方法概述:根据id删除商品信息
-     * @param
-     * @return
-     * @创建人 Tom
-     * @创建时间 2019/12/16 10:55
-     * @修改人 (修改了该文件，请填上修改人的名字)
-     * @修改日期 (请填上修改该文件时的日期)
-     */
-    boolean deleteProduct(Long id);
-
-    /***
      * selectProducts方法概述:通过id查询商品详细信息
      * @param
      * @return

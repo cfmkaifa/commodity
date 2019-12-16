@@ -17,7 +17,6 @@ import lombok.experimental.Accessors;
 @Data
 @ApiModel(description="库存信息")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("f_product_sku")
 public class ProductSku extends BaseEntity {
 

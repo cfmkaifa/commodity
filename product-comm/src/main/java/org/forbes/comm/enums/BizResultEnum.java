@@ -14,6 +14,7 @@ public enum BizResultEnum {
 	PRODUCT_CODE_EXIST("004001001","商品编码存在","%s对应商品编码存在"),
 	PRODUCT_STATUS_NO_EXISTS("004001002","商品状态不存在","%s对应商品状态不存在"),
 	PRO_EXIST("004001003","商品不存在","s%对应商品不存在"),
+	PRODUCT_SHELVES_STATUS("004001004","商品已上架","%s对应商品已经上架，无法删除"),
 
 	/*******商品分类信息*****/
 	EMPTY("004001","参数为空","%s为空"),

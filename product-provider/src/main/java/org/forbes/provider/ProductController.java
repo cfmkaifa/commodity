@@ -167,7 +167,12 @@ public class ProductController {
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
             return result;
         }
-        Boolean deleteProduct=productService.deleteProduct(id);
+        if(product.getState().equals(2)){
+            result.setBizCode(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode());
+            result.setMessage(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage());
+            return result;
+        }
+        Boolean deleteProduct=productService.removeById(id);
         result.setResult(deleteProduct);
         return result;
     }

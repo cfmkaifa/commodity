@@ -1,132 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.forbes.dal.mapper.ext.ProductExtMapper" >
-  <resultMap id="BaseResultMap" type="org.forbes.comm.vo.ProductVo" >
-    <!-- 主键 -->
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <!-- 创建时间 -->
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <!-- 更新人 -->
-    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
-    <!-- 更新时间 -->
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <!-- 分类id -->
-    <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
-    <!-- 品牌ID -->
-    <result column="brand_id" property="brandId" jdbcType="BIGINT" />
-    <!-- 店铺ID -->
-    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
-    <!-- 商品编码 -->
-    <result column="pro_sn" property="proSn" jdbcType="VARCHAR" />
-    <!-- 商品名称 -->
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <!-- 品种 -->
-    <result column="variety" property="variety" jdbcType="VARCHAR" />
-    <!-- 厚度单位为mm -->
-    <result column="thickness" property="thickness" jdbcType="DECIMAL" />
-    <!-- 细度单位dtex -->
-    <result column="fineness" property="fineness" jdbcType="DECIMAL" />
-    <!-- 颜色 -->
-    <result column="color" property="color" jdbcType="VARCHAR" />
-    <!-- 功能 -->
-    <result column="function" property="function" jdbcType="VARCHAR" />
-    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
-    <!-- 单价 -->
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <!-- 单位 -->
-    <result column="company" property="company" jdbcType="VARCHAR" />
-    <!-- 数量 -->
-    <result column="number" property="number" jdbcType="INTEGER" />
-    <!-- 集装箱重-改为件重 -->
-    <result column="whole_weight" property="wholeWeight" jdbcType="VARCHAR" />
-    <!-- 产地 -->
-    <result column="origin" property="origin" jdbcType="VARCHAR" />
-    <!-- 存放地 -->
-    <result column="deposit" property="deposit" jdbcType="VARCHAR" />
-    <!-- 仓库 -->
-    <result column="warehouse" property="warehouse" jdbcType="VARCHAR" />
-    <!-- 销售地址 -->
-    <result column="sales_address" property="salesAddress" jdbcType="VARCHAR" />
-    <!-- 说明 -->
-    <result column="explaindesc" property="explaindesc" jdbcType="VARCHAR" />
-    <!-- 实物验证 -->
-    <result column="good_verify" property="goodVerify" jdbcType="INTEGER" />
-    <!-- 质量验证 -->
-    <result column="quality_verify" property="qualityVerify" jdbcType="INTEGER" />
-    <!-- 质保书1无2有 -->
-    <result column="quality_warranty" property="qualityWarranty" jdbcType="INTEGER" />
-    <!-- 议价1有2无 -->
-    <result column="bargaining" property="bargaining" jdbcType="INTEGER" />
-    <!-- 延期保证金 -->
-    <result column="extension_margin" property="extensionMargin" jdbcType="INTEGER" />
-    <!-- 融资保证金 -->
-    <result column="financing_margin" property="financingMargin" jdbcType="INTEGER" />
-    <!-- 供方代运 -->
-    <result column="supplier_delivery" property="supplierDelivery" jdbcType="INTEGER" />
-    <!-- 先行赔付 -->
-    <result column="compensation" property="compensation" jdbcType="INTEGER" />
-    <!-- 视频验货 -->
-    <result column="video_inspection" property="videoInspection" jdbcType="INTEGER" />
-    <!-- 仓费快结 -->
-    <result column="warehouse_charge" property="warehouseCharge" jdbcType="INTEGER" />
-    <!-- 代运补贴 -->
-    <result column="subsidy" property="subsidy" jdbcType="INTEGER" />
-    <!-- 闪电开票 -->
-    <result column="lightning_invoice" property="lightningInvoice" jdbcType="INTEGER" />
-    <!-- 诚信店铺 -->
-    <result column="honest_shop" property="honestShop" jdbcType="INTEGER" />
-    <!-- 在途 -->
-    <result column="on_the_way" property="onTheWay" jdbcType="INTEGER" />
-    <!-- 定向 -->
-    <result column="directional" property="directional" jdbcType="INTEGER" />
-    <!-- 竞价 -->
-    <result column="bidding_price" property="biddingPrice" jdbcType="INTEGER" />
-    <!-- 现货挂牌 -->
-    <result column="spot_listing" property="spotListing" jdbcType="INTEGER" />
-    <!-- 新资源 -->
-    <result column="new" property="new" jdbcType="INTEGER" />
-    <!-- 供应链 -->
-    <result column="supply_chain" property="supplyChain" jdbcType="INTEGER" />
-    <!-- 担保交易 -->
-    <result column="guarantee_pay" property="guaranteePay" jdbcType="INTEGER" />
-    <!-- 纤维纤度 -->
-    <result column="size" property="size" jdbcType="DECIMAL" />
-    <!-- 长度 -->
-    <result column="length" property="length" jdbcType="DECIMAL" />
-    <!-- 断裂长度 -->
-    <result column="break_length" property="breakLength" jdbcType="DECIMAL" />
-    <!-- 延伸率 -->
-    <result column="break_elongation" property="breakElongation" jdbcType="DECIMAL" />
-    <!-- 回潮率 -->
-    <result column="regain" property="regain" jdbcType="DECIMAL" />
-    <!-- 卷曲度 -->
-    <result column="crimp_degree" property="crimpDegree" jdbcType="INTEGER" />
-    <!-- 倍长纤维 -->
-    <result column="double_length" property="doubleLength" jdbcType="DECIMAL" />
-    <!-- 白度 -->
-    <result column="whiteness" property="whiteness" jdbcType="DECIMAL" />
-    <!-- 疵点 -->
-    <result column="defect" property="defect" jdbcType="DECIMAL" />
-    <!-- 油污 -->
-    <result column="oil" property="oil" jdbcType="DECIMAL" />
-    <!-- 残硫物 -->
-    <result column="sulfur" property="sulfur" jdbcType="DECIMAL" />
-    <!-- 灼烧残留物 -->
-    <result column="burn" property="burn" jdbcType="DECIMAL" />
-    <result column="add_time" property="addTime" jdbcType="VARCHAR" />
-    <!-- 1上架2未上架3待审核4审核失败 -->
-    <result column="state" property="state" jdbcType="VARCHAR" />
-    <!-- 库存 -->
-    <result column="stock" property="stock" jdbcType="VARCHAR" />
-    <!-- 销售类别1现货直销2预售3竞价 -->
-    <result column="sale_type" property="saleType" jdbcType="INTEGER" />
+  <resultMap id="BaseResultMap"  type="org.forbes.dal.entity.Product" extends="org.forbes.dal.mapper.ProductMapper.BaseResultMap">
   </resultMap>
   <sql id="Base_Column_List" >
     <include refid="org.forbes.dal.mapper.ProductMapper.Base_Column_List" />
   </sql>
     <!--分页查询商品详细信息-->
-  <select id="PageProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultMap="BaseResultMap">
+  <select id="pageProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultType="org.forbes.comm.vo.ProductAttvalueVo">
     SELECT  p.classify_id,
             p.classify_id,
             p.brand_id,
@@ -221,25 +102,9 @@
     </where>
   </select>
 
-    <!--删除商品信息-->
-  <delete id="deleteProduct">
-    DELETE   f_product,
-			 f_product_attach,
-			 f_specification_value,
-			 f_product_sku,
-			 f_attribute_value
-			 FROM f_product
-			 LEFT JOIN f_product_attach on f_product.id = f_product_attach.data_id
-		     LEFT JOIN f_specification_value on f_product.id = f_specification_value.pro_id
-		     LEFT JOIN f_product_sku on f_product.id = f_product_sku.pro_id
-		     LEFT JOIN f_attribute_value on f_product.id = f_attribute_value.pro_id
-			 WHERE f_product.id=#{id}
-  </delete>
-
     <!--通过id查询商品详细信息-->
   <select id="selectProducts" resultType="org.forbes.comm.vo.ProductAttvalueVo">
-     SELECT
-				p.classify_id,
+     SELECT p.classify_id,
 				p.brand_id,
 				p.shop_id,
 				p.pro_sn,
@@ -318,11 +183,12 @@
 				av.classify_id,
 				av.pro_id,
                 av.attribute_value
-				FROM f_product p JOIN f_product_attach pa on p.id = pa.data_id
-				JOIN f_specification_value sv on p.id = sv.pro_id
-				JOIN f_product_sku pk on p.id = pk.pro_id
-				JOIN f_attribute_value av on p.id = av.pro_id
-				WHERE p.id=#{id,jdbcType=BIGINT}
+				FROM f_product p
+				LEFT JOIN f_product_attach pa on p.id = pa.data_id
+				LEFT JOIN f_specification_value sv on p.id = sv.pro_id
+				LEFT JOIN f_product_sku pk on p.id = pk.pro_id
+				LEFT JOIN f_attribute_value av on p.id = av.pro_id
+				WHERE p.id=1
   </select>
 
 </mapper>

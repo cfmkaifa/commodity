@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,7 +17,6 @@ import lombok.experimental.Accessors;
 @Data
 @ApiModel(description="商品信息")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("f_product")
 public class Product extends BaseEntity{
 
@@ -28,6 +28,7 @@ public class Product extends BaseEntity{
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty("分类id")
     private Long classifyId;
 
     /**
@@ -36,6 +37,7 @@ public class Product extends BaseEntity{
      * Column:    brand_id
      * Nullable:  true
      */
+    @ApiModelProperty("品牌ID")
     private Long brandId;
 
     /**
@@ -44,6 +46,7 @@ public class Product extends BaseEntity{
      * Column:    shop_id
      * Nullable:  true
      */
+    @ApiModelProperty("品牌ID")
     private Long shopId;
 
     /**
@@ -52,6 +55,7 @@ public class Product extends BaseEntity{
      * Column:    pro_sn
      * Nullable:  true
      */
+    @ApiModelProperty("商品编码")
     private String proSn;
 
     /**
@@ -60,6 +64,7 @@ public class Product extends BaseEntity{
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty("商品名称")
     private String name;
 
     /**
@@ -68,6 +73,7 @@ public class Product extends BaseEntity{
      * Column:    variety
      * Nullable:  true
      */
+    @ApiModelProperty("品种")
     private String variety;
 
     /**
@@ -437,7 +443,7 @@ public class Product extends BaseEntity{
     private String addTime;
 
     /**
-     * 1上架2未上架3待审核4审核失败
+     * 1未上架2上架3待审核4审核失败
      * Table:     f_product
      * Column:    state
      * Nullable:  true

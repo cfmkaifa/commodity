@@ -14,7 +14,6 @@ import lombok.experimental.Accessors;
 @Data
 @ApiModel(description="分类规格")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("f_specification_value")
 public class SpecificationValue extends BaseEntity{
     

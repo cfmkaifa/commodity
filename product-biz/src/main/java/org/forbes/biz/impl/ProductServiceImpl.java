@@ -8,6 +8,7 @@ import org.forbes.biz.IProductService;
 import org.forbes.comm.constant.DataColumnConstant;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ProductStausEnum;
+import org.forbes.comm.enums.ProductTypeEnum;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.*;
 import org.forbes.comm.utils.ConvertUtils;
@@ -73,8 +74,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Transactional(rollbackFor=Exception.class)
     public void addProduct(ProductDto productDto) {
         Product product=new Product();
-        BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
-        productDto.setState(ProductStausEnum.FREEZE.getCode());
+        BeanCopier.create(ProductDto.class,Product.class ,false)
+                .copy(productDto, product, null);
+        product.setState(ProductStausEnum.FREEZE.getCode());
         baseMapper.insert(product);
         Long proId = product.getId();
         //添加附件值
@@ -88,7 +90,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productAttach.setCnName(productAttach.getCnName());
                 productAttach.setEnName(productAttach.getEnName());
                 productAttach.setFilePath(productAttach.getFilePath());
-                productAttach.setType(productAttach.getType());
+                productAttach.setType(ProductTypeEnum.BIGPICTURE.getCode());
                 productAttachMapper.insert(productAttach);
             });
         }
@@ -180,7 +182,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productAttach.setCnName(productAttach.getCnName());
                 productAttach.setEnName(productAttach.getEnName());
                 productAttach.setFilePath(productAttach.getFilePath());
-                productAttach.setType(productAttach.getType());
+                productAttach.setType(ProductTypeEnum.BIGPICTURE.getCode());
                 productAttachMapper.insert(productAttach);
             });
         }
@@ -252,8 +254,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteProduct(Long id) {
-        return productExtMapper.deleteProduct(id);
+    public boolean removeById(Serializable id) {
+        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.DATAID, id));
+        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, id));
+        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, id));
+        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, id));
+        boolean delBool =  SqlHelper.delBool(baseMapper.deleteById(id));
+        return delBool;
     }
 
     /**
@@ -267,7 +274,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             throw new ForbesException(BizResultEnum.ENTITY_EMPTY.getBizCode()
                     ,String.format(BizResultEnum.ENTITY_EMPTY.getBizMessage()));
         }
-//        productAttachMapper.delete(new QueryWrapper<ProductAttach>().in(DataColumnConstant.PROID, idList));
+        for (Product p:products){
+            if(p.getState().equals(2)){
+                throw new ForbesException(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode()
+                        ,String.format(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage()));
+            }
+        }
+        productAttachMapper.delete(new QueryWrapper<ProductAttach>().in(DataColumnConstant.DATAID, idList));
         attributeValueMapper.delete(new QueryWrapper<AttributeValue>().in(DataColumnConstant.PROID, idList));
         productSkuMapper.delete(new QueryWrapper<ProductSku>().in(DataColumnConstant.PROID, idList));
         specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().in(DataColumnConstant.PROID, idList));
@@ -287,5 +300,4 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     public ProductAttvalueVo selectProducts(Long id) {
         return productExtMapper.selectProducts(id);
     }
-
 }

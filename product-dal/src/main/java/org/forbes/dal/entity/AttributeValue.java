@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
 @Data
 @ApiModel(description="商品属性对象")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("f_attribute_value")
 public class AttributeValue extends BaseEntity{
 

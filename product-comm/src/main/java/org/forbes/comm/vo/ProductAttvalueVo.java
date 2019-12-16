@@ -31,14 +31,121 @@ public class ProductAttvalueVo implements Serializable{
 
     private static final long serialVersionUID = 8848645335864724946L;
 
-    @ApiModelProperty("商品附件")
-    List<ProductAttachDto> productAttachDtos;
+    /**
+     * 数据ID
+     * Table:     f_product_attach
+     * Column:    data_id
+     * Nullable:  true
+     */
+    @ApiModelProperty("数据ID")
+    private Long dataId;
 
-    @ApiModelProperty("商品属性")
-    List<AttributeValueDto> attributeValueDtos;
+    /**
+     * 后缀
+     * Table:     f_product_attach
+     * Column:    suffix
+     * Nullable:  true
+     */
+    @ApiModelProperty("后缀")
+    private String suffix;
 
-    @ApiModelProperty("商品库存")
-    List<ProductSkuDto> productSkuDtos;
+    /**
+     * 中文名称
+     * Table:     f_product_attach
+     * Column:    cn_name
+     * Nullable:  true
+     */
+    @ApiModelProperty("中文名称")
+    private String cnName;
+
+    /**
+     * Table:     f_product_attach
+     * Column:    en_name
+     * Nullable:  true
+     */
+    @ApiModelProperty("英文名")
+    private String enName;
+
+    /**
+     * 文件地址
+     * Table:     f_product_attach
+     * Column:    file_path
+     * Nullable:  true
+     */
+    @ApiModelProperty("文件地址")
+    private String filePath;
+
+    /**
+     * 0-大图，1-小图，3-中图
+     * Table:     f_product_attach
+     * Column:    type
+     * Nullable:  true
+     */
+    @ApiModelProperty("0-大图，1-小图，3-中图")
+    private String type;
+
+    /**
+     * Table:     f_attribute_value
+     * Column:    orders_sort
+     * Nullable:  true
+     */
+    @ApiModelProperty("排序")
+    private Integer ordersSort;
+
+    /**
+     * 属性值
+     * Table:     f_attribute_value
+     * Column:    attribute_value
+     * Nullable:  true
+     */
+    @ApiModelProperty("属性值")
+    private String attributeValue;
+
+
+    /**
+     * 商品ID
+     * Table:     f_product_sku
+     * Column:    pro_id
+     * Nullable:  true
+     */
+    @ApiModelProperty("商品ID")
+    private Long proId;
+
+    /**
+     * 编码
+     * Table:     f_product_sku
+     * Column:    sku_sn
+     * Nullable:  true
+     */
+    @ApiModelProperty("编码")
+    private String skuSn;
+
+    /**
+     * 销售价
+     * Table:     f_product_sku
+     * Column:    sale_price
+     * Nullable:  true
+     */
+    @ApiModelProperty("销售价")
+    private BigDecimal salePrice;
+
+    /**
+     * 市场价
+     * Table:     f_product_sku
+     * Column:    market_price
+     * Nullable:  true
+     */
+    @ApiModelProperty("市场价")
+    private BigDecimal marketPrice;
+
+    /**
+     * 成本价
+     * Table:     f_product_sku
+     * Column:    cost_price
+     * Nullable:  true
+     */
+    @ApiModelProperty("成本价")
+    private BigDecimal costPrice;
 
     /**
      * id
@@ -519,7 +626,7 @@ public class ProductAttvalueVo implements Serializable{
      * Column:    state
      * Nullable:  true
      */
-    @ApiModelProperty("1上架2未上架3待审核4审核失败")
+    @ApiModelProperty("1未上架2上架3待审核4审核失败")
     private String state;
 
     /**
