@@ -212,14 +212,14 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/update-product-state",method = RequestMethod.PUT)
+    @RequestMapping(value = "/product-state",method = RequestMethod.PUT)
     @ApiOperation("上架/下架商品")
     @ApiImplicitParam(value="state",name="商品状态",required=false)
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.COMM_ACTION_ERROR_MSG),
             @ApiResponse(code=200,message = Result.COMM_ACTION_MSG)
     })
-    public Result<Product> updateProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
+    public Result<Product> ProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
         Result<Product> result=new Result<Product>();
         Product product = productService.getById(id);
         if(ConvertUtils.isEmpty(product)){
