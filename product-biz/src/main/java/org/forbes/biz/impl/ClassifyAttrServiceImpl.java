@@ -1,7 +1,10 @@
 package org.forbes.biz.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import org.forbes.biz.IClasAttrService;
+import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.comm.model.ClassifyAttributeDto;
@@ -57,5 +60,24 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
                 clasAttrMapper.insert(classifyAttribute);
             });
         }
+    }
+
+    /***
+     * 方法概述: 删除属性
+     * @param
+     * @return
+     * @创建人 xfx
+     * @创建时间 2019/12/18
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     *
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteAttrbute(Long id) {
+        QueryWrapper<ClassifyAttribute> qw=new  QueryWrapper<ClassifyAttribute>();
+        clasAttrMapper.delete(qw.eq(PermsCommonConstant.CLASSIFY_ID,id));
+        boolean delBool =  SqlHelper.delBool(baseMapper.deleteById(id));
+        return delBool;
     }
 }

@@ -140,7 +140,7 @@ public class ProductClassifyController {
             @ApiResponse(code=500,message= Result.DEL_ERROR_CLASSIFY),
             @ApiResponse(code=200,message = Result.DEL_CLASSIFY)
     })
-    public Result<ProductClassify> delGoodsClassify(@RequestParam(name = "id",required =true)String id){
+    public Result<ProductClassify> delGoodsClassify(@RequestParam(name = "id",required =true)Long id){
         log.debug("==================id:"+JSON.toJSONString(id));
         Result<ProductClassify> result=new Result<ProductClassify>();
         ProductClassify productClassify=productClassifyService.getById(id);
@@ -165,10 +165,16 @@ public class ProductClassifyController {
             return result;
         }
         //禁用状态，可删除相关分类和规格
-        classifyAttrService.remove(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.CLASSIFY_ID,productClassify.getId()));
-        proSpecificService.remove(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_CLASSIFY_ID,productClassify.getId()));
-        productClassifyService.removeById(id);
-        return result;
+        try {
+            classifyAttrService.deleteAttrbute(id);
+            proSpecificService.deleteProductSpecification(id);
+            productClassifyService.removeById(id);
+        }catch (ForbesException e){
+            result.setBizCode(e.getErrorCode());
+            result.setMessage(e.getErrorMsg());
+            return result;
+        }
+            return result;
     }
 
     /***

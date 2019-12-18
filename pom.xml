@@ -176,6 +176,12 @@
 		    <groupId>io.github.openfeign</groupId>
 		    <artifactId>feign-jackson</artifactId>
 		</dependency>
+	  <!--doubbo-->
+	  <dependency>
+		  <groupId>org.apache.dubbo</groupId>
+		  <artifactId>dubbo-spring-boot-starter</artifactId>
+		  <version>2.7.4.1</version>
+	  </dependency>
   </dependencies>
   <dependencyManagement>
   	<dependencies>
