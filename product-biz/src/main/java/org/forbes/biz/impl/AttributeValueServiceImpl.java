@@ -7,10 +7,12 @@ import org.forbes.dal.entity.AttributeValue;
 import org.forbes.dal.entity.Product;
 import org.forbes.dal.mapper.AttributeValueMapper;
 import org.forbes.dal.mapper.ProductMapper;
+import org.springframework.stereotype.Service;
 
 /**
  * @author lzw
  * @date 2019/12/14 17:56
  */
+@Service
 public class AttributeValueServiceImpl extends ServiceImpl<AttributeValueMapper, AttributeValue> implements IAttributeValueService {
 }

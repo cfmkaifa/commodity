@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -82,6 +83,7 @@ public class Product extends BaseEntity{
      * Column:    thickness
      * Nullable:  true
      */
+    @ApiModelProperty("厚度单位为mm")
     private BigDecimal thickness;
 
     /**
@@ -90,6 +92,7 @@ public class Product extends BaseEntity{
      * Column:    fineness
      * Nullable:  true
      */
+    @ApiModelProperty("细度单位dtex")
     private BigDecimal fineness;
 
     /**
@@ -98,6 +101,7 @@ public class Product extends BaseEntity{
      * Column:    color
      * Nullable:  true
      */
+    @ApiModelProperty("颜色")
     private String color;
 
     /**
@@ -425,6 +429,7 @@ public class Product extends BaseEntity{
      * Column:    sulfur
      * Nullable:  true
      */
+    @ApiModelProperty("残硫物")
     private BigDecimal sulfur;
 
     /**
@@ -433,6 +438,7 @@ public class Product extends BaseEntity{
      * Column:    burn
      * Nullable:  true
      */
+    @ApiModelProperty("灼烧残留物")
     private BigDecimal burn;
 
     /**
@@ -440,6 +446,7 @@ public class Product extends BaseEntity{
      * Column:    add_time
      * Nullable:  true
      */
+    @ApiModelProperty("添加时间")
     private String addTime;
 
     /**
@@ -448,6 +455,7 @@ public class Product extends BaseEntity{
      * Column:    state
      * Nullable:  true
      */
+    @ApiModelProperty("1未上架2上架3待审核4审核失败")
     private String state;
 
     /**
@@ -456,6 +464,7 @@ public class Product extends BaseEntity{
      * Column:    stock
      * Nullable:  true
      */
+    @ApiModelProperty("库存")
     private String stock;
 
     /**
@@ -464,5 +473,22 @@ public class Product extends BaseEntity{
      * Column:    sale_type
      * Nullable:  true
      */
+    @ApiModelProperty("销售类别1现货直销2预售3竞价")
     private Integer saleType;
+
+    @ApiModelProperty(value = "商品附件")
+    @TableField(exist = false)
+    List<ProductAttach> productAttachs;
+
+    @ApiModelProperty(value = "商品库存")
+    @TableField(exist = false)
+    List<ProductSku> productSkus;
+
+    @ApiModelProperty(value = "商品规格")
+    @TableField(exist = false)
+    List<SpecificationValue> specificationValues;
+
+    @ApiModelProperty(value = "商品属性")
+    @TableField(exist = false)
+    List<AttributeValue> attributeValues;
 }

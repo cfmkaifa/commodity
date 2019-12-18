@@ -19,13 +19,15 @@ import org.forbes.comm.model.ProductDto;
 import org.forbes.comm.model.ProductPageDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.ProductAttvalueVo;
+import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
-import org.forbes.dal.entity.Product;
+import org.forbes.dal.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author lzw
@@ -39,6 +41,18 @@ public class ProductController {
 
     @Autowired
     IProductService productService;
+    //商品附件
+    @Autowired
+    IProductAttachService  productAttachService;
+    //商品库存
+    @Autowired
+    IProductSkuService productSkuService;
+    //商品规格
+    @Autowired
+    ISpecificationValueService specificationValueService;
+    //商品属性
+    @Autowired
+    IAttributeValueService attributeValueService;
 
     /***
      * selectProduct方法概述:分页查询商品信息
@@ -55,11 +69,11 @@ public class ProductController {
             @ApiResponse(code=200,message = Result.SELECT_PRODUCT),
             @ApiResponse(code=500, message = Result.SELECT_ERROR_PRODUCT)
     })
-    public Result<IPage<ProductAttvalueVo>> pageProduct(BasePageDto basePageDto,ProductPageDto productPageDto){
+    public Result<IPage<ProductVo>> pageProduct(BasePageDto basePageDto, ProductPageDto productPageDto){
         log.debug("=============="+ JSON.toJSONString(basePageDto));
-        Result<IPage<ProductAttvalueVo>> result=new Result<IPage<ProductAttvalueVo>>();
-        IPage<ProductAttvalueVo> page = new Page<ProductAttvalueVo>(basePageDto.getPageNo(),basePageDto.getPageSize());
-        IPage<ProductAttvalueVo> pageUsers =  productService.pageProduct(page, productPageDto);
+        Result<IPage<ProductVo>> result=new Result<IPage<ProductVo>>();
+        IPage<ProductVo> page = new Page<ProductVo>(basePageDto.getPageNo(),basePageDto.getPageSize());
+        IPage<ProductVo> pageUsers =  productService.pageProduct(page, productPageDto);
         result.setResult(pageUsers);
         return result;
     }
@@ -162,12 +176,7 @@ public class ProductController {
     public Result<Boolean> deleteProduct(@RequestParam(name="id",required=true) Long id) {
         Result<Boolean> result = new Result<Boolean>();
         Product product = productService.getById(id);
-        if(ConvertUtils.isEmpty(product)){
-            result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
-            result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
-            return result;
-        }
-        if(product.getState().equals(2)){
+        if(product.getState().equals(ProductStausEnum.NORMAL.getCode())){
             result.setBizCode(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode());
             result.setMessage(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage());
             return result;
@@ -212,14 +221,14 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/product-state",method = RequestMethod.PUT)
+    @RequestMapping(value = "/upp-or-low-shelf",method = RequestMethod.PUT)
     @ApiOperation("上架/下架商品")
     @ApiImplicitParam(value="state",name="商品状态",required=false)
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.COMM_ACTION_ERROR_MSG),
             @ApiResponse(code=200,message = Result.COMM_ACTION_MSG)
     })
-    public Result<Product> ProductState(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
+    public Result<Product> uppOrLowShelf(@RequestParam(value="id",required=true)Long id,@RequestParam(value = "state",required = true)String state){
         Result<Product> result=new Result<Product>();
         Product product = productService.getById(id);
         if(ConvertUtils.isEmpty(product)){
@@ -247,7 +256,7 @@ public class ProductController {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    @RequestMapping(value = "/select-products", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-by-id", method = RequestMethod.GET)
     @ApiOperation("通过商品id查询商品信息")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id",value = "商品id")
@@ -256,10 +265,31 @@ public class ProductController {
             @ApiResponse(code=500,message= Result.SELECT_ERROR_PRODUCT),
             @ApiResponse(code=200,message = Result.SELECT_PRODUCT)
     })
-    public Result<ProductAttvalueVo> selectProducts(@RequestParam(value = "id",required = true)Long id){
-           Result<ProductAttvalueVo> result=new Result<ProductAttvalueVo>();
-           ProductAttvalueVo pra=productService.selectProducts(id);
-           result.setResult(pra);
+    public Result<Product> getById(@RequestParam(value = "id",required = true)Long id){
+           Result<Product> result=new Result<Product>();
+            //查询商品信息
+            Product product = productService.getById(id);
+            //查询商品附件信息
+            List<ProductAttach> productAttachs = productAttachService.list(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.DATAID,id));
+            if(ConvertUtils.isNotEmpty(productAttachs)){
+                product.setProductAttachs(productAttachs);
+            }
+            //查询商品库存信息
+            List<ProductSku> ProductSkus = productSkuService.list(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID,id));
+            if(ConvertUtils.isNotEmpty(ProductSkus)){
+                product.setProductSkus(ProductSkus);
+            }
+            //查询商品规格信息
+            List<SpecificationValue> specificationValues = specificationValueService.list(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID,id));
+            if(ConvertUtils.isNotEmpty(specificationValues)){
+                product.setSpecificationValues(specificationValues);
+            }
+            //查询商品属性信息
+            List<AttributeValue> attributeValues = attributeValueService.list(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID,id));
+            if(ConvertUtils.isNotEmpty(attributeValues)){
+                product.setAttributeValues(attributeValues);
+            }
+           result.setResult(product);
            return result;
     }
 

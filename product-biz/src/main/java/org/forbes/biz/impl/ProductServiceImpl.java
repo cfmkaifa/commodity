@@ -49,7 +49,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     SpecificationValueMapper specificationValueMapper;
 
     /***
-     * selectProduct方法慨述:分页查询用户信息
+     * selectProduct方法慨述:分页查询商品信息
      * @param page
      * @param productPageDto
      * @return IPage < ProductVo>
@@ -58,7 +58,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public IPage<ProductAttvalueVo> pageProduct(IPage<ProductAttvalueVo> page, ProductPageDto productPageDto) {
+    public IPage<ProductVo> pageProduct(IPage<ProductVo> page, ProductPageDto productPageDto) {
         return productExtMapper.pageProduct(page,productPageDto);
     }
 
@@ -270,12 +270,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public boolean removeByIds(Collection<? extends Serializable> idList) {
         List<Product> products =  baseMapper.selectBatchIds(idList);
-        if(ConvertUtils.isEmpty(products)){
-            throw new ForbesException(BizResultEnum.ENTITY_EMPTY.getBizCode()
-                    ,String.format(BizResultEnum.ENTITY_EMPTY.getBizMessage()));
-        }
         for (Product p:products){
-            if(p.getState().equals(2)){
+            long classIdCount1 =  products.stream().filter(specificationValueDto -> !p.getState().equals(ProductStausEnum.NORMAL.getCode())).count();
+            if(classIdCount1 > 0){
                 throw new ForbesException(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode()
                         ,String.format(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage()));
             }
@@ -288,16 +285,4 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return delBool;
     }
 
-    /***
-     * selectProducts方法概述:通过id查询商品详细信息
-     * @param
-     * @return
-     * @创建人 Tom
-     * @创建时间 2019/12/16 9:52
-     * @修改人 (修改了该文件，请填上修改人的名字)
-     * @修改日期 (请填上修改该文件时的日期)
-     */
-    public ProductAttvalueVo selectProducts(Long id) {
-        return productExtMapper.selectProducts(id);
-    }
 }

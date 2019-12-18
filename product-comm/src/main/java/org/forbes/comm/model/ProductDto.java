@@ -80,7 +80,7 @@ public class ProductDto implements Serializable{
      * Column:    pro_sn
      * Nullable:  true
      */
-    @ApiModelProperty(value = "商品编码")
+    @ApiModelProperty(value = "商品编码",required = true)
     private String proSn;
 
     /**
@@ -89,7 +89,7 @@ public class ProductDto implements Serializable{
      * Column:    name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "商品名称",required = true)
     private String name;
 
     /**

@@ -18,7 +18,7 @@ import org.forbes.dal.entity.Product;
 public interface IProductService extends IService<Product> {
 
     /***
-     * selectProduct方法慨述:分页查询用户信息列表
+     * selectProduct方法慨述:分页查询商品信息
      * @param page
      * @param productPageDto
      * @return IPage<ProductVo>
@@ -27,7 +27,7 @@ public interface IProductService extends IService<Product> {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    IPage<ProductAttvalueVo> pageProduct(IPage<ProductAttvalueVo> page, ProductPageDto productPageDto);
+    IPage<ProductVo> pageProduct(IPage<ProductVo> page, ProductPageDto productPageDto);
 
     /***
      * addProduct方法概述:新增商品信息
@@ -50,16 +50,5 @@ public interface IProductService extends IService<Product> {
      * @修改日期 (请填上修改该文件时的日期)
      */
     void updateProduct(ProductDto productDto);
-
-    /***
-     * selectProducts方法概述:通过id查询商品详细信息
-     * @param
-     * @return
-     * @创建人 Tom
-     * @创建时间 2019/12/16 9:52
-     * @修改人 (修改了该文件，请填上修改人的名字)
-     * @修改日期 (请填上修改该文件时的日期)
-     */
-    ProductAttvalueVo selectProducts(Long id);
 
 }
