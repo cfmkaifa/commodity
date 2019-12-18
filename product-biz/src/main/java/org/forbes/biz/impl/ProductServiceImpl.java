@@ -270,12 +270,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public boolean removeByIds(Collection<? extends Serializable> idList) {
         List<Product> products =  baseMapper.selectBatchIds(idList);
-        for (Product p:products){
-            long classIdCount1 =  products.stream().filter(specificationValueDto -> !p.getState().equals(ProductStausEnum.NORMAL.getCode())).count();
-            if(classIdCount1 > 0){
-                throw new ForbesException(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode()
-                        ,String.format(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage()));
-            }
+        long classIdCount1 =  products.stream().filter(p -> !p.getState().equals(ProductStausEnum.NORMAL.getCode())).count();
+        if(classIdCount1 > 0){
+            throw new ForbesException(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizCode()
+                    ,String.format(BizResultEnum.PRODUCT_SHELVES_STATUS.getBizMessage()));
         }
         productAttachMapper.delete(new QueryWrapper<ProductAttach>().in(DataColumnConstant.DATAID, idList));
         attributeValueMapper.delete(new QueryWrapper<AttributeValue>().in(DataColumnConstant.PROID, idList));
