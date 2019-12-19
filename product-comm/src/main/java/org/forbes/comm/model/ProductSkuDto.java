@@ -46,7 +46,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty("分类ID")
+    @ApiModelProperty(value = "分类ID",required = true)
     private Long classifyId;
 
     /**
@@ -55,7 +55,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty(value = "商品ID",required = true)
     private Long proId;
 
     /**
@@ -64,7 +64,7 @@ public class ProductSkuDto implements Serializable {
      * Column:    sku_sn
      * Nullable:  true
      */
-    @ApiModelProperty("编码")
+    @ApiModelProperty(value = "编码",required = true)
     private String skuSn;
 
     /**

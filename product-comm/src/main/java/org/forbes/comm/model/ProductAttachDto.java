@@ -41,7 +41,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    data_id
      * Nullable:  true
      */
-    @ApiModelProperty("数据ID")
+    @ApiModelProperty("数据ID(商品id)")
     private Long dataId;
 
     /**
@@ -68,7 +68,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    cn_name
      * Nullable:  true
      */
-    @ApiModelProperty("中文名称")
+    @ApiModelProperty(value = "中文名称",required = true)
     private String cnName;
 
     /**

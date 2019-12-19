@@ -43,4 +43,47 @@
           <version>0.0.1-SNAPSHOT</version>
       </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- 打包跳过测试 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>org.forbes.ForbesApplication</mainClass>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.forbes</groupId>
+            <artifactId>product-comm</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${parentPath}product-comm/target/product-comm-0.0.1-SNAPSHOT.jar</systemPath>
+          </dependency>
+          <dependency>
+            <groupId>org.forbes</groupId>
+            <artifactId>product-dal</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${parentPath}product-dal/target/product-dal-0.0.1-SNAPSHOT.jar</systemPath>
+          </dependency>
+          <dependency>
+            <groupId>org.forbes</groupId>
+            <artifactId>product-biz</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${parentPath}product-biz/target/product-biz-0.0.1-SNAPSHOT.jar</systemPath>
+          </dependency>
+          <dependency>
+            <groupId>org.forbes</groupId>
+            <artifactId>product-config</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${parentPath}product-config/target/product-config-0.0.1-SNAPSHOT.jar</systemPath>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
 </project>
