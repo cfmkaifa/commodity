@@ -22,7 +22,7 @@ public class ProductClassify extends BaseEntity {
      * Column:    classify_sn
      * Nullable:  true
      */
-    @ApiModelProperty(value = "分类编码")
+    @ApiModelProperty(value = "分类编码",required = true)
     private String classifySn;
 
     /**
