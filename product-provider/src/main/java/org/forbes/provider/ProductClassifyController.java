@@ -219,7 +219,7 @@ public class ProductClassifyController {
 
 
     /***
-     * 方法概述:修改商品分类
+     * 方法概述:编辑商品分类
      * @param productClassify
      * @return ProductClassify
      * @创建人 xfx
@@ -332,6 +332,23 @@ public class ProductClassifyController {
         }
         List<ProductClassify> productClassifies=productClassifyService.list(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.PARENT_ID,id));
         result.setResult(productClassifies);
+        return result;
+    }
+
+    @ApiOperation("校验分类编码是否唯一")
+    @RequestMapping(value = "/unique",method = RequestMethod.GET)
+    @ApiResponses(value = {
+            @ApiResponse(code=500,message = Result.CLASSIFY_CHECK_ERROR),
+            @ApiResponse(code=200,message = Result.CLASSIFY_CHECK)
+    })
+    public Result<Boolean> check(@RequestParam(value = "classifySn")String classifySn){
+        Result<Boolean> result=new Result<Boolean>();
+        int count=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.CLASSIFY_SN,classifySn));
+        if(count>0){
+            result.setBizCode(BizResultEnum.CLASSIFY_SN_EXIST.getBizCode());
+            result.setMessage(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage());
+            return result;
+        }
         return result;
     }
 }

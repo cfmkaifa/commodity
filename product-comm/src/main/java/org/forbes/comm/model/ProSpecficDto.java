@@ -29,7 +29,7 @@ public class ProSpecficDto implements Serializable{
     /**
      * id
      */
-    @ApiModelProperty(value = "规格id",required = true)
+    @ApiModelProperty(value = "规格id")
     @NotEmpty(message = "规格id不能为空")
     private Long id;
 

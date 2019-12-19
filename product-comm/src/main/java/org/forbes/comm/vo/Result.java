@@ -111,6 +111,10 @@ public class Result<T> implements Serializable {
 	public static final  String SYS_GOOD_DETAIL="查询商品详情成功";
 	public static final  String SYS_GOOD_DETAIL_ERROR="查询商品详情失败";
 
+	/********商品分类编码***********/
+	public static final  String CLASSIFY_CHECK="商品分类编码校验成功";
+	public static final  String CLASSIFY_CHECK_ERROR="商品分类编码校验失败";
+
 	/**
 	 * 返回代码
 	 */

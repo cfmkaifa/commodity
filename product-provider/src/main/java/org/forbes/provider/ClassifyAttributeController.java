@@ -66,7 +66,7 @@ public class ClassifyAttributeController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.CLASSIF_ATTR_ERROR)
     })
-    public Result<IPage<ClassifyAttribute>> page(@RequestParam(value = "id",required = true)Long id, BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
+    public Result<IPage<ClassifyAttribute>> page(@RequestParam(value = "id")Long id, BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
         log.debug("=============basePageDto:"+basePageDto);
         Result<IPage<ClassifyAttribute>> result=new Result<IPage<ClassifyAttribute>>();
         QueryWrapper<ClassifyAttribute> qw=new QueryWrapper<>();

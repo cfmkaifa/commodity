@@ -61,7 +61,7 @@ public class ProductSpecificationController {
             @ApiResponse(code = 200,message = Result.PAGE_PRO_SPEC),
             @ApiResponse(code=500,message = Result.PAGE_PRO_SPEC_ERROR)
     })
-    public Result<IPage<ProductSpecification>> page(@RequestParam(value = "id",required = true)Long id, BasePageDto basePageDto,ProSpecficDto proSpecficDto){
+    public Result<IPage<ProductSpecification>> page(@RequestParam(value = "id")Long id, BasePageDto basePageDto,ProSpecficDto proSpecficDto){
         log.debug("================basePageDto:"+basePageDto);
         Result<IPage<ProductSpecification>> result=new Result<>();
         QueryWrapper<ProductSpecification> qw=new QueryWrapper<>();
