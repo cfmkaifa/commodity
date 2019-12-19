@@ -85,7 +85,7 @@ public class ClassifyAttributeController {
     }
 
     /***
-     * batchAdd方法概述:批量添加商品分类
+     * batchAdd方法概述:批量添加商品分类属性
      * @param classAttrDto
      * @return org.forbes.comm.vo.Result<org.forbes.comm.model.ClassAttrDto>
      * @创建人 xfx
@@ -94,7 +94,7 @@ public class ClassifyAttributeController {
      * @修改日期 (请填上修改该文件时的日期)
      */
     @RequestMapping(value = "/batch-add",method = RequestMethod.POST)
-    @ApiOperation("批量添加商品分类")
+    @ApiOperation("批量添加商品分类属性")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.BATCH_ADD_ERROR_MSG),
             @ApiResponse(code=200,message = Result.BATCH_ADD_MSG)

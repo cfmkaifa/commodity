@@ -8,6 +8,7 @@ import org.forbes.comm.constant.PermsCommonConstant;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ClassAttrDto;
 import org.forbes.comm.model.ClassifyAttributeDto;
+import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.mapper.ClassifyAttributeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
     public void batchAdd(ClassAttrDto classAttrDto) {
         List<ClassifyAttributeDto> attrnames=classAttrDto.getAttrnames();
         //判断是否包含相同分类属性名称
-        if(attrnames.size()>0){
+        if(ConvertUtils.isNotEmpty(attrnames)){
             Long classifyId=classAttrDto.getClassifyId();
             Map<String,List<ClassifyAttributeDto>> tempMap = attrnames.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
             tempMap.forEach((namestr,keyList) -> {
