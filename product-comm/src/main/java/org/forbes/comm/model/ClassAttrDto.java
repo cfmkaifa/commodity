@@ -34,7 +34,7 @@ public class ClassAttrDto implements Serializable{
     /**
      *分类属性名称集合
      **/
-    @ApiModelProperty("分类属性名称集合")
+    @ApiModelProperty(value = "分类属性名称集合",required = true)
     @NotEmpty(message = "分类属性名称不能为空")
     private List<ClassifyAttributeDto> attrnames;
 

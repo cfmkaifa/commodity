@@ -10,6 +10,8 @@ import org.forbes.biz.IClasAttrService;
 import org.forbes.biz.IProSpecificService;
 import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.PermsCommonConstant;
+import org.forbes.comm.constant.SaveValid;
+import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.exception.ForbesException;
@@ -20,6 +22,7 @@ import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
 import org.forbes.dal.entity.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -96,7 +99,7 @@ public class ProductClassifyController {
             @ApiResponse(code=500,message= Result.ADD_ERROR_CLASSIFY),
             @ApiResponse(code=200,message = Result.ADD_CLASSIFY)
     })
-    public Result<ProductClassifyDto> addGoodsClassify(@RequestBody ProductClassifyDto productClassifyDto){
+    public Result<ProductClassifyDto> addGoodsClassify( @RequestBody @Validated(value = SaveValid.class)ProductClassifyDto productClassifyDto){
         log.debug("============productClassifyDto:"+JSON.toJSONString(productClassifyDto));
         Result<ProductClassifyDto> result=new Result<ProductClassifyDto>();
         String name=productClassifyDto.getName();//获取商品分类名称
@@ -216,7 +219,7 @@ public class ProductClassifyController {
 
 
     /***
-     * 方法概述:修改商品分类名称或者编码等
+     * 方法概述:修改商品分类
      * @param productClassify
      * @return ProductClassify
      * @创建人 xfx
@@ -230,7 +233,7 @@ public class ProductClassifyController {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_NAME),
             @ApiResponse(code=200,message = Result.UP_CLASSIFY_NAME)
     })
-    public Result<ProductClassify> editProductClassify(@RequestBody ProductClassify productClassify){
+    public Result<ProductClassify> editProductClassify(@RequestBody  @Validated(value = UpdateValid.class) ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
         Result<ProductClassify> result=new Result<ProductClassify>();
         String name=productClassify.getName();

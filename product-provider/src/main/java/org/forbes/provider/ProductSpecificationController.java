@@ -9,6 +9,7 @@ import org.forbes.biz.IProSpecficService;
 import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
+import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.ClassifyStausEnum;
 import org.forbes.comm.model.BasePageDto;
@@ -20,6 +21,7 @@ import org.forbes.config.exception.ForbesException;
 import org.forbes.dal.entity.ProductClassify;
 import org.forbes.dal.entity.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -86,7 +88,7 @@ public class ProductSpecificationController {
             @ApiResponse(code = 200,message = Result.ADD_PAGE_PRO_SPEC),
             @ApiResponse(code = 500,message = Result.ADD_PAGE_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecBatchDto> add(@RequestBody ProSpecBatchDto proSpecBatchDto){
+    public Result<ProSpecBatchDto> add(@RequestBody @Validated(value = SaveValid.class) ProSpecBatchDto proSpecBatchDto){
         Result<ProSpecBatchDto> result=new Result<ProSpecBatchDto>();
         ProductClassify productClassify=productClassifyService.getById(proSpecBatchDto.getClassifyId());
         if (ConvertUtils.isEmpty(productClassify)){
@@ -147,7 +149,7 @@ public class ProductSpecificationController {
             @ApiResponse(code = 200,message = Result.UPD_PRO_SPEC),
             @ApiResponse(code=500,message = Result.UPD_PRO_SPEC_ERROR)
     })
-    public Result<ProSpecficDto> update(@RequestBody ProSpecficDto proSpecficDto){
+    public Result<ProSpecficDto> update(@RequestBody @Validated(value = SaveValid.class) ProSpecficDto proSpecficDto){
         Result<ProSpecficDto> result=new Result<ProSpecficDto>();
         ProductSpecification productSpecification=proSpecficService.getById(proSpecficDto.getId());
         if(ConvertUtils.isEmpty(productSpecification)){

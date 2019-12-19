@@ -28,7 +28,7 @@ public class ClassifyAttributeDto implements Serializable {
     /**
      * id
      */
-    @ApiModelProperty("分类属性id")
+    @ApiModelProperty(value = "分类属性id",required = true)
     @NotEmpty(message = "分类属性不为空")
     private Long id;
     /**

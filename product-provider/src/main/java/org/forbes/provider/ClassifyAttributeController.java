@@ -13,6 +13,8 @@ import org.forbes.biz.IClasAttrService;
 import org.forbes.biz.IProductClassifyService;
 import org.forbes.comm.constant.CommonConstant;
 import org.forbes.comm.constant.PermsCommonConstant;
+import org.forbes.comm.constant.SaveValid;
+import org.forbes.comm.constant.UpdateValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ClassAttrDto;
@@ -24,6 +26,7 @@ import org.forbes.config.exception.ForbesException;
 import org.forbes.dal.entity.ClassifyAttribute;
 import org.forbes.dal.entity.ProductClassify;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -96,7 +99,7 @@ public class ClassifyAttributeController {
             @ApiResponse(code=500,message = Result.BATCH_ADD_ERROR_MSG),
             @ApiResponse(code=200,message = Result.BATCH_ADD_MSG)
     })
-    public Result<ClassAttrDto> batchAdd(@RequestBody ClassAttrDto classAttrDto){
+    public Result<ClassAttrDto> batchAdd(@RequestBody @Validated(value = SaveValid.class) ClassAttrDto classAttrDto){
         log.debug("=============classAttrDto:"+JSON.toJSONString(classAttrDto));
         Result<ClassAttrDto> result=new Result<ClassAttrDto>();
         ProductClassify productClassify=productClassifyService.getById(classAttrDto.getClassifyId());
@@ -132,7 +135,7 @@ public class ClassifyAttributeController {
             @ApiResponse(code = 500,message =Result.UPD_ATTR_ERROR_MSG),
             @ApiResponse(code=200,message = Result.UPD_ATTR_MSG)
     })
-    public Result<ClassifyAttribute> updClassAttr(@RequestBody ClassifyAttributeDto classifyAttributeDto){
+    public Result<ClassifyAttribute> updClassAttr(@RequestBody @Validated(value = UpdateValid.class) ClassifyAttributeDto classifyAttributeDto){
         log.debug("=============classifyAttributeDto:"+JSON.toJSONString(classifyAttributeDto));
         Result<ClassifyAttribute> result=new Result<ClassifyAttribute>();
         ClassifyAttribute classifyAttribute=clasAttrService.getById(classifyAttributeDto.getId());

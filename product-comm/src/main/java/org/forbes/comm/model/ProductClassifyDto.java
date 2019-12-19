@@ -32,7 +32,7 @@ public class ProductClassifyDto  implements Serializable{
     /**
      *  id
      */
-    @ApiModelProperty(value ="主键")
+    @ApiModelProperty(value ="主键",example = "0")
     private Long id;
 
     /**
@@ -64,14 +64,14 @@ public class ProductClassifyDto  implements Serializable{
     /**
      * 分类编码
      */
-    @ApiModelProperty(value ="分类编码")
+    @ApiModelProperty(value ="分类编码",required = true)
     @NotEmpty(message = "分类编码不能为空")
     private String classifySn;
 
     /**
      * 分类名称
      */
-    @ApiModelProperty(value ="分类名称")
+    @ApiModelProperty(value ="分类名称",required = true)
     @NotEmpty(message = "分类名称不能为空")
     private String name;
 
@@ -84,14 +84,14 @@ public class ProductClassifyDto  implements Serializable{
     /**
      * 等级
      */
-    @ApiModelProperty(value ="等级")
+    @ApiModelProperty(value ="等级",required = true)
     @NotEmpty(message = "等级不能为空")
     private Long level;
 
     /**
      * 状态:0未启用1-启用
      */
-    @ApiModelProperty(value ="状态")
+    @ApiModelProperty(value ="状态",required = true)
     private Long state;
 
     @ApiModelProperty("添加分类关联分类属性信息")

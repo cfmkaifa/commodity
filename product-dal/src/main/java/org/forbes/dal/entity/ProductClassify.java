@@ -57,6 +57,6 @@ public class ProductClassify extends BaseEntity {
      * Column:    state
      * Nullable:  true
      */
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态:0未启用1-启用")
     private String state;
 }
