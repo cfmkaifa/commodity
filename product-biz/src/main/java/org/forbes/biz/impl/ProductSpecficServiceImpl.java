@@ -5,6 +5,7 @@ import org.forbes.biz.IProSpecficService;
 import org.forbes.comm.exception.ForbesException;
 import org.forbes.comm.model.ProSpecBatchDto;
 import org.forbes.comm.model.ProSpecficDto;
+import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.dal.entity.ProductSpecification;
 import org.forbes.dal.mapper.ProductSpecificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationM
     public void batchAdd(ProSpecBatchDto proSpecBatchDto) {
         List<ProSpecficDto> proSpecficDtos=proSpecBatchDto.getProSpecficDtos();
         //判断是否包含相同规格名称
-        if(proSpecficDtos.size()>0){
+        if(ConvertUtils.isNotEmpty(proSpecficDtos)){
             Long classifyId=proSpecBatchDto.getClassifyId();
             Map<String,List<ProSpecficDto>> tempMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
             tempMmap.forEach((namestr,keyList) -> {

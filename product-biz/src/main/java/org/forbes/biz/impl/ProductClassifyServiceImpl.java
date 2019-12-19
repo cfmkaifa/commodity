@@ -65,7 +65,7 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
         List<ClassifyAttributeDto> classifyAttributeDtos=productClassifyDto.getClassifyAttributeDtos();
         Long classifyId=productClassify.getId();
         //判断是否包含相同属性名称+添加属性
-        if(classifyAttributeDtos.size()>0){
+        if(ConvertUtils.isNotEmpty(classifyAttributeDtos)){
             Map<String,List<ClassifyAttributeDto>> classifyAttrMmap = classifyAttributeDtos.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
             classifyAttrMmap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
@@ -81,7 +81,7 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
         }
         //判断是否包含相同规格名称+添加规格
         List<ProSpecficDto> proSpecficDtos=productClassifyDto.getProSpecficDtos();
-        if(proSpecficDtos.size()>0){
+        if(ConvertUtils.isNotEmpty(proSpecficDtos)){
             Map<String,List<ProSpecficDto>> classifyAttrMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
             classifyAttrMmap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
