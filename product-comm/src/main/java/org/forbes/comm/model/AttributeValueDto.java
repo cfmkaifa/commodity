@@ -50,7 +50,7 @@ public class AttributeValueDto implements Serializable{
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "分类ID",required = true)
+    @ApiModelProperty(value = "分类ID")
     private Long classifyId;
 
     /**
@@ -59,7 +59,7 @@ public class AttributeValueDto implements Serializable{
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "商品ID",required = true)
+    @ApiModelProperty(value = "商品ID")
     private Long proId;
 
     /**
@@ -68,6 +68,6 @@ public class AttributeValueDto implements Serializable{
      * Column:    attribute_value
      * Nullable:  true
      */
-    @ApiModelProperty(value = "属性值",required = true)
+    @ApiModelProperty(value = "属性值")
     private String attributeValue;
 }

@@ -68,7 +68,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    cn_name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "中文名称",required = true)
+    @ApiModelProperty(value = "中文名称")
     private String cnName;
 
     /**

@@ -19,7 +19,7 @@
     <!-- 等级 -->
     <result column="level" property="level" jdbcType="BIGINT" />
     <!-- 状态:0未启用1-启用 -->
-    <result column="state" property="state" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, create_by, create_time, update_by, update_time, classify_sn, name, parent_id, 
