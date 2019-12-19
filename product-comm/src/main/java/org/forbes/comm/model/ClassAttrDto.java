@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,12 +28,14 @@ public class ClassAttrDto implements Serializable{
     /**商品分类id
      */
     @ApiModelProperty("商品分类id")
+    @NotEmpty(message = "商品分类id不为空")
     private Long classifyId;
 
     /**
      *分类属性名称集合
      **/
     @ApiModelProperty("分类属性名称集合")
+    @NotEmpty(message = "分类属性名称不能为空")
     private List<ClassifyAttributeDto> attrnames;
 
 }

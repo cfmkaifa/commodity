@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
@@ -28,6 +29,7 @@ public class ClassifyAttributeDto implements Serializable {
      * id
      */
     @ApiModelProperty("分类属性id")
+    @NotEmpty(message = "分类属性不为空")
     private Long id;
     /**
      * 名称

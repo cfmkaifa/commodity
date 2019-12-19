@@ -33,7 +33,6 @@ public class ProductClassifyDto  implements Serializable{
      *  id
      */
     @ApiModelProperty(value ="主键")
-    @NotNull(message = "主键id不能为空")
     private Long id;
 
     /**
@@ -86,6 +85,7 @@ public class ProductClassifyDto  implements Serializable{
      * 等级
      */
     @ApiModelProperty(value ="等级")
+    @NotEmpty(message = "等级不能为空")
     private Long level;
 
     /**

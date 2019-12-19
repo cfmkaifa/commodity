@@ -1,4 +1,4 @@
-package src.main.java.org.forbes.api.provider;
+package main.java.org.forbes.api.provider;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
