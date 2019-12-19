@@ -265,6 +265,7 @@ public class ProductClassifyController {
     /***
      * getClasAttr方法概述:根据商品分类id查询分类属性
      * @param id
+     *
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ClassifyAttribute>
      * @创建人 xfx
      * @创建时间 2019/12/13

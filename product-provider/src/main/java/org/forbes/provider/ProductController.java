@@ -295,7 +295,7 @@ public class ProductController {
 
 
     /****
-     * checkProductCode方法慨述:校验角色编码唯一
+     * checkProductCode方法慨述:校验商品编码唯一
      * @param procn
      * @return Result<Boolean>
      * @创建人 lzw
@@ -315,6 +315,7 @@ public class ProductController {
             result.setResult(false);
             return result;
         }
+        result.setMessage(Result.PRODUCT_CODE_IS_EXIST);
         return result;
     }
 

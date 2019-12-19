@@ -28,6 +28,7 @@ public class Result<T> implements Serializable {
 	public static final  String COMM_ACTION_ERROR_MSG = "操作失败";
 
 	/******查询商品相关信息****/
+	public static final  String PRODUCT_CODE_IS_EXIST = "商品编码可用";
 	public static final  String SELECT_PRODUCT = "查询商品信息成功";
 	public static final  String SELECT_ERROR_PRODUCT = "查询商品信息失败";
 
