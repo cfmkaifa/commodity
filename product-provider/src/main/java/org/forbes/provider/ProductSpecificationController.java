@@ -61,7 +61,7 @@ public class ProductSpecificationController {
             @ApiResponse(code = 200,message = Result.PAGE_PRO_SPEC),
             @ApiResponse(code=500,message = Result.PAGE_PRO_SPEC_ERROR)
     })
-    public Result<IPage<ProductSpecification>> page(@RequestParam(value = "id")Long id, BasePageDto basePageDto,ProSpecficDto proSpecficDto){
+    public Result<IPage<ProductSpecification>> page(BasePageDto basePageDto,ProSpecficDto proSpecficDto){
         log.debug("================basePageDto:"+basePageDto);
         Result<IPage<ProductSpecification>> result=new Result<>();
         QueryWrapper<ProductSpecification> qw=new QueryWrapper<>();
@@ -72,8 +72,8 @@ public class ProductSpecificationController {
             if(ClassifyStausEnum.existsClassifyStausEnum(String.valueOf(proSpecficDto.getState()))){
                 qw.eq(PermsCommonConstant.PRO_SPEC_STATE,proSpecficDto.getState());
             }
-            if(ConvertUtils.isNotEmpty(id)){
-                qw.eq(PermsCommonConstant.ID,id);
+            if(ConvertUtils.isNotEmpty(proSpecficDto.getId())){
+                qw.eq(PermsCommonConstant.ID,proSpecficDto.getId());
             }
         }
         IPage<ProductSpecification> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
@@ -157,11 +157,14 @@ public class ProductSpecificationController {
             result.setMessage(String.format(BizResultEnum.ENTITY_EMPTY.getBizFormateMessage()));
             return result;
         }
-        int count=proSpecficService.count(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_NAME,proSpecficDto.getName()));
-        if(count>0){//判断要添加名称是否已存在
-            result.setBizCode(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizFormateMessage()));
-            return result;
+        String prospectname=proSpecficDto.getName();
+        if(!prospectname.equalsIgnoreCase(productSpecification.getName())){
+            int count=proSpecficService.count(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_NAME,prospectname));
+            if(count>0){//判断要添加名称是否已存在
+                result.setBizCode(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizCode());
+                result.setMessage(String.format(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizFormateMessage()));
+                return result;
+            }
         }
         productSpecification.setOrderSorts(proSpecficDto.getOrderSorts());
         productSpecification.setState(proSpecficDto.getState());

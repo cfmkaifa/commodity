@@ -22,6 +22,13 @@ import java.io.Serializable;
 public class ClassAttrPageDto implements Serializable {
     private static final long serialVersionUID = 8055341873746064011L;
 
+
+    /**
+     * id
+     */
+    @ApiModelProperty(value = "id")
+    private Long id;
+
     /**
      * 属性名称
      */

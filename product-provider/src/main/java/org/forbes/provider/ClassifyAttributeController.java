@@ -66,7 +66,7 @@ public class ClassifyAttributeController {
             @ApiResponse(code=500,message= Result.SELECT_CLASSIFY),
             @ApiResponse(code=200,message = Result.CLASSIF_ATTR_ERROR)
     })
-    public Result<IPage<ClassifyAttribute>> page(@RequestParam(value = "id")Long id, BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
+    public Result<IPage<ClassifyAttribute>> page( BasePageDto basePageDto,ClassAttrPageDto classAttrPageDto){
         log.debug("=============basePageDto:"+basePageDto);
         Result<IPage<ClassifyAttribute>> result=new Result<IPage<ClassifyAttribute>>();
         QueryWrapper<ClassifyAttribute> qw=new QueryWrapper<>();
@@ -74,8 +74,8 @@ public class ClassifyAttributeController {
             if(ConvertUtils.isNotEmpty(classAttrPageDto.getName())){
                 qw.like(PermsCommonConstant.ATTR_NAME,classAttrPageDto.getName());
             }
-            if(ConvertUtils.isNotEmpty(id)){
-                qw.eq(PermsCommonConstant.ID,id);
+            if(ConvertUtils.isNotEmpty(classAttrPageDto.getId())){
+                qw.eq(PermsCommonConstant.ID,classAttrPageDto.getId());
             }
         }
         IPage<ClassifyAttribute> page=new Page<>(basePageDto.getPageNo(),basePageDto.getPageSize());
@@ -144,12 +144,15 @@ public class ClassifyAttributeController {
             result.setMessage(String.format(BizResultEnum.BATCH_ADD_ERROR.getBizFormateMessage()));
             return result;
         }
+        String attrname=classifyAttributeDto.getName();
         //判断属性名称是否已存在
-        int attrcount=clasAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.ATTR_NAME,classifyAttributeDto.getName()));
-        if(attrcount>0){
-            result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
-            result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
-            return result;
+        if(!attrname.equalsIgnoreCase(classifyAttribute.getName())){
+            int attrcount=clasAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.ATTR_NAME,attrname));
+            if(attrcount>0){
+                result.setBizCode(BizResultEnum.REPETITION_ATTR.getBizCode());
+                result.setMessage(String.format(BizResultEnum.REPETITION_ATTR.getBizFormateMessage()));
+                return result;
+            }
         }
         classifyAttribute.setName(classifyAttributeDto.getName());
         clasAttrService.updateById(classifyAttribute);

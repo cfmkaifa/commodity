@@ -236,18 +236,24 @@ public class ProductClassifyController {
     public Result<ProductClassify> editProductClassify(@RequestBody  @Validated(value = UpdateValid.class) ProductClassify productClassify){
         log.debug("============productClassify:"+JSON.toJSONString(productClassify));
         Result<ProductClassify> result=new Result<ProductClassify>();
+        ProductClassify product=productClassifyService.getById(productClassify.getId());
         String name=productClassify.getName();
-        int  existcount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.NAME,name));
-        if(existcount>0){//判断商品分类名称是否重复
-            result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizCode());
-            result.success(String.format(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizMessage(),name));
-            return result;
+        if(!name.equalsIgnoreCase(product.getName())){
+            int  existcount=productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.NAME,name));
+            if(existcount>0){//判断商品分类名称是否重复
+                result.setBizCode(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizCode());
+                result.success(String.format(BizResultEnum.PRODUCT_CLASSIFY_EXIST.getBizMessage(),name));
+                return result;
+            }
         }
-        int classifycount= productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.CLASSIFY_SN,productClassify.getClassifySn()));
-        if(classifycount>0){//判断商品分类编码是否重复
-            result.setBizCode(BizResultEnum.CLASSIFY_SN_EXIST.getBizCode());
-            result.success(String.format(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage(),name));
-            return result;
+        String classify=productClassify.getClassifySn();
+        if(!classify.equalsIgnoreCase(product.getClassifySn())){
+            int classifycount= productClassifyService.count(new QueryWrapper<ProductClassify>().eq(PermsCommonConstant.CLASSIFY_SN,classify));
+            if(classifycount>0){//判断商品分类编码是否重复
+                result.setBizCode(BizResultEnum.CLASSIFY_SN_EXIST.getBizCode());
+                result.success(String.format(BizResultEnum.CLASSIFY_SN_EXIST.getBizMessage(),name));
+                return result;
+            }
         }
         productClassify.setName(name);
         productClassifyService.updateById(productClassify);
