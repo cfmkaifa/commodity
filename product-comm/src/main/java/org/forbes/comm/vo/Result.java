@@ -116,6 +116,11 @@ public class Result<T> implements Serializable {
 	public static final  String CLASSIFY_CHECK="商品分类编码校验成功";
 	public static final  String CLASSIFY_CHECK_ERROR="商品分类编码校验失败";
 
+	/********校验分类属性编码***********/
+	public static final  String CHECK_ATTR_SN="校验分类属性编码成功";
+	public static final  String CHECK_ATTR_SN_ERROR="校验分类属性编码失败";
+
+
 	/**
 	 * 返回代码
 	 */

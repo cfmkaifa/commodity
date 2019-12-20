@@ -48,7 +48,7 @@ public class ProductSpecficServiceImpl extends ServiceImpl<ProductSpecificationM
             Map<String,List<ProSpecficDto>> tempMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
             tempMmap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
-                if(attrSize > 0 ){
+                if(attrSize > 1 ){
                     throw new ForbesException(namestr);
                 }
                 ProSpecficDto proSpecficDto=keyList.get(0);

@@ -51,7 +51,7 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
             Map<String,List<ClassifyAttributeDto>> tempMap = attrnames.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
             tempMap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
-                if(attrSize > 0 ){
+                if(attrSize > 1 ){
                     throw new ForbesException(namestr);
                 }
                 ClassifyAttributeDto classifyAttributeDto=keyList.get(0);

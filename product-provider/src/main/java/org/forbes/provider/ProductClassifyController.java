@@ -190,13 +190,13 @@ public class ProductClassifyController {
      * @修改日期 (请填上修改该文件时的日期)
      */
 
-    @RequestMapping(value = "/uppate-status/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value = "/update-status/{id}",method = RequestMethod.PUT)
     @ApiOperation("禁用/启用商品分类状态")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.UP_CLASSIFY_ERROR_STATUS),
             @ApiResponse(code=200,response = ProductClassify.class,message = Result.UP_CLASSIFY_STATUS)
     })
-    public Result<ProductClassify> update(@PathVariable Long id,@RequestParam(value="state",required=true)String state){
+    public Result<ProductClassify> update(@PathVariable @RequestParam(value = "id",required = true) Long id,@RequestParam(value="state",required=true)String state){
         log.debug("==================id:"+JSON.toJSONString(id)+"============state:"+JSON.toJSONString(state));
         Result<ProductClassify> result=new Result<ProductClassify>();
         boolean isClassifyres= ClassifyStausEnum.existsClassifyStausEnum(state);

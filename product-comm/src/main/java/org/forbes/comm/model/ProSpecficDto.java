@@ -29,7 +29,7 @@ public class ProSpecficDto implements Serializable{
     /**
      * id
      */
-    @ApiModelProperty(value = "规格id")
+    @ApiModelProperty(value = "规格id",required = true)
     private Long id;
 
     /**状态
@@ -41,16 +41,16 @@ public class ProSpecficDto implements Serializable{
     /**
      * 排序
      */
-    @ApiModelProperty("排序")
+    @ApiModelProperty(value = "排序",required = true)
     private Integer orderSorts;
 
     /**
      */
-    @ApiModelProperty("规格名称")
+    @ApiModelProperty(value = "规格名称",required = true)
     private String name;
 
     /**商品分类id
      */
-    @ApiModelProperty("商品分类id")
+    @ApiModelProperty(value = "商品分类id",required = true)
     private Long classifyId;
 }

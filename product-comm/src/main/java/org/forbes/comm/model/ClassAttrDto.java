@@ -27,12 +27,12 @@ public class ClassAttrDto implements Serializable{
     private static final long serialVersionUID = -2720585649050208895L;
     /**商品分类id
      */
-    @ApiModelProperty("商品分类id")
+    @ApiModelProperty(value = "商品分类id",required = true)
     @NotEmpty(message = "商品分类id不为空")
     private Long classifyId;
 
     /**
-     *分类属性名称集合
+     *分类属性名称
      **/
     @ApiModelProperty(value = "分类属性名称集合",required = true)
     @NotEmpty(message = "分类属性名称不能为空")

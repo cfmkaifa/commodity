@@ -42,7 +42,7 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
     @Autowired
     private ProductSpecificationMapper productSpecificationMapper;
     /***
-     * 方法概述: 添加商品分类+添加分类属性
+     * 方法概述: 添加商品分类+添加分类属性+添加规格
      * @param productClassifyDto
      * @return
      * @创建人 xfx
@@ -69,7 +69,7 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
             Map<String,List<ClassifyAttributeDto>> classifyAttrMmap = classifyAttributeDtos.stream().collect(Collectors.groupingBy(ClassifyAttributeDto::getName));
             classifyAttrMmap.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
-                if(attrSize > 0 ){
+                if(attrSize > 1 ){
                     throw new ForbesException(namestr);
                 }
                 ClassifyAttributeDto classifyAttributeDto=keyList.get(0);
@@ -82,10 +82,10 @@ public class ProductClassifyServiceImpl extends ServiceImpl<ProductClassifyMappe
         //判断是否包含相同规格名称+添加规格
         List<ProSpecficDto> proSpecficDtos=productClassifyDto.getProSpecficDtos();
         if(ConvertUtils.isNotEmpty(proSpecficDtos)){
-            Map<String,List<ProSpecficDto>> classifyAttrMmap = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
-            classifyAttrMmap.forEach((namestr,keyList) -> {
+            Map<String,List<ProSpecficDto>> temp = proSpecficDtos.stream().collect(Collectors.groupingBy(ProSpecficDto::getName));
+            temp.forEach((namestr,keyList) -> {
                 int attrSize = keyList.size();
-                if(attrSize > 0 ){
+                if(attrSize > 1){
                     throw new ForbesException(namestr);
                 }
                 ProSpecficDto proSpecficDto = keyList.get(0);

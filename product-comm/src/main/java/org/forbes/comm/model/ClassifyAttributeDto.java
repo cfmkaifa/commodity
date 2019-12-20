@@ -38,6 +38,12 @@ public class ClassifyAttributeDto implements Serializable {
     private String name;
 
 
+    /**
+     * 属性编码
+     */
+    @ApiModelProperty(value = "属性编码")
+    private String attributeSn;
+
     /**商品分类id
      */
     @ApiModelProperty("商品分类id")

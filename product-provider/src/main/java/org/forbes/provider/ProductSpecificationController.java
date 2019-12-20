@@ -168,6 +168,7 @@ public class ProductSpecificationController {
         }
         productSpecification.setOrderSorts(proSpecficDto.getOrderSorts());
         productSpecification.setState(proSpecficDto.getState());
+        productSpecification.setClassifyId(proSpecficDto.getClassifyId());
         productSpecification.setName(proSpecficDto.getName());
         proSpecficService.updateById(productSpecification);
         return result;

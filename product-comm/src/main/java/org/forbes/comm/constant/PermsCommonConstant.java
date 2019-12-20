@@ -18,6 +18,7 @@ public interface PermsCommonConstant {
     public static final String CLASSIFY_ID = "classify_id";//商品分类id
     public static final String ATTR_NAME = "name";//属性名称
     public static final String ID = "id";//属性名称
+    public static final String ATTRIBUTE_SN = "attribute_sn";//属性编码
 
 
 

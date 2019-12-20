@@ -94,7 +94,7 @@ public class ClassifyAttributeController {
      * @修改日期 (请填上修改该文件时的日期)
      */
     @RequestMapping(value = "/batch-add",method = RequestMethod.POST)
-    @ApiOperation("批量添加商品分类属性")
+    @ApiOperation("批量添加分类属性")
     @ApiResponses(value = {
             @ApiResponse(code=500,message = Result.BATCH_ADD_ERROR_MSG),
             @ApiResponse(code=200,message = Result.BATCH_ADD_MSG)
@@ -108,7 +108,6 @@ public class ClassifyAttributeController {
             result.setMessage(String.format(BizResultEnum.BATCH_ADD_ERROR.getBizFormateMessage(),productClassify.getName()));
             return result;
         }
-        result.setResult(classAttrDto);
         try {
             clasAttrService.batchAdd(classAttrDto);
         }catch (ForbesException e){
@@ -116,6 +115,7 @@ public class ClassifyAttributeController {
             result.setMessage(e.getErrorMsg());
             return result;
         }
+        result.setResult(classAttrDto);
         return result;
     }
 
@@ -154,7 +154,17 @@ public class ClassifyAttributeController {
                 return result;
             }
         }
+        String attributeSn=classifyAttributeDto.getAttributeSn();
+        if(!attributeSn.equalsIgnoreCase(classifyAttribute.getAttributeSn())){
+            int attrcSnount=clasAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.ATTRIBUTE_SN,attributeSn));
+            if(attrcSnount>0){
+                result.setBizCode(BizResultEnum.ATTRIBUTE_SN.getBizCode());
+                result.setMessage(String.format(BizResultEnum.ATTRIBUTE_SN.getBizFormateMessage()));
+                return result;
+            }
+        }
         classifyAttribute.setName(classifyAttributeDto.getName());
+        classifyAttribute.setAttributeSn(classifyAttributeDto.getAttributeSn());
         clasAttrService.updateById(classifyAttribute);
         result.setResult(classifyAttribute);
         return result;
@@ -184,6 +194,26 @@ public class ClassifyAttributeController {
             result.setBizCode(e.getErrorCode());
             result.setMessage(e.getErrorMsg());
         }
+        return result;
+    }
+
+
+    @RequestMapping(value = "/check",method = RequestMethod.GET)
+    @ApiOperation("校验分类属性编码")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500,message =Result.CHECK_ATTR_SN_ERROR),
+            @ApiResponse(code=200,message = Result.CHECK_ATTR_SN)
+    })
+    public Result<Boolean>  check(@RequestParam(value = "attributeSn",required = true)String attributeSn){
+        Result<Boolean> result=new Result<Boolean>();
+        int count=clasAttrService.count(new QueryWrapper<ClassifyAttribute>().eq(PermsCommonConstant.ATTRIBUTE_SN,attributeSn));
+        if(count>0){
+            result.setBizCode(BizResultEnum.ATTRIBUTE_SN.getBizCode());
+            result.setMessage(BizResultEnum.ATTRIBUTE_SN.getBizMessage());
+            result.setResult(false);
+            return result;
+        }
+        result.setResult(true);
         return result;
     }
 }
