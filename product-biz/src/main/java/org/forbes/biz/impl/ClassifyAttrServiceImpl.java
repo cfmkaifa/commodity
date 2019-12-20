@@ -57,6 +57,7 @@ public class ClassifyAttrServiceImpl extends ServiceImpl<ClassifyAttributeMapper
                 ClassifyAttributeDto classifyAttributeDto=keyList.get(0);
                 ClassifyAttribute classifyAttribute=new ClassifyAttribute();
                 classifyAttribute.setClassifyId(classifyId);
+                classifyAttribute.setAttributeSn(classifyAttributeDto.getAttributeSn());
                 classifyAttribute.setName(classifyAttributeDto.getName());
                 clasAttrMapper.insert(classifyAttribute);
             });
