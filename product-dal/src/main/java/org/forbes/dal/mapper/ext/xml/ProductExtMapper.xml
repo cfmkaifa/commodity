@@ -67,7 +67,7 @@
             FROM f_product p
     <where>
       <if test="productPageDto.state != null and productPageDto.state != '' and productPageDto.state != 'null'">
-        AND p.state=#{productPageDto.state,jdbcType=INTEGER}
+        AND p.state=#{productPageDto.state,jdbcType=VARCHAR}
       </if>
       <if test="productPageDto.proSn != null and productPageDto.proSn != '' and productPageDto.proSn != 'null'">
         AND p.pro_sn LIKE concat('%',#{productPageDto.proSn,jdbcType=VARCHAR},'%')
