@@ -30,13 +30,13 @@ public class ProductDto implements Serializable{
     private static final long serialVersionUID = 7814229668578335245L;
 
     @ApiModelProperty("商品附件")
-    List<ProductAttachDto> productAttachDtos;
+    private List<ProductAttachDto> productAttachDtos;
 
     @ApiModelProperty("商品属性")
-    List<AttributeValueDto> attributeValueDtos;
+    private List<AttributeValueDto> attributeValueDtos;
 
     @ApiModelProperty("商品库存")
-    List<ProductSkuDto> productSkuDtos;
+    private List<ProductSkuDto> productSkuDtos;
 
     /**
      * id

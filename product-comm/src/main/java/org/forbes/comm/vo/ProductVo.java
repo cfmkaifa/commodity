@@ -38,25 +38,9 @@ public class ProductVo implements Serializable {
     private Long id;
 
     /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
      * 更新时间
      */
+    @ApiModelProperty("更新时间")
     private Date updateTime;
 
     /**
@@ -65,6 +49,7 @@ public class ProductVo implements Serializable {
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty("分类id")
     private Long classifyId;
 
     /**
@@ -73,6 +58,7 @@ public class ProductVo implements Serializable {
      * Column:    brand_id
      * Nullable:  true
      */
+    @ApiModelProperty("品牌ID")
     private Long brandId;
 
     /**
@@ -81,6 +67,7 @@ public class ProductVo implements Serializable {
      * Column:    shop_id
      * Nullable:  true
      */
+    @ApiModelProperty("店铺ID")
     private Long shopId;
 
     /**
@@ -89,6 +76,7 @@ public class ProductVo implements Serializable {
      * Column:    pro_sn
      * Nullable:  true
      */
+    @ApiModelProperty("商品编码")
     private String proSn;
 
     /**
@@ -97,6 +85,7 @@ public class ProductVo implements Serializable {
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty("商品名称")
     private String name;
 
     /**
@@ -105,6 +94,7 @@ public class ProductVo implements Serializable {
      * Column:    variety
      * Nullable:  true
      */
+    @ApiModelProperty("品种")
     private String variety;
 
     /**
@@ -113,6 +103,42 @@ public class ProductVo implements Serializable {
      * Column:    state
      * Nullable:  true
      */
-    private Integer state;
+    @ApiModelProperty("1上架2未上架3待审核4审核失败")
+    private String state;
 
+    /**
+     * 文件地址
+     * Table:     f_product_attach
+     * Column:    file_path
+     * Nullable:  true
+     */
+    @ApiModelProperty("文件地址")
+    private String filePath;
+
+    /**
+     * 0-大图，1-小图，3-中图
+     * Table:     f_product_attach
+     * Column:    type
+     * Nullable:  true
+     */
+    @ApiModelProperty("0-大图，1-小图，3-中图")
+    private String type;
+
+    /**
+     * 单价
+     * Table:     f_product
+     * Column:    price
+     * Nullable:  true
+     */
+    @ApiModelProperty("单价")
+    private BigDecimal price;
+
+    /**
+     * 库存
+     * Table:     f_product
+     * Column:    stock
+     * Nullable:  true
+     */
+    @ApiModelProperty("库存")
+    private String stock;
 }
