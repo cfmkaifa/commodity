@@ -30,10 +30,7 @@ public class AttributeValueDto implements Serializable{
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "id",example = "0")
     private Long id;
 
     /**
@@ -41,7 +38,7 @@ public class AttributeValueDto implements Serializable{
      * Column:    orders_sort
      * Nullable:  true
      */
-    @ApiModelProperty("排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer ordersSort;
 
     /**
@@ -50,7 +47,7 @@ public class AttributeValueDto implements Serializable{
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "分类ID")
+    @ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**
@@ -59,7 +56,7 @@ public class AttributeValueDto implements Serializable{
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "商品ID")
+    @ApiModelProperty(value = "商品ID",example = "0")
     private Long proId;
 
     /**
@@ -68,6 +65,6 @@ public class AttributeValueDto implements Serializable{
      * Column:    attribute_value
      * Nullable:  true
      */
-    @ApiModelProperty(value = "属性值")
+    @ApiModelProperty(value = "属性值",example = "0")
     private String attributeValue;
 }

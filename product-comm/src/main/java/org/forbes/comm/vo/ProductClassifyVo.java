@@ -30,7 +30,7 @@ public class ProductClassifyVo implements Serializable{
     /**
      *  id
      */
-    @ApiModelProperty(value ="主键")
+    @ApiModelProperty(value ="主键",example = "0")
     private Long id;
 
     /**
@@ -74,19 +74,19 @@ public class ProductClassifyVo implements Serializable{
     /**
      * 父级id
      */
-    @ApiModelProperty(value ="父级id")
+    @ApiModelProperty(value ="父级id",example = "0")
     private Long parentId;
 
     /**
      * 等级
      */
-    @ApiModelProperty(value ="等级")
+    @ApiModelProperty(value ="等级",example = "1")
     private Long level;
 
     /**
      * 状态:0未启用1-启用
      */
-    @ApiModelProperty(value ="状态")
+    @ApiModelProperty(value ="状态",example = "0")
     private Long state;
 
     @ApiModelProperty(value = "父级分类下子集分类",required = true)

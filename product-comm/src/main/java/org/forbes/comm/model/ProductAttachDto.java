@@ -29,10 +29,7 @@ public class ProductAttachDto implements Serializable{
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "数据ID(商品id)",example = "0")
     private Long id;
 
     /**
@@ -41,7 +38,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    data_id
      * Nullable:  true
      */
-    @ApiModelProperty("数据ID(商品id)")
+    @ApiModelProperty(value = "数据ID",example = "0")
     private Long dataId;
 
     /**
@@ -50,7 +47,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    orders_sort
      * Nullable:  true
      */
-    @ApiModelProperty("排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer ordersSort;
 
     /**
@@ -68,7 +65,7 @@ public class ProductAttachDto implements Serializable{
      * Column:    cn_name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "中文名称")
+    @ApiModelProperty("中文名称")
     private String cnName;
 
     /**

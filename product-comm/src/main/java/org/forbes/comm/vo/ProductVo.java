@@ -23,7 +23,6 @@ import java.util.Date;
 @Data
 @ApiModel(description="商品查询返回对象")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class ProductVo implements Serializable {
 
     private static final long serialVersionUID = 2549085622563695034L;
@@ -31,10 +30,7 @@ public class ProductVo implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "商品id",example = "0")
     private Long id;
 
     /**
@@ -49,7 +45,7 @@ public class ProductVo implements Serializable {
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty("分类id")
+    @ApiModelProperty(value = "分类id",example = "0")
     private Long classifyId;
 
     /**
@@ -58,7 +54,7 @@ public class ProductVo implements Serializable {
      * Column:    brand_id
      * Nullable:  true
      */
-    @ApiModelProperty("品牌ID")
+    @ApiModelProperty(value = "品牌ID",example = "0")
     private Long brandId;
 
     /**
@@ -67,7 +63,7 @@ public class ProductVo implements Serializable {
      * Column:    shop_id
      * Nullable:  true
      */
-    @ApiModelProperty("店铺ID")
+    @ApiModelProperty(value = "店铺ID",example = "0")
     private Long shopId;
 
     /**
@@ -130,7 +126,7 @@ public class ProductVo implements Serializable {
      * Column:    price
      * Nullable:  true
      */
-    @ApiModelProperty("单价")
+    @ApiModelProperty(value = "单价",required = true,example = "0")
     private BigDecimal price;
 
     /**

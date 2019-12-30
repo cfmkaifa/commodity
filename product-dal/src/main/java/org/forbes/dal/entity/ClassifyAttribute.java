@@ -37,6 +37,6 @@ public class ClassifyAttribute extends BaseEntity{
      * Column:    parent_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品分类id")
+    @ApiModelProperty(value = "商品分类id",example = "0")
     private Long classifyId;
 }

@@ -30,10 +30,7 @@ public class SpecificationValueDto implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "id",example = "0")
     private Long id;
 
     /**
@@ -42,7 +39,7 @@ public class SpecificationValueDto implements Serializable {
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty("分类ID")
+    @ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**
@@ -51,7 +48,7 @@ public class SpecificationValueDto implements Serializable {
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty(value = "商品ID",example = "0")
     private Long proId;
 
     /**
@@ -60,7 +57,7 @@ public class SpecificationValueDto implements Serializable {
      * Column:    spec_id
      * Nullable:  true
      */
-    @ApiModelProperty("规格ID")
+    @ApiModelProperty(value = "规格ID",example = "0")
     private Long specId;
 
 
@@ -71,6 +68,6 @@ public class SpecificationValueDto implements Serializable {
 
     /***skuId
      */
-    @ApiModelProperty("库存Id")
+    @ApiModelProperty(value = "库存Id",example = "0")
     private Long skuId;
 }

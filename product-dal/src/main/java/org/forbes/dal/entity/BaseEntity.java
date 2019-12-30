@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.forbes.comm.constant.UpdateValid;
 
@@ -24,6 +25,7 @@ public class BaseEntity implements Serializable  {
     @JSONField(format="yyyy-MM-dd")
 	@JsonFormat(pattern="yyyy-MM-dd")
     @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "id",example = "0")
     private Long id;
     
     

@@ -8,7 +8,8 @@
   </sql>
     <!--分页查询商品详细信息-->
   <select id="pageProduct" parameterType="org.forbes.comm.model.ProductPageDto" resultType="org.forbes.comm.vo.ProductVo">
-    SELECT  p.classify_id,
+    SELECT  p.id,
+            p.classify_id,
             p.brand_id,
             p.shop_id,
             p.pro_sn,
@@ -65,7 +66,7 @@
             p.stock,
             a.file_path,
             a.type
-            FROM f_product p JOIN f_product_attach a ON p.id=a.data_id
+            FROM f_product p LEFT JOIN f_product_attach a ON p.id=a.data_id
     <where>
       <if test="productPageDto.state != null and productPageDto.state != '' and productPageDto.state != 'null'">
         AND p.state=#{productPageDto.state,jdbcType=VARCHAR}

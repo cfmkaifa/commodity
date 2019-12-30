@@ -28,7 +28,7 @@ public class ProductSku extends BaseEntity {
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty("分类ID")
+    @ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**
@@ -37,7 +37,7 @@ public class ProductSku extends BaseEntity {
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty(value = "商品ID",example = "0")
     private Long proId;
 
     /**
@@ -55,7 +55,7 @@ public class ProductSku extends BaseEntity {
      * Column:    stock
      * Nullable:  true
      */
-    @ApiModelProperty("库存")
+    @ApiModelProperty(value = "库存",example = "0")
     private Integer stock;
 
     /**
@@ -64,7 +64,7 @@ public class ProductSku extends BaseEntity {
      * Column:    sale_price
      * Nullable:  true
      */
-    @ApiModelProperty("销售价")
+    @ApiModelProperty(value = "销售价",example = "0")
     private BigDecimal salePrice;
 
     /**
@@ -73,7 +73,7 @@ public class ProductSku extends BaseEntity {
      * Column:    market_price
      * Nullable:  true
      */
-    @ApiModelProperty("市场价")
+    @ApiModelProperty(value = "市场价",example = "0")
     private BigDecimal marketPrice;
 
     /**
@@ -82,6 +82,6 @@ public class ProductSku extends BaseEntity {
      * Column:    cost_price
      * Nullable:  true
      */
-    @ApiModelProperty("成本价")
+    @ApiModelProperty(value = "成本价",example = "0")
     private BigDecimal costPrice;
 }

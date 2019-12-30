@@ -27,79 +27,76 @@ import java.util.List;
 @Accessors(chain = true)
 public class ProductSkuDto implements Serializable {
 
-    private static final long serialVersionUID = 900447705542164350L;
+private static final long serialVersionUID = 900447705542164350L;
 
-    List<SpecificationValueDto> specificationValueDtos;
+        List<SpecificationValueDto> specificationValueDtos;
 
-    /**
-     * id
-     */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
-    private Long id;
+/**
+ * id
+ */
+@ApiModelProperty(value = "id",example = "0")
+private Long id;
 
-    /**
-     * 分类ID
-     * Table:     f_product_sku
-     * Column:    classify_id
-     * Nullable:  true
-     */
-    @ApiModelProperty(value = "分类ID")
-    private Long classifyId;
+/**
+ * 分类ID
+ * Table:     f_product_sku
+ * Column:    classify_id
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "分类ID",example = "0")
+private Long classifyId;
 
-    /**
-     * 商品ID
-     * Table:     f_product_sku
-     * Column:    pro_id
-     * Nullable:  true
-     */
-    @ApiModelProperty(value = "商品ID")
-    private Long proId;
+/**
+ * 商品ID
+ * Table:     f_product_sku
+ * Column:    pro_id
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "商品ID",example = "0")
+private Long proId;
 
-    /**
-     * 编码
-     * Table:     f_product_sku
-     * Column:    sku_sn
-     * Nullable:  true
-     */
-    @ApiModelProperty(value = "编码")
-    private String skuSn;
+/**
+ * 编码
+ * Table:     f_product_sku
+ * Column:    sku_sn
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "编码")
+private String skuSn;
 
-    /**
-     * 库存
-     * Table:     f_product_sku
-     * Column:    stock
-     * Nullable:  true
-     */
-    @ApiModelProperty("库存")
-    private Integer stock;
+/**
+ * 库存
+ * Table:     f_product_sku
+ * Column:    stock
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "库存",example = "0")
+private Integer stock;
 
-    /**
-     * 销售价
-     * Table:     f_product_sku
-     * Column:    sale_price
-     * Nullable:  true
-     */
-    @ApiModelProperty("销售价")
-    private BigDecimal salePrice;
+/**
+ * 销售价
+ * Table:     f_product_sku
+ * Column:    sale_price
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "销售价",example = "0")
+private BigDecimal salePrice;
 
-    /**
-     * 市场价
-     * Table:     f_product_sku
-     * Column:    market_price
-     * Nullable:  true
-     */
-    @ApiModelProperty("市场价")
-    private BigDecimal marketPrice;
+/**
+ * 市场价
+ * Table:     f_product_sku
+ * Column:    market_price
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "市场价",example = "0")
+private BigDecimal marketPrice;
 
-    /**
-     * 成本价
-     * Table:     f_product_sku
-     * Column:    cost_price
-     * Nullable:  true
-     */
-    @ApiModelProperty("成本价")
-    private BigDecimal costPrice;
-}
+/**
+ * 成本价
+ * Table:     f_product_sku
+ * Column:    cost_price
+ * Nullable:  true
+ */
+@ApiModelProperty(value = "成本价",example = "0")
+private BigDecimal costPrice;
+        }

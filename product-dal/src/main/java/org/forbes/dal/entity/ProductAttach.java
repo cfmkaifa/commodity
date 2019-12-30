@@ -25,7 +25,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    data_id
      * Nullable:  true
      */
-    @ApiModelProperty("数据ID")
+    @ApiModelProperty(value = "数据ID",example = "0")
     private Long dataId;
 
     /**
@@ -34,7 +34,7 @@ public class ProductAttach extends BaseEntity{
      * Column:    orders_sort
      * Nullable:  true
      */
-    @ApiModelProperty("排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer ordersSort;
 
     /**

@@ -39,7 +39,7 @@ public class ProductClassify extends BaseEntity {
      * Column:    parent_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "父级id")
+    @ApiModelProperty(value = "父级id",example = "0")
     private Long parentId;
 
     /**
@@ -48,7 +48,7 @@ public class ProductClassify extends BaseEntity {
      * Column:    level
      * Nullable:  true
      */
-    @ApiModelProperty(value = "等级")
+    @ApiModelProperty(value = "等级",example = "0")
     private Long level;
 
     /**

@@ -33,7 +33,7 @@ public class ProductSpecification extends BaseEntity{
      * Column:    order_sorts
      * Nullable:  true
      */
-    @ApiModelProperty(value = "排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer orderSorts;
 
     /**
@@ -49,6 +49,6 @@ public class ProductSpecification extends BaseEntity{
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty(value = "商品分类id")
+    @ApiModelProperty(value = "商品分类id",example = "0")
     private Long classifyId;
 }

@@ -25,7 +25,7 @@ public class SpecificationValue extends BaseEntity{
      * Column:    classify_id
      * Nullable:  true
      */
-	@ApiModelProperty("分类ID")
+	@ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**
@@ -34,7 +34,7 @@ public class SpecificationValue extends BaseEntity{
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty(value = "商品ID",example = "0")
     private Long proId;
 
     /**
@@ -43,7 +43,7 @@ public class SpecificationValue extends BaseEntity{
      * Column:    spec_id
      * Nullable:  true
      */
-    @ApiModelProperty("规格ID")
+    @ApiModelProperty(value = "规格ID",example = "0")
     private Long specId;
 
 
@@ -54,6 +54,6 @@ public class SpecificationValue extends BaseEntity{
     
     /***skuId
      */
-    @ApiModelProperty("库存id")
+    @ApiModelProperty(value = "库存id",example = "0")
     private Long skuId;
 }

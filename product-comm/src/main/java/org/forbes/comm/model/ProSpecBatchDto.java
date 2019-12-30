@@ -27,7 +27,7 @@ public class ProSpecBatchDto implements Serializable{
 
     /**商品分类id
      */
-    @ApiModelProperty(value = "商品分类id",required = true)
+    @ApiModelProperty(value = "商品分类id",required = true,example = "0")
     @NotEmpty(message = "商品分类id不能为空")
     private Long classifyId;
 

@@ -26,7 +26,7 @@ public class ClassAttrPageDto implements Serializable {
     /**
      * id
      */
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "id",example = "0")
     private Long id;
 
     /**

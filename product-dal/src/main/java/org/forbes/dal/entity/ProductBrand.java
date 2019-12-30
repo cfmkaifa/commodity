@@ -1,6 +1,8 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -14,6 +16,7 @@ public class ProductBrand extends BaseEntity {
      * Column:    id
      * Nullable:  false
      */
+    @ApiModelProperty(value = "主键",example = "0")
     private Long id;
 
     /**
@@ -53,6 +56,7 @@ public class ProductBrand extends BaseEntity {
      * Column:    classify_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**

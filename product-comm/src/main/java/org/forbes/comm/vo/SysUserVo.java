@@ -28,7 +28,7 @@ public class SysUserVo implements Serializable {
 	/**
      * id
      */
-	@ApiModelProperty(value = "主键")
+	@ApiModelProperty(value = "主键",example = "0")
     private Long id;
     
     

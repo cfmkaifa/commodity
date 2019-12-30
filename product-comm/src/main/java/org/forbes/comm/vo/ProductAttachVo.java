@@ -27,13 +27,13 @@ public class ProductAttachVo implements Serializable{
     /**
      * 数据ID
      */
-    @ApiModelProperty(value = "数据id")
+    @ApiModelProperty(value = "数据id",example = "0")
     private Long dataId;
 
     /**
      * 排序
      */
-    @ApiModelProperty(value = "排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer ordersSort;
 
     /**

@@ -24,7 +24,7 @@ public class AttributeValue extends BaseEntity{
      * Column:    orders_sort
      * Nullable:  true
      */
-    @ApiModelProperty("排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer ordersSort;
 
     /**
@@ -33,7 +33,7 @@ public class AttributeValue extends BaseEntity{
      * Column:    classify_id
      * Nullable:  true
      */
-    @ApiModelProperty("分类ID")
+    @ApiModelProperty(value = "分类ID",example = "0")
     private Long classifyId;
 
     /**
@@ -42,7 +42,7 @@ public class AttributeValue extends BaseEntity{
      * Column:    pro_id
      * Nullable:  true
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty(value = "商品ID",example = "0")
     private Long proId;
 
     /**
@@ -51,6 +51,6 @@ public class AttributeValue extends BaseEntity{
      * Column:    attribute_value
      * Nullable:  true
      */
-    @ApiModelProperty("属性值")
+    @ApiModelProperty(value = "属性值",example = "0")
     private String attributeValue;
 }
