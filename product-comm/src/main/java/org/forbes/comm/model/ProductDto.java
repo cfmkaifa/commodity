@@ -24,7 +24,6 @@ import java.util.List;
 @Data
 @ApiModel(description="商品增加修改参数")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class ProductDto implements Serializable{
 
     private static final long serialVersionUID = 7814229668578335245L;
@@ -41,10 +40,8 @@ public class ProductDto implements Serializable{
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
-    @JSONField(format="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotNull(message="主键ID为空",groups=UpdateValid.class)
+    @ApiModelProperty(value = "主键ID",example = "0")
+    @NotNull(message="主键ID为空",groups = UpdateValid.class)
     private Long id;
 
     /**

@@ -166,10 +166,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         BeanCopier.create(ProductDto.class,Product.class ,false).copy(productDto, product, null);
         baseMapper.updateById(product);
         //删除
-        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.PROID, productDto.getId()));
-        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.PROID, productDto.getId()));
-        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.PROID, productDto.getId()));
-        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.PROID, productDto.getId()));
+        productAttachMapper.delete(new QueryWrapper<ProductAttach>().eq(DataColumnConstant.ID, productDto.getId()));
+        attributeValueMapper.delete(new QueryWrapper<AttributeValue>().eq(DataColumnConstant.ID, productDto.getId()));
+        productSkuMapper.delete(new QueryWrapper<ProductSku>().eq(DataColumnConstant.ID, productDto.getId()));
+        specificationValueMapper.delete(new QueryWrapper<SpecificationValue>().eq(DataColumnConstant.ID, productDto.getId()));
         Long proId = product.getId();
         //添加附件值
         List<ProductAttachDto> productAttachDtos = productDto.getProductAttachDtos();

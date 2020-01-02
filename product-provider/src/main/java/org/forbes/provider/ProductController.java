@@ -237,7 +237,7 @@ public class ProductController {
             return result;
         }
         boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
-        if(isUserStatus){
+        if(!isUserStatus){
             result.setBizCode(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizFormateMessage(), state));
             return result;
