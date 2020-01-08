@@ -12,4 +12,10 @@ public interface DataColumnConstant {
 	public static final String PROID = "pro_id";
 	public static final String DATAID = "data_id";
 
+	/******商品标签相关*******/
+	/**
+	 * 商品标签名称
+	 */
+	public static final String LABEL_NAME= "label_name";
+
 }

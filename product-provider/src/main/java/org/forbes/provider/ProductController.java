@@ -41,16 +41,28 @@ public class ProductController {
 
     @Autowired
     IProductService productService;
-    //商品附件
+
+    /**
+     * 商品附件
+     */
     @Autowired
     IProductAttachService  productAttachService;
-    //商品库存
+
+    /**
+     * 商品库存
+     */
     @Autowired
     IProductSkuService productSkuService;
-    //商品规格
+
+    /**
+     * 商品规格
+     */
     @Autowired
     ISpecificationValueService specificationValueService;
-    //商品属性
+
+    /**
+     * 商品属性
+     */
     @Autowired
     IAttributeValueService attributeValueService;
 
@@ -100,7 +112,8 @@ public class ProductController {
             ProductDto productDtos=new ProductDto();
             String procn = productDtos.getProSn();
             int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
-            if(existsCount > 0 ) {//存在此记录
+            //存在此记录
+            if(existsCount > 0 ) {
                 result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
                 result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
                 return result;
@@ -144,7 +157,8 @@ public class ProductController {
             if (!procn.equalsIgnoreCase(oldProduct.getProSn())) {
                 //查询是否和其他商家编码一致
                 int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
-                if (existsCount > 0) {//存在此记录
+                //存在此记录
+                if (existsCount > 0) {
                     result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
                     result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
                     return result;
@@ -346,7 +360,8 @@ public class ProductController {
     public Result<Boolean> checkProductCode(@RequestParam(value="procn",required=true)String procn) {
         Result<Boolean> result = new Result<Boolean>();
         int existsCount = productService.count(new QueryWrapper<Product>().eq(DataColumnConstant.PROCN, procn));
-        if(existsCount > 0 ) {//存在此记录
+        //存在此记录
+        if(existsCount > 0 ) {
             result.setBizCode(BizResultEnum.PRODUCT_CODE_EXIST.getBizCode());
             result.setMessage(String.format(BizResultEnum.PRODUCT_CODE_EXIST.getBizFormateMessage(), procn));
             result.setResult(false);

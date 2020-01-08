@@ -120,6 +120,13 @@ public class Result<T> implements Serializable {
 	public static final  String CHECK_ATTR_SN="校验分类属性编码成功";
 	public static final  String CHECK_ATTR_SN_ERROR="校验分类属性编码失败";
 
+	/********总后台查看商品标签***********/
+	public static final  String PAGE_LABEL_MSG="查询商品标签成功";
+	public static final  String PAGE_LABEL_MSG_ERROR="查询商品标签失败";
+
+	/********总后台添加商品标签***********/
+	public static final  String ADD_LABEL_MSG="添加商品标签成功";
+	public static final  String ADD_LABEL_MSG_ERROR="添加商品标签失败";
 
 	/**
 	 * 返回代码
