@@ -248,6 +248,43 @@ public class ProductController {
     }
 
     /***
+     * uppOrLowShelfs方法概述:批量上架/下架商品
+     * @param ids, state
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>
+     * @创建人 Tom
+     * @创建时间 2020/1/8 10:21
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/upp-or-low-shelfs",method = RequestMethod.PUT)
+    @ApiOperation("批量上架/下架商品")
+    @ApiImplicitParam(value="state",name="商品状态",required=false)
+    @ApiResponses(value = {
+            @ApiResponse(code=500,message = Result.COMM_ACTION_ERROR_MSG),
+            @ApiResponse(code=200,message = Result.COMM_ACTION_MSG)
+    })
+    public Result<Product> uppOrLowShelfs(@RequestParam(value = "ids",required = true)List<Long> ids,@RequestParam(value = "state",required = true)String state){
+         Result<Product> result=new Result<Product>();
+          for (Long id:ids){
+              Product product = productService.getById(id);
+              if(ConvertUtils.isEmpty(product)){
+                  result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
+                  result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
+                  return result;
+              }
+              boolean isUserStatus = ProductStausEnum.existsProductStausEnum(state);
+              if(!isUserStatus){
+                  result.setBizCode(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizCode());
+                  result.setMessage(String.format(BizResultEnum.PRODUCT_STATUS_NO_EXISTS.getBizFormateMessage(), state));
+                  return result;
+              }
+              product.setState(state);
+              productService.updateById(product);
+          }
+          return result;
+    }
+
+    /***
      * selectProducts方法概述:
      * @param id
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.Product>

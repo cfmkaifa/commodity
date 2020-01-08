@@ -10,6 +10,9 @@ import org.forbes.comm.vo.ProductSysPageVo;
 import org.forbes.comm.vo.ProductVo;
 import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Product;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author lzw
