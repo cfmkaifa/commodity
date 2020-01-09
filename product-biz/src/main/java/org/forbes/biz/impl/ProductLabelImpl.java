@@ -33,7 +33,6 @@ public class ProductLabelImpl extends ServiceImpl<ProductLabelMapper, ProductLab
         return delBool;
     }
 
-
     /***批量删除商品标签
      */
     @Transactional(rollbackFor = Exception.class)

@@ -24,6 +24,6 @@ public class ProductLabelPageDto implements Serializable {
      * Column:    label_name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "标签名称")
+    @ApiModelProperty(value = "标签名称",required = true)
     private String LabelName;
 }

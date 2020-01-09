@@ -54,4 +54,7 @@ public interface PermsCommonConstant {
     //商品标签名称
     public static final String LABEL_NAME= "label_name";
 
+    /*****商品属性相关变量*****/
+    //商品分类id
+    public static final String ATTRIBUTE_NAME= "name";
 }

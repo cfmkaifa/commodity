@@ -13,12 +13,13 @@ import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.ProductLabelPageDto;
 import org.forbes.comm.utils.ConvertUtils;
 import org.forbes.comm.vo.Result;
-import org.forbes.dal.entity.ProductLabel;
+import org.forbes.dal.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author lzw
@@ -67,6 +68,32 @@ public class ProductLabelController {
     }
 
     /***
+     * getById方法概述:
+     * @param id
+     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductLabel>
+     * @创建人 Tom
+     * @创建时间 2020/1/9 9:35
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/get-by-id", method = RequestMethod.GET)
+    @ApiOperation("通过商品标签id查看商品标签信息")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name = "id",value = "商品标签id")
+    )
+    @ApiResponses(value={
+            @ApiResponse(code=500,message= Result.PAGE_LABEL_MSG_ERROR),
+            @ApiResponse(code=200,message = Result.PAGE_LABEL_MSG)
+    })
+    public Result<ProductLabel> getById(@RequestParam(value = "id",required = true)Long id){
+        Result<ProductLabel> result=new Result<ProductLabel>();
+        //查询商品标签信息
+        ProductLabel productLabel = productLabelService.getById(id);
+        result.setResult(productLabel);
+        return result;
+    }
+
+    /***
      * addProductLabel方法概述:
      * @param productLabel
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ProductLabel>
@@ -76,10 +103,10 @@ public class ProductLabelController {
      * @修改日期 (请填上修改该文件时的日期)
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ApiOperation("添加商品标签")
-    @ApiResponses(value={
-            @ApiResponse(code=500,message= Result.ADD_LABEL_MSG_ERROR),
             @ApiResponse(code=200,message = Result.ADD_LABEL_MSG)
+                    @ApiOperation("添加商品标签")
+                    @ApiResponses(value={
+                            @ApiResponse(code=500,message= Result.ADD_LABEL_MSG_ERROR),
     })
     public Result<ProductLabel> addProductLabel(@RequestBody @Validated(value=SaveValid.class) ProductLabel productLabel){
         Result<ProductLabel> result=new Result<ProductLabel>();

@@ -32,12 +32,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 /**
- * @ClassName
- * @Description 分类属性
- * @Author
- * @Date 2019/12/13 10:52
- * @Version 1.0
- **/
+ * @author lzw
+ * @date 2020/1/9 10:49
+ */
 @RestController
 @RequestMapping("/attr")
 @Api(tags={"分类属性"})
@@ -51,15 +48,14 @@ public class ClassifyAttributeController {
     private IProductClassifyService productClassifyService;
 
     /***
-     * page方法概述:分页查询分类属性
-     * @param basePageDto
+     * page方法概述:
+     * @param basePageDto, classAttrPageDto
      * @return org.forbes.comm.vo.Result<com.baomidou.mybatisplus.core.metadata.IPage<org.forbes.dal.entity.ClassifyAttribute>>
-     * @创建人 xfx
-     * @创建时间 2019/12/13
+     * @创建人 Tom
+     * @创建时间 2020/1/9 11:06
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     @ApiOperation("分页查询分类属性")
     @ApiResponses(value={
@@ -85,11 +81,11 @@ public class ClassifyAttributeController {
     }
 
     /***
-     * batchAdd方法概述:批量添加商品分类属性
+     * batchAdd方法概述:
      * @param classAttrDto
      * @return org.forbes.comm.vo.Result<org.forbes.comm.model.ClassAttrDto>
-     * @创建人 xfx
-     * @创建时间 2019/12/13
+     * @创建人 Tom
+     * @创建时间 2020/1/9 11:06
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -121,11 +117,11 @@ public class ClassifyAttributeController {
 
 
     /***
-     * updClassAttr方法概述:修改分类属性
+     * updClassAttr方法概述:
      * @param classifyAttributeDto
      * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ClassifyAttribute>
-     * @创建人 xfx
-     * @创建时间 2019/12/13
+     * @创建人 Tom
+     * @创建时间 2020/1/9 11:07
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -170,13 +166,12 @@ public class ClassifyAttributeController {
         return result;
     }
 
-
     /***
-     * delAttr方法概述:删除分类属性
+     * delAttr方法概述:
      * @param ids
-     * @return org.forbes.comm.vo.Result<org.forbes.dal.entity.ClassifyAttribute>
-     * @创建人 xfx
-     * @创建时间 2019/12/13
+     * @return org.forbes.comm.vo.Result<java.lang.Boolean>
+     * @创建人 Tom
+     * @创建时间 2020/1/9 11:07
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -198,6 +193,15 @@ public class ClassifyAttributeController {
     }
 
 
+    /***
+     * check方法概述:校验分类属性编码
+     * @param attributeSn
+     * @return org.forbes.comm.vo.Result<java.lang.Boolean>
+     * @创建人 Tom
+     * @创建时间 2020/1/9 11:07
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
     @RequestMapping(value = "/check",method = RequestMethod.GET)
     @ApiOperation("校验分类属性编码")
     @ApiResponses(value = {
