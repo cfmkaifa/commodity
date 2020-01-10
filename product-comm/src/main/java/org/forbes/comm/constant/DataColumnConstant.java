@@ -18,4 +18,8 @@ public interface DataColumnConstant {
 	 */
 	public static final String LABEL_NAME= "label_name";
 
+	/**
+	 * 商品参数id
+	 */
+	public static final String PARAMETER_ID= "id";
 }

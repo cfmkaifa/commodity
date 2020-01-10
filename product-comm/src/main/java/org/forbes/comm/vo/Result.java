@@ -128,9 +128,17 @@ public class Result<T> implements Serializable {
 	public static final  String ADD_LABEL_MSG="添加商品标签成功";
 	public static final  String ADD_LABEL_MSG_ERROR="添加商品标签失败";
 
-	/********分页查询商品属性***********/
-	public static final  String ATTRIBUTE_PAGE_MSG="分页查询商品属性成功";
-	public static final  String ATTRIBUTE_PAGE_ERROR="分页查询商品属性失败";
+	/********分页查询商品参数***********/
+	public static final  String PARAMETER_PAGE_MSG="分页查询商品参数成功";
+	public static final  String PARAMETER_PAGE_ERROR="分页查询商品参数失败";
+
+	/********添加属性***********/
+	public static final  String ADD_PARAMETER_MSG="添加参数成功";
+	public static final  String ADD_PARAMETER_ERROR="添加参数失败";
+
+	/********删除属性***********/
+	public static final  String DEL_PARAMETER_MSG="删除属性成功";
+	public static final  String DEL_PARAMETER_ERROR="删除属性失败";
 	/**
 	 * 返回代码
 	 */
