@@ -47,11 +47,11 @@ public class ProductSpecificationController {
 
 
     /***
-     * page方法概述:分页查询规格
-     * @param basePageDto
+     * page方法概述:
+     * @param basePageDto, proSpecficDto
      * @return org.forbes.comm.vo.Result<com.baomidou.mybatisplus.core.metadata.IPage<org.forbes.dal.entity.ProductSpecification>>
-     * @创建人 xfx
-     * @创建时间 2019/12/14
+     * @创建人 Tom
+     * @创建时间 2020/1/13 14:15
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -82,6 +82,15 @@ public class ProductSpecificationController {
         return result;
     }
 
+    /***
+     * add方法概述:
+     * @param proSpecBatchDto
+     * @return org.forbes.comm.vo.Result<org.forbes.comm.model.ProSpecBatchDto>
+     * @创建人 Tom
+     * @创建时间 2020/1/13 14:15
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation("批量添加规格")
     @ApiResponses(value = {
@@ -109,11 +118,11 @@ public class ProductSpecificationController {
     }
 
     /***
-     * deleProSpec方法概述:批量删除规格
+     * deleProSpec方法概述:
      * @param ids
      * @return org.forbes.comm.vo.Result<java.lang.Boolean>
-     * @创建人 xfx
-     * @创建时间 2019/12/14
+     * @创建人 Tom
+     * @创建时间 2020/1/13 14:16
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -135,11 +144,11 @@ public class ProductSpecificationController {
     }
 
     /***
-     * update方法概述:修改规格
+     * update方法概述:
      * @param proSpecficDto
      * @return org.forbes.comm.vo.Result<org.forbes.comm.model.ProSpecficDto>
-     * @创建人 xfx
-     * @创建时间 2019/12/14
+     * @创建人 Tom
+     * @创建时间 2020/1/13 14:16
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
@@ -160,7 +169,8 @@ public class ProductSpecificationController {
         String prospectname=proSpecficDto.getName();
         if(!prospectname.equalsIgnoreCase(productSpecification.getName())){
             int count=proSpecficService.count(new QueryWrapper<ProductSpecification>().eq(PermsCommonConstant.PRO_SPEC_NAME,prospectname));
-            if(count>0){//判断要添加名称是否已存在
+            //判断要添加名称是否已存在
+            if(count>0){
                 result.setBizCode(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizCode());
                 result.setMessage(String.format(BizResultEnum.PRO_SPEC_NAME_EXIST.getBizFormateMessage()));
                 return result;

@@ -35,7 +35,7 @@ public class ParameterDto implements Serializable{
      * Column:    name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "属性名称")
+    @ApiModelProperty(value = "参数组名称")
     private String name;
 
     /**商品分类id

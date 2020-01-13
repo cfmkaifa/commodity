@@ -21,19 +21,9 @@ public class ParameterPageDto implements Serializable {
     private static final long serialVersionUID = 7563528926268961597L;
 
     /**
-     * id
-     */
-    @ApiModelProperty(value = "参数id",required = true,example = "0")
-    @NotEmpty(message = "参数id")
-    private Long id;
-    /**
      * 名称
      */
     @ApiModelProperty("参数名称")
     private String name;
 
-    /**商品分类id
-     */
-    @ApiModelProperty(value = "商品分类id",example = "0")
-    private Long classifyId;
 }

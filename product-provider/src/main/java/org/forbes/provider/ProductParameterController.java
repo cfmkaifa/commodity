@@ -21,7 +21,6 @@ import org.forbes.comm.vo.Result;
 import org.forbes.config.exception.ForbesException;
 import org.forbes.dal.entity.ProductClassify;
 import org.forbes.dal.entity.ProductParameter;
-import org.forbes.dal.entity.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +33,7 @@ import java.util.Arrays;
  */
 @RestController
 @RequestMapping("/parameter")
-@Api(tags={"商品属性管理"})
+@Api(tags={"商品参数管理"})
 @Slf4j
 public class ProductParameterController {
 
