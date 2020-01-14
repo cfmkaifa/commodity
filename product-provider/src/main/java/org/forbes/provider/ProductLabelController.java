@@ -103,10 +103,10 @@ public class ProductLabelController {
      * @修改日期 (请填上修改该文件时的日期)
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-            @ApiResponse(code=200,message = Result.ADD_LABEL_MSG)
-                    @ApiOperation("添加商品标签")
-                    @ApiResponses(value={
-                            @ApiResponse(code=500,message= Result.ADD_LABEL_MSG_ERROR),
+    @ApiResponse(code=200,message = Result.ADD_LABEL_MSG)
+    @ApiOperation("添加商品标签")
+    @ApiResponses(value={
+            @ApiResponse(code=500,message= Result.ADD_LABEL_MSG_ERROR),
     })
     public Result<ProductLabel> addProductLabel(@RequestBody @Validated(value=SaveValid.class) ProductLabel productLabel){
         Result<ProductLabel> result=new Result<ProductLabel>();

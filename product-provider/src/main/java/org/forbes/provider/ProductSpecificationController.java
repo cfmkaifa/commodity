@@ -99,10 +99,10 @@ public class ProductSpecificationController {
     })
     public Result<ProSpecBatchDto> add(@RequestBody @Validated(value = SaveValid.class) ProSpecBatchDto proSpecBatchDto){
         Result<ProSpecBatchDto> result=new Result<ProSpecBatchDto>();
-        ProductClassify productClassify=productClassifyService.getById(proSpecBatchDto.getClassifyId());
-        if (ConvertUtils.isEmpty(productClassify)){
-            result.setBizCode(BizResultEnum.PRO_SPEC_CLASSFY_ID_EXIST.getBizCode());
-            result.setMessage(String.format(BizResultEnum.PRO_SPEC_CLASSFY_ID_EXIST.getBizFormateMessage(),proSpecBatchDto.getClassifyId()));
+                    ProductClassify productClassify=productClassifyService.getById(proSpecBatchDto.getClassifyId());
+            if (ConvertUtils.isEmpty(productClassify)){
+                result.setBizCode(BizResultEnum.PRO_SPEC_CLASSFY_ID_EXIST.getBizCode());
+                result.setMessage(String.format(BizResultEnum.PRO_SPEC_CLASSFY_ID_EXIST.getBizFormateMessage(),proSpecBatchDto.getClassifyId()));
             return result;
         }
         try {

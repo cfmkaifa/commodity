@@ -9,7 +9,8 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 
 /**
- * Table: f_product_label
+ * @author lzw
+ * @date 2019/12/13 13:39
  */
 @Data
 @ApiModel(description="标签信息")
@@ -34,8 +35,17 @@ public class ProductLabel extends BaseEntity {
      * Column:    label_name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "标签名称",required = true)
-    private String LabelName;
+    @ApiModelProperty(value = "标签名称")
+    private String labelName;
+
+    /**
+     * 排序
+     * Table:     f_product_specification
+     * Column:    order_sorts
+     * Nullable:  true
+     */
+    @ApiModelProperty(value = "排序",example = "0")
+    private Integer orderSorts;
 
     /**
      * 备注
@@ -44,5 +54,5 @@ public class ProductLabel extends BaseEntity {
      * Nullable:  true
      */
     @ApiModelProperty(value = "备注")
-    private String Remarks;
+    private String remarks;
 }
