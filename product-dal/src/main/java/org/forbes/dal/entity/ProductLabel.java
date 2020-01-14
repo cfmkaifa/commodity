@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
 /**
@@ -35,7 +36,8 @@ public class ProductLabel extends BaseEntity {
      * Column:    label_name
      * Nullable:  true
      */
-    @ApiModelProperty(value = "标签名称")
+    @ApiModelProperty(value = "标签名称",required = true)
+    @NotEmpty(message = "标签名称不能为空")
     private String labelName;
 
     /**
