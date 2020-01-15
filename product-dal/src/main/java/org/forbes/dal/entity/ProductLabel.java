@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.forbes.comm.constant.SaveValid;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
@@ -37,7 +38,7 @@ public class ProductLabel extends BaseEntity {
      * Nullable:  true
      */
     @ApiModelProperty(value = "标签名称",required = true)
-    @NotEmpty(message = "标签名称不能为空")
+    @NotEmpty(message = "标签名称不能为空",groups = SaveValid.class)
     private String labelName;
 
     /**
